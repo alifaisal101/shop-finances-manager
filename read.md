@@ -55,6 +55,8 @@ the information about the transactions.
             Which are very similar to the purchased records, as they consist of a paid amount and a payment type, whether direct or indirect, but without a company or etc details.\
     
 Execution plan:
+NOTE!!: These sections are incomplete and are planned to be completed later, probably after the first phase has been successfully completed!!
+
     The project is a desktop application, therefor, we plan to develop it using Electron. Thus the project execution could be divided into 4 components:
 
     API/Electron:
@@ -69,10 +71,12 @@ Execution plan:
 
 
     Frontend:
-        This section consists of the frontend will function, SPA framework, api calls handling
+        This section consists of the frontend will function, SPA framework, api calls handling.
+        For now, what will be clear from this section, is that, React will be used as the framework for the project.
     UI/UX:
-        This consists of the project will function and how it will look like and be used by the client
+        This consists of the project will function and how it will look like and be used by the client.
         UI:
+            For the UI we plan to use the Ionic web component library.
 
         UX:
 
@@ -80,9 +84,13 @@ Execution plan:
         This section consists of the project will be finizilezed and deployed for the client to be used, including, the database, backup options, updates handling. 
         
         Internet Requirement:
+            The project is planned to be fully offline, therefor any internet requirement should be eliminated, such as, automatic backups, online database, activiation and updates.
 
         Database usage and location:
+            The database should be offline and hosted locally on the client's machine, where the project will be hosted. Its highly prefrerred for the database to be a file, easily backed up by the client.
 
         Backup:
 
+
         Updates: 
+            There won't be an automatic update functionality in the project. Updates will be on the request of the client, and will be handled manually.
