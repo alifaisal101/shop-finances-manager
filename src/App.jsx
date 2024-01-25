@@ -30,7 +30,8 @@ import './theme/fonts.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Menu from './components/Menu';
+
+import SideMenu from './global/SideMenu/SideMenu';
 
 /* Pages */
 import PurchaseRecords from "./pages/PurchaseRecords/PurchaseRecords";
@@ -45,14 +46,14 @@ setupIonicReact();
 function App() {
   return (
     <IonApp>
+
       <IonReactRouter>
         <IonSplitPane contentId="main">
-          <Menu />
+          <SideMenu />
           <IonRouterOutlet id="main" animated={true}>
             <Route path="/" exact={true}>
               <Redirect to="/purchase-records" />
             </Route>
-
             <Route path="/purchase-records" exact={true}>
               <PurchaseRecords />
             </Route>

@@ -1,60 +1,60 @@
 @font-face {
   font-family: cairoplay;
-  src: url('./assets/fonts/CairoPlay-Bold.ttf');
+  src: url('../assets/fonts/CairoPlay-Bold.ttf');
 }
 
 @font-face {
   font-family: dgtofan;
-  src: url('./assets/fonts/DGTofanAlAqsa-Regular.ttf');
+  src: url('../assets/fonts/DGTofanAlAqsa-Regular.ttf');
 }
 
 @font-face {
   font-family: foda;
-  src: url('./assets/fonts/Foda-Free-Font.ttf');
+  src: url('../assets/fonts/Foda-Free-Font.ttf');
 }
 
 @font-face {
   font-family: jawadtaut;
-  src: url('./assets/fonts/Jawadtaut-1.otf');
+  src: url('../assets/fonts/Jawadtaut-1.otf');
 }
 
 @font-face {
   font-family: lamasans;
-  src: url('./assets/fonts/LamaSans-ExtraBold.ttf');
+  src: url('../assets/fonts/LamaSans-ExtraBold.ttf');
   font-weight: 800;
 }
 
 @font-face {
   font-family: lamasans;
-  src: url('./assets/fonts/LamaSans-SemiBold.ttf');
+  src: url('../assets/fonts/LamaSans-SemiBold.ttf');
   font-weight: 500;
 }
 
 @font-face {
   font-family: jenine;
-  src: url('./assets/fonts/jenine-semi-bold.otf');
+  src: url('../assets/fonts/jenine-semi-bold.otf');
 }
 
 @font-face {
   font-family: readex;
-  src: url('./assets/fonts/Readex-Pro/ReadexPro-ExtraLight.ttf');
+  src: url('../assets/fonts/Readex-Pro/ReadexPro-ExtraLight.ttf');
   font-weight: 200;
 }
 
 @font-face {
   font-family: readex;
-  src: url('./assets/fonts/Readex-Pro/ReadexPro-Light.ttf');
+  src: url('../assets/fonts/Readex-Pro/ReadexPro-Light.ttf');
   font-weight: 300;
 }
 
 @font-face {
   font-family: readex;
-  src: url('./assets/fonts/Readex-Pro/ReadexPro-Regular.ttf');
+  src: url('../assets/fonts/Readex-Pro/ReadexPro-Regular.ttf');
   font-weight: 400;
 }
 
 @font-face {
   font-family: readex;
-  src: url('./assets/fonts/Readex-Pro/ReadexPro-Bold.ttf');
+  src: url('../assets/fonts/Readex-Pro/ReadexPro-Bold.ttf');
   font-weight: 600;
 }

@@ -19,7 +19,7 @@ import {
   cashOutline,
   cartOutline
 } from 'ionicons/icons';
-import './Menu.css';
+import './__SideMenu.css';
 
 const appPages = [
   {
@@ -62,21 +62,23 @@ const appPages = [
 
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-const Menu = () => {
+const SideMenu = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay" side="right">
+    <IonMenu contentId="main" type="overlay" side="end" className='global_sidemenu'>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>
           <IonNote>hi@ionicframework.com</IonNote>
           {appPages.map((appPage, index) => {
+            let selectedClass = location.pathname === appPage.url ? 'selected' : '';
+          
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem
                   className={
-                    location.pathname === appPage.url ? 'selected' : ''
+                    selectedClass + " global_sidemenu_item"
                   }
                   routerLink={appPage.url}
                   routerDirection="none"
@@ -110,4 +112,4 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+export default SideMenu;
