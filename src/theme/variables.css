@@ -240,22 +240,35 @@ html {
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 }
 
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
+ion-content {
+  --offset-bottom: auto !important;
+  --overflow: auto;
+  background: var(--ion-toolbar-background, var(--ion-background-color, 
+               #000000)) !important;
+  overflow: auto;
+
+&::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
+&::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
+&::-webkit-scrollbar-track:hover {
+  background: #35d703;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+&::-webkit-scrollbar-thumb {
+  background: rgb(75, 75, 75);
+}
+
+&::-webkit-scrollbar-thumb:hover {
+   background: #94173a
+}
+
+.inner-scroll {
+   scrollbar-width: thin;
+}
 }

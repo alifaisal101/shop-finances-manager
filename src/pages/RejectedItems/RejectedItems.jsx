@@ -1,12 +1,14 @@
+import { IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./__RejectedItems.css";
+import Header from "../../global/Header/Header";
 
 const RejectedItems = () => {
     return (
-        <div>
-            <h1>
-            RejectedItems
-            </h1>
-        </div>
+        <IonPage>
+            <Header title="السلع المرفوضة" />
+
+
+        </IonPage>
     );
 }
 

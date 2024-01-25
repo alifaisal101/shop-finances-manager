@@ -1,12 +1,15 @@
+import { IonPage } from "@ionic/react";
 import "./__Budget.css";
+import Header from "../../global/Header/Header";
 
 const Budget = () => {
     return (
-        <div>
+        <IonPage>
+            <Header title="صندوق المال" />
             <h1>
-                budget
+                dsaoda
             </h1>
-        </div>
+        </IonPage>
     );
 }
 

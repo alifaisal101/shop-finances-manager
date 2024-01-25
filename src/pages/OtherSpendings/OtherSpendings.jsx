@@ -1,12 +1,13 @@
+import { IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./__OtherSpendings.css";
+import Header from "../../global/Header/Header";
 
 const OtherSpendings = () => {
     return (
-        <div>
-            <h1>
-            OtherSpendings
-            </h1>
-        </div>
+        <IonPage>
+            <Header title="المصاريف الآخرى" />
+
+        </IonPage>
     );
 }
 

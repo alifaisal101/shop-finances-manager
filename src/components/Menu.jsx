@@ -66,7 +66,7 @@ const Menu = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay" side='end'>
+    <IonMenu contentId="main" type="overlay" side="right">
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>

@@ -48,7 +48,7 @@ function App() {
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <Menu />
-          <IonRouterOutlet id="main">
+          <IonRouterOutlet id="main" animated={true}>
             <Route path="/" exact={true}>
               <Redirect to="/purchase-records" />
             </Route>

@@ -1,12 +1,14 @@
+import { IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import "./__PurchaseRecords.css";
+import Header from "../../global/Header/Header";
 
 const PurchaseRecords = () => {
     return (
-        <div>
-            <h1>
-            PurchaseRecords
-            </h1>
-        </div>
+        <IonPage>
+            <Header title="قوائم الشركات" />
+
+
+        </IonPage>
     );
 }
 
