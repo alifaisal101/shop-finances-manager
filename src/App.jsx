@@ -30,8 +30,15 @@ import './theme/fonts.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import Page from './pages/Page';
 import Menu from './components/Menu';
+
+/* Pages */
+import PurchaseRecords from "./pages/PurchaseRecords/PurchaseRecords";
+import RejectedItems from "./pages/RejectedItems/RejectedItems";
+import OtherSpendings from "./pages/OtherSpendings/OtherSpendings";
+import Employees from "./pages/Employees/Employees";
+import Budget from "./pages/Budget/Budget";
+import Earnings from './pages/Earnings/Earnings';
 
 setupIonicReact();
 
@@ -43,10 +50,26 @@ function App() {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/folder/Inbox" />
+              <Redirect to="/purchase-records" />
             </Route>
-            <Route path="/folder/:name" exact={true}>
-              <Page />
+
+            <Route path="/purchase-records" exact={true}>
+              <PurchaseRecords />
+            </Route>
+            <Route path="/rejected-items" exact={true}>
+              <RejectedItems />
+            </Route>
+            <Route path="/other-spendings" exact={true}>
+              <OtherSpendings />
+            </Route>
+            <Route path="/employees" exact={true}>
+              <Employees />
+            </Route>
+            <Route path="/budget" exact={true}>
+              <Budget />
+            </Route>
+            <Route path="/earnings" exact={true}>
+              <Earnings />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

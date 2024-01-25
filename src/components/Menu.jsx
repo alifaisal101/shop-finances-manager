@@ -11,58 +11,52 @@ import {
 } from '@ionic/react';
 import { useLocation } from 'react-router-dom';
 import {
-  archiveOutline,
-  archiveSharp,
   bookmarkOutline,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
+  receiptOutline,
   warningOutline,
-  warningSharp,
+  peopleOutline,
+  briefcaseOutline,
+  cashOutline,
+  cartOutline
 } from 'ionicons/icons';
 import './Menu.css';
 
 const appPages = [
   {
-    title: 'Inbox',
-    url: '/folder/Inbox',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp,
+    title: 'قوائم الشركات',
+    url: '/purchase-records',
+    iosIcon: receiptOutline,
+    mdIcon: receiptOutline,
   },
   {
-    title: 'Outbox',
-    url: '/folder/Outbox',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp,
-  },
-  {
-    title: 'Favorites',
-    url: '/folder/Favorites',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp,
-  },
-  {
-    title: 'Archived',
-    url: '/folder/Archived',
-    iosIcon: archiveOutline,
-    mdIcon: archiveSharp,
-  },
-  {
-    title: 'Trash',
-    url: '/folder/Trash',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp,
-  },
-  {
-    title: 'Spam',
-    url: '/folder/Spam',
+    title: 'المواد المرفوضة',
+    url: '/rejected-items',
     iosIcon: warningOutline,
-    mdIcon: warningSharp,
+    mdIcon: warningOutline,
+  },
+  {
+    title: 'المصاريف الاَخرى',
+    url: '/other-spendings',
+    iosIcon: cartOutline,
+    mdIcon: cartOutline,
+  },
+  {
+    title: 'الموظفين',
+    url: '/employees',
+    iosIcon: peopleOutline,
+    mdIcon: peopleOutline,
+  },
+  {
+    title: 'صندوق المال',
+    url: '/budget',
+    iosIcon: briefcaseOutline,
+    mdIcon: briefcaseOutline,
+  },
+  {
+    title: 'الإيرادات',
+    url: '/earnings',
+    iosIcon: cashOutline,
+    mdIcon: cashOutline,
   },
 ];
 
@@ -72,7 +66,7 @@ const Menu = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay">
+    <IonMenu contentId="main" type="overlay" side='end'>
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>
@@ -102,7 +96,7 @@ const Menu = () => {
           })}
         </IonList>
 
-        <IonList id="labels-list">
+        {/* <IonList id="labels-list">
           <IonListHeader>text</IonListHeader>
           {labels.map((label, index) => (
             <IonItem lines="none" key={index}>
@@ -110,7 +104,7 @@ const Menu = () => {
               <IonLabel>{label}</IonLabel>
             </IonItem>
           ))}
-        </IonList>
+        </IonList> */}
       </IonContent>
     </IonMenu>
   );

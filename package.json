@@ -1,7 +1,7 @@
 {
-  "name": "al-muhandis-for-accounting",
+  "name": "shop-finances-manager",
   "private": true,
-  "version": "1.0.4",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",

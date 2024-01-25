@@ -17,11 +17,11 @@ const Page = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
+        <IonToolbar >
+          <IonTitle slot='end'>{name} 86</IonTitle>
+          <IonButtons slot="end">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{name}</IonTitle>
         </IonToolbar>
       </IonHeader>
 
