@@ -1,0 +1,48 @@
+@font-face {
+  font-family: jenine;
+  src: url('./assets/fonts/jenine-semi-bold.otf');
+}
+
+@font-face {
+  font-family: readex;
+  src: url('./assets/fonts/Readex-Pro/ReadexPro-ExtraLight.ttf');
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: readex;
+  src: url('./assets/fonts/Readex-Pro/ReadexPro-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: readex;
+  src: url('./assets/fonts/Readex-Pro/ReadexPro-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: readex;
+  src: url('./assets/fonts/Readex-Pro/ReadexPro-Bold.ttf');
+  font-weight: 600;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
