@@ -1,3 +1,11 @@
- h1 {
-    font-family: readex;
-  } 
+h1 {
+  font-family: readex;
+}
+
+.InovuaReactDataGrid__row--odd {
+  background-color: var(--ion-color-light-shade) !important;
+}
+
+.InovuaReactDataGrid__row--even {
+  background-color: var(--ion-color-light) !important;
+}

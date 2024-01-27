@@ -1,9 +1,11 @@
 import './__PurchaseRecordsTable.css';
 
+import { purchaseRecords } from './../../../preset-data';
+
 const PurchaseRecordsTable = (props) => {
   return (
     <div className="purchase-records-table-container">
-      <h1>PurchaseRecordsTable</h1>
+      <h1></h1>
     </div>
   );
 };

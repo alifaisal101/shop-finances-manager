@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
     "@ionic/react": "^7.6.6",
     "@ionic/react-router": "^7.6.6",
     "dotenv": "^16.3.1",
@@ -19,13 +17,9 @@
     "node-machine-id": "^1.1.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "saslprep": "^1.0.3"
+    "react-dropzone": "^14.2.3"
   },
   "devDependencies": {
-    "@mui/material": "^5.14.0",
-    "@mui/x-data-grid": "^6.10.0",
-    "@mui/x-date-pickers": "^6.10.1",
     "@types/mongoose": "^5.11.97",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
