@@ -139,7 +139,7 @@ http://ionicframework.com/docs/theming/ */
     --ion-color-medium-shade: #86888f;
     --ion-color-medium-tint: #a2a4ab;
 
-    --ion-color-light: #222428;
+    --ion-color-light: #121212;
     --ion-color-light-rgb: 34, 36, 40;
     --ion-color-light-contrast: #ffffff;
     --ion-color-light-contrast-rgb: 255, 255, 255;
@@ -243,32 +243,34 @@ html {
 ion-content {
   --offset-bottom: auto !important;
   --overflow: auto;
-  background: var(--ion-toolbar-background, var(--ion-background-color, 
-               #000000)) !important;
+  background: var(
+    --ion-toolbar-background,
+    var(--ion-background-color, #000000)
+  ) !important;
   overflow: auto;
 
-&::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
 
-&::-webkit-scrollbar-track {
-  background: rgb(0, 0, 0);
-}
+  &::-webkit-scrollbar-track {
+    background: rgb(0, 0, 0);
+  }
 
-&::-webkit-scrollbar-track:hover {
-  background: #35d703;
-}
+  &::-webkit-scrollbar-track:hover {
+    background: #35d703;
+  }
 
-&::-webkit-scrollbar-thumb {
-  background: rgb(75, 75, 75);
-}
+  &::-webkit-scrollbar-thumb {
+    background: rgb(75, 75, 75);
+  }
 
-&::-webkit-scrollbar-thumb:hover {
-   background: #94173a
-}
+  &::-webkit-scrollbar-thumb:hover {
+    background: #94173a;
+  }
 
-.inner-scroll {
-   scrollbar-width: thin;
-}
+  .inner-scroll {
+    scrollbar-width: thin;
+  }
 }
