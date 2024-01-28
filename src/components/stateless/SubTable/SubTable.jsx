@@ -28,7 +28,7 @@ createTheme(
   'dark'
 );
 
-const SubTable = () => {
+const SubTable = (props) => {
   return (
     <div className="subtable_container">
       <DataTable
@@ -40,3 +40,5 @@ const SubTable = () => {
     </div>
   );
 };
+
+export default SubTable;

@@ -35,6 +35,7 @@ const Table = (props) => {
       data={props.data}
       expandableRows={(props.expandable && props.expandedComponent) || false}
       expandableRowsComponent={props.expandedComponent}
+      expandableRowDisabled={props.expandableRowDisabled}
       theme="dark-table"
     />
   );

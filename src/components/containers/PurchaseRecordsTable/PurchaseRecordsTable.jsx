@@ -1,37 +1,10 @@
 import './__PurchaseRecordsTable.css';
 
 import Table from '../../stateless/Table/Table';
+
+import PaymentsRecordsTable from './../PaymentsRecordsTable/PaymentsRecordsTable';
 import { purchaseRecords } from './../../../preset-data';
-
-const paymentTypeMap = (payType) => {
-  const paymentsTypes = {
-    direct: 'نقد',
-    indirect: 'آجل',
-  };
-
-  return paymentsTypes[payType];
-};
-
-const displayDate = (dateObj) => dateObj.toISOString().substring(0, 10);
-
-const numberWithCommas = (number) => {
-  if (!number || number < 1000) {
-    return '';
-  }
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
-const paymentsColumns = [
-  {
-    name: 'تاريخ التسديد',
-    selector: (paymentRecord) => displayDate(paymentRecord.paydate),
-  },
-  {
-    name: 'الدفعة',
-    selector: (paymentRecord) => paymentRecord.paymentAmount,
-  },
-];
-
-const ExpandedComponent = ({ data }) => {};
+import { displayDate, paymentTypeMap } from '../../../util/display.functions';
 
 const purchaseColumns = [
   {
@@ -67,7 +40,10 @@ const PurchaseRecordsTable = (props) => {
         columns={purchaseColumns}
         data={purchaseRecords}
         expandable={true}
-        expandedComponent={ExpandedComponent}
+        expandedComponent={PaymentsRecordsTable}
+        expandableRowDisabled={(purchaseRecord) =>
+          purchaseRecord.paymentType == 'direct' ? true : false
+        }
       ></Table>
     </div>
   );
