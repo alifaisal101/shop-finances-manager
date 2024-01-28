@@ -10,6 +10,7 @@ import {
 } from '@ionic/react';
 import { themeState } from '../../store/theme.store';
 import { useRecoilState } from 'recoil';
+import Content from '../../components/stateless/Content/Content';
 
 const Settings = (props) => {
   // Add or remove the "dark" class on the document body
@@ -18,7 +19,7 @@ const Settings = (props) => {
   return (
     <IonPage>
       <Header title="اﻹعدادات" />
-      <IonContent className="page_content">
+      <Content className="page_content">
         <IonListHeader>Appearance</IonListHeader>
         <IonList inset={true}>
           <IonItem>
@@ -33,7 +34,7 @@ const Settings = (props) => {
             </IonToggle>
           </IonItem>
         </IonList>
-      </IonContent>
+      </Content>
     </IonPage>
   );
 };

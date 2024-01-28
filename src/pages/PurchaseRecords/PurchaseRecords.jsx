@@ -3,14 +3,15 @@ import './__PurchaseRecords.css';
 import Header from '../../global/Header/Header';
 
 import PurchaseRecordsTable from './../../components/containers/PurchaseRecordsTable/PurchaseRecordsTable';
+import Content from '../../components/stateless/Content/Content';
 
 const PurchaseRecords = () => {
   return (
     <IonPage>
       <Header title="قوائم الشركات" />
-      <IonContent className="page_content">
+      <Content>
         <PurchaseRecordsTable></PurchaseRecordsTable>
-      </IonContent>
+      </Content>
     </IonPage>
   );
 };

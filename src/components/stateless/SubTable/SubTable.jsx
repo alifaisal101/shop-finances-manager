@@ -1,7 +1,8 @@
 import './__SubTable.css';
 
 import DataTable, { createTheme } from 'react-data-table-component';
-
+import { themeState } from './../../../store/theme.store';
+import { useRecoilState } from 'recoil';
 createTheme(
   'dark-subtable',
   {
@@ -28,14 +29,18 @@ createTheme(
   'dark'
 );
 
+createTheme('light-subtable', {}, 'light');
+
 const SubTable = (props) => {
+  const [themetoggle, setThemeToggle] = useRecoilState(themeState);
+
   return (
     <div className="subtable_container">
       <DataTable
         columns={props.columns}
         data={props.data}
         expandableRows={false}
-        theme="dark-subtable"
+        theme={themetoggle ? 'dark-subtable' : 'light-subtable'}
       />
     </div>
   );
