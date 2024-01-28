@@ -6,7 +6,7 @@ const RejectedItems = () => {
   return (
     <IonPage>
       <Header title="السلع المرفوضة" />
-      <IonContent></IonContent>
+      <IonContent className="page_content"></IonContent>
     </IonPage>
   );
 };

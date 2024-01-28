@@ -17,8 +17,8 @@ const Page = () => {
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar >
-          <IonTitle slot='end'>{name} 86</IonTitle>
+        <IonToolbar>
+          <IonTitle slot="end">{name} 86</IonTitle>
           <IonButtons slot="end">
             <IonMenuButton />
           </IonButtons>

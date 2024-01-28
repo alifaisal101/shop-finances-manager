@@ -18,7 +18,7 @@ const Settings = (props) => {
   return (
     <IonPage>
       <Header title="اﻹعدادات" />
-      <IonContent>
+      <IonContent className="page_content">
         <IonListHeader>Appearance</IonListHeader>
         <IonList inset={true}>
           <IonItem>
