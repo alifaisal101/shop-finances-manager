@@ -42,9 +42,15 @@ import Budget from './pages/Budget/Budget';
 import Earnings from './pages/Earnings/Earnings';
 import Settings from './pages/Settings/Settings';
 
+import { useRecoilState } from 'recoil';
+import { themeState } from './store/theme.store';
+
 setupIonicReact();
 
 function App() {
+  const [themetoggle, setThemeToggle] = useRecoilState(themeState);
+  document.body.classList.toggle('dark', themetoggle);
+
   return (
     <IonApp>
       <IonReactRouter>
