@@ -1,9 +1,9 @@
-import './__Table.css';
+import './__SubTable.css';
 
 import DataTable, { createTheme } from 'react-data-table-component';
 
 createTheme(
-  'dark-table',
+  'dark-subtable',
   {
     text: {
       primary: '#FFFFFF',
@@ -28,16 +28,15 @@ createTheme(
   'dark'
 );
 
-const Table = (props) => {
+const SubTable = () => {
   return (
-    <DataTable
-      columns={props.columns}
-      data={props.data}
-      expandableRows={(props.expandable && props.expandedComponent) || false}
-      expandableRowsComponent={props.expandedComponent}
-      theme="dark-table"
-    />
+    <div className="subtable_container">
+      <DataTable
+        columns={props.columns}
+        data={props.data}
+        expandableRows={false}
+        theme="dark-subtable"
+      />
+    </div>
   );
 };
-
-export default Table;

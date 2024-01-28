@@ -3,40 +3,69 @@ import './__PurchaseRecordsTable.css';
 import Table from '../../stateless/Table/Table';
 import { purchaseRecords } from './../../../preset-data';
 
-const ExpandedComponent = ({ data }) => {
-  console.log(data);
-  return <h1>hi</h1>;
+const paymentTypeMap = (payType) => {
+  const paymentsTypes = {
+    direct: 'نقد',
+    indirect: 'آجل',
+  };
+
+  return paymentsTypes[payType];
 };
 
-const columns = [
+const displayDate = (dateObj) => dateObj.toISOString().substring(0, 10);
+
+const numberWithCommas = (number) => {
+  if (!number || number < 1000) {
+    return '';
+  }
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
+const paymentsColumns = [
   {
-    name: 'Title',
-    selector: (row) => row.title,
+    name: 'تاريخ التسديد',
+    selector: (paymentRecord) => displayDate(paymentRecord.paydate),
   },
   {
-    name: 'Year',
-    selector: (row) => row.year,
+    name: 'الدفعة',
+    selector: (paymentRecord) => paymentRecord.paymentAmount,
   },
 ];
 
-const data = [
+const ExpandedComponent = ({ data }) => {};
+
+const purchaseColumns = [
   {
-    id: 1,
-    title: 'Beetlejuice',
-    year: '1988',
+    name: 'رقم القائمة',
+    selector: (purchaseRecord) => purchaseRecord.recordNumber,
   },
   {
-    id: 2,
-    title: 'Ghostbusters',
-    year: '1984',
+    name: 'الشركة',
+    selector: (purchaseRecord) => purchaseRecord.company,
+  },
+  {
+    name: 'نوع الدفع',
+    selector: (purchaseRecord) => paymentTypeMap(purchaseRecord.paymentType),
+  },
+  {
+    name: 'الدفعة الكلية',
+    selector: (purchaseRecord) => purchaseRecord.totalCost,
+  },
+  {
+    name: 'الدين',
+    selector: (purchaseRecord) => purchaseRecord.debt,
+  },
+  {
+    name: 'تاريخ القائمة',
+    selector: (purchaseRecord) => displayDate(purchaseRecord.date),
   },
 ];
+
 const PurchaseRecordsTable = (props) => {
   return (
     <div className="purchase-records-table-container">
       <Table
-        columns={columns}
-        data={data}
+        columns={purchaseColumns}
+        data={purchaseRecords}
         expandable={true}
         expandedComponent={ExpandedComponent}
       ></Table>

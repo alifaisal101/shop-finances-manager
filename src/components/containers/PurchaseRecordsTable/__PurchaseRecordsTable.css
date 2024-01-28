@@ -1,3 +1,7 @@
-.purchase-records-table-container {
-  height: 20rem !important;
+.test {
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
 }
