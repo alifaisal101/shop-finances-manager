@@ -17,7 +17,8 @@ import {
   peopleOutline,
   briefcaseOutline,
   cashOutline,
-  cartOutline
+  cartOutline,
+  cogOutline,
 } from 'ionicons/icons';
 import './__SideMenu.css';
 
@@ -58,6 +59,12 @@ const appPages = [
     iosIcon: cashOutline,
     mdIcon: cashOutline,
   },
+  {
+    title: 'اﻹعدادات',
+    url: '/settings',
+    iosIcon: cogOutline,
+    mdIcon: cogOutline,
+  },
 ];
 
 const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
@@ -66,20 +73,24 @@ const SideMenu = () => {
   const location = useLocation();
 
   return (
-    <IonMenu contentId="main" type="overlay" side="end" className='global_sidemenu'>
+    <IonMenu
+      contentId="main"
+      type="overlay"
+      side="end"
+      className="global_sidemenu"
+    >
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>
           <IonNote>hi@ionicframework.com</IonNote>
           {appPages.map((appPage, index) => {
-            let selectedClass = location.pathname === appPage.url ? 'selected' : '';
-          
+            let selectedClass =
+              location.pathname === appPage.url ? 'selected' : '';
+
             return (
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem
-                  className={
-                    selectedClass + " global_sidemenu_item"
-                  }
+                  className={selectedClass + ' global_sidemenu_item'}
                   routerLink={appPage.url}
                   routerDirection="none"
                   lines="none"

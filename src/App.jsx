@@ -34,19 +34,19 @@ import './theme/variables.css';
 import SideMenu from './global/SideMenu/SideMenu';
 
 /* Pages */
-import PurchaseRecords from "./pages/PurchaseRecords/PurchaseRecords";
-import RejectedItems from "./pages/RejectedItems/RejectedItems";
-import OtherSpendings from "./pages/OtherSpendings/OtherSpendings";
-import Employees from "./pages/Employees/Employees";
-import Budget from "./pages/Budget/Budget";
+import PurchaseRecords from './pages/PurchaseRecords/PurchaseRecords';
+import RejectedItems from './pages/RejectedItems/RejectedItems';
+import OtherSpendings from './pages/OtherSpendings/OtherSpendings';
+import Employees from './pages/Employees/Employees';
+import Budget from './pages/Budget/Budget';
 import Earnings from './pages/Earnings/Earnings';
+import Settings from './pages/Settings/Settings';
 
 setupIonicReact();
 
 function App() {
   return (
     <IonApp>
-
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <SideMenu />
@@ -71,6 +71,9 @@ function App() {
             </Route>
             <Route path="/earnings" exact={true}>
               <Earnings />
+            </Route>
+            <Route path="/settings" exact={true}>
+              <Settings />
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>
