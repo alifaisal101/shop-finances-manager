@@ -37,26 +37,24 @@ const Modal = (props) => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton onClick={cancelHandler}>Cancel</IonButton>
+            <IonButton color="danger" fill="outline" onClick={cancelHandler}>
+              {props.cancelText ? props.cancelText : 'الغاء'}
+            </IonButton>
           </IonButtons>
-          <IonTitle>Welcome</IonTitle>
+          <IonTitle class="modal_title">{props.title}</IonTitle>
           <IonButtons slot="end">
-            <IonButton strong={true} onClick={confirmHandler}>
-              Confirm
+            <IonButton
+              strong={true}
+              color="primary"
+              fill="outline"
+              onClick={confirmHandler}
+            >
+              {props.confirmText ? props.confirmText : 'حفظ'}
             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">
-        <IonItem>
-          <IonInput
-            label="Enter your name"
-            labelPlacement="stacked"
-            type="text"
-            placeholder="Your name"
-          />
-        </IonItem>
-      </IonContent>
+      <IonContent className="ion-padding">{props.children}</IonContent>
     </IonModal>
   );
 };

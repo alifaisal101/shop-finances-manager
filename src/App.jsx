@@ -45,6 +45,11 @@ import Settings from './pages/Settings/Settings';
 import { useRecoilState } from 'recoil';
 import { themeState } from './store/theme.store';
 import Modal from './components/stateless/Modal/Modal';
+import PurchaseRecordsForm from './components/containers/PurchaseRecordsForm/PurchaseRecordsForm';
+import RejectedItemsForm from './components/containers/RejectedItemsForm/RejectedItemsForm';
+import OtherSpendingsForm from './components/containers/OtherSpendingsForm/OtherSpendingsForm';
+import EmployeesForm from './components/containers/EmployeesForm/EmployeesForm';
+import EarningsForm from './components/containers/EarningsForm/EarningsForm';
 
 setupIonicReact();
 
@@ -54,7 +59,25 @@ function App() {
 
   return (
     <IonApp>
-      <Modal></Modal>
+      <Modal>
+        <IonReactRouter>
+          <Route path="/purchase-records/:purchaseRecordId" exact={true}>
+            <PurchaseRecordsForm></PurchaseRecordsForm>
+          </Route>
+          <Route path="/rejected-items/:rejectItemId" exact={true}>
+            <RejectedItemsForm></RejectedItemsForm>
+          </Route>
+          <Route path="/other-spendings/:otherSpending" exact={true}>
+            <OtherSpendingsForm></OtherSpendingsForm>
+          </Route>
+          <Route path="/employees/:employee" exact={true}>
+            <EmployeesForm></EmployeesForm>
+          </Route>
+          <Route path="/earnings/:earning" exact={true}>
+            <EarningsForm></EarningsForm>
+          </Route>
+        </IonReactRouter>
+      </Modal>
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <SideMenu />
