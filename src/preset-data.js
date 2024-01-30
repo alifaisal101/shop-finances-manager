@@ -9,6 +9,33 @@ export const purchaseRecords = [
     date: new Date(),
   },
   {
+    _id: 1,
+    recordNumber: 12,
+    company: 'درة',
+    paymentType: 'direct', // direct or indirect'
+    totalCost: 1000000,
+    // debt: No debt field cause the payment is direct,
+    date: new Date(),
+  },
+  {
+    _id: 1,
+    recordNumber: 12,
+    company: 'درة',
+    paymentType: 'direct', // direct or indirect'
+    totalCost: 1000000,
+    // debt: No debt field cause the payment is direct,
+    date: new Date(),
+  },
+  {
+    _id: 1,
+    recordNumber: 12,
+    company: 'درة',
+    paymentType: 'direct', // direct or indirect'
+    totalCost: 1000000,
+    // debt: No debt field cause the payment is direct,
+    date: new Date(),
+  },
+  {
     _id: 7,
     recordNumber: 2323,
     company: 'الامل2',
@@ -74,6 +101,97 @@ export const purchaseRecords = [
     totalCost: 7000000,
     debt: 5000000,
     payments: [
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 1,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
+      {
+        _id: 2,
+        paydate: new Date(),
+        paymentAmount: 1000000,
+      },
       {
         _id: 1,
         paydate: new Date(),

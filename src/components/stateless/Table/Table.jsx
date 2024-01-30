@@ -3,6 +3,7 @@ import './__Table.css';
 import DataTable, { createTheme } from 'react-data-table-component';
 import { themeState } from './../../../store/theme.store';
 import { useRecoilState } from 'recoil';
+import { IonSpinner } from '@ionic/react';
 
 createTheme('dark-table', {}, 'dark');
 
@@ -19,6 +20,12 @@ const Table = (props) => {
       expandableRowsComponent={props.expandedComponent}
       expandableRowDisabled={props.expandableRowDisabled}
       theme={themetoggle ? 'dark-table' : 'light-table'}
+      progressPending={props.loading}
+      pagination={true}
+      paginationServer={props.paginationServer}
+      paginationTotalRows={props.totalRows}
+      onChangeRowsPerPage={props.handlePerRowsChange}
+      progressComponent={<IonSpinner className="table_spinner" />}
     />
   );
 };

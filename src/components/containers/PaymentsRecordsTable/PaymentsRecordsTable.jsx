@@ -18,7 +18,11 @@ const PaymentsRecordsTable = (props) => {
 
   return (
     <div className="paymentsrecordstable_container">
-      <SubTable columns={paymentsColumns} data={props.data.payments}></SubTable>
+      <SubTable
+        columns={paymentsColumns}
+        data={props.data.payments}
+        pagination={props.data.payments.length > 10 ? true : false}
+      ></SubTable>
     </div>
   );
 };

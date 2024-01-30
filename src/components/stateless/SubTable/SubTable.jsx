@@ -41,6 +41,9 @@ const SubTable = (props) => {
         data={props.data}
         expandableRows={false}
         theme={themetoggle ? 'dark-subtable' : 'light-subtable'}
+        pagination={props.pagination}
+        paginationRowsPerPageOptions={[5, 10, 15, 20]}
+        paginationComponentOptions={{ selectAllRowsItem: true }}
       />
     </div>
   );
