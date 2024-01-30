@@ -15,3 +15,12 @@ export const numberWithCommas = (number) => {
   }
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
+
+export const displaySex = (sex) => {
+  const sexesObj = {
+    male: 'ذكر',
+    female: 'أنثى',
+  };
+
+  return sexesObj[sex];
+};
