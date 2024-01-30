@@ -19,7 +19,7 @@ const PaymentsRecordsTable = (props) => {
       <SubTable
         columns={paymentsColumns}
         data={props.data.payments}
-        pagination={props.data.payments.length > 10 ? true : false}
+        pagination={props.data.payments.length > 5 ? true : false}
       ></SubTable>
     </div>
   );

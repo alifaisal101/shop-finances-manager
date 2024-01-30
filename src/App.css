@@ -1,3 +1,13 @@
 * {
   font-family: 'lamasans' !important;
 }
+
+.action-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.action-button-container ion-button {
+  font-size: 1.2rem;
+}
