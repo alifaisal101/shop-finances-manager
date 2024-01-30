@@ -276,8 +276,10 @@ export const budgets = [
       {
         _id: 1234,
         refId: 4,
+        title: 'قائمة شراء',
         amount: -2000000,
-        date: new Date(),
+        time: '12:00 AM',
+        index: 1,
       },
     ],
   },

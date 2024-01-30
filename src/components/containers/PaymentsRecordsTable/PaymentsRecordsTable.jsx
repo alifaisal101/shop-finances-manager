@@ -14,8 +14,6 @@ const paymentsColumns = [
 ];
 
 const PaymentsRecordsTable = (props) => {
-  console.log(props);
-
   return (
     <div className="paymentsrecordstable_container">
       <SubTable
