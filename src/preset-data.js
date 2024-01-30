@@ -211,7 +211,11 @@ export const purchaseRecords = [
 export const rejectedItems = [
   {
     _id: 120,
-    purchaseRecordId: 4,
+    purchaseRecord: {
+      _id: 4,
+      number: 4356,
+    },
+
     date: new Date(),
     price: 1000000,
     desc: 'dusah uishads uhsda hsuhsduahdsa',
@@ -234,7 +238,7 @@ export const otherSpendings = [
       {
         _id: 2,
         paydate: new Date(),
-        paymentAmount: 1000000,
+        paymentAmount: 1000,
       },
     ],
 
