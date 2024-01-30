@@ -28,7 +28,7 @@ const bootstrap = async () => {
   let failedToConnectToDB = false;
   let failedToActivate = false;
 
-  await mongoose.connect(process.env.MONGODB_URI);
+  // await mongoose.connect(process.env.MONGODB_URI);
 
   process.env.DIST = path.join(__dirname, '../dist');
   process.env.PUBLIC = app.isPackaged
@@ -72,19 +72,19 @@ const bootstrap = async () => {
 
   app.whenReady().then(createWindow);
 
-  ipcMain.on('ready', (event) => {
-    if (!process.env.MONGODB_URI) {
-      event.reply('alert_exit_error', messages.noMongodbURIFound);
-    }
+  // ipcMain.on('ready', (event) => {
+  //   if (!process.env.MONGODB_URI) {
+  //     event.reply('alert_exit_error', messages.noMongodbURIFound);
+  //   }
 
-    if (failedToConnectToDB) {
-      event.reply('alert_exit_error', messages.failedToConnectToDatabase);
-    }
+  //   if (failedToConnectToDB) {
+  //     event.reply('alert_exit_error', messages.failedToConnectToDatabase);
+  //   }
 
-    if (failedToActivate) {
-      event.reply('alert_exit_error', messages.failedToActivate);
-    }
-  });
+  //   if (failedToActivate) {
+  //     event.reply('alert_exit_error', messages.failedToActivate);
+  //   }
+  // });
 
   ipcMain.on('exit_error', () => {
     return process.exit(1);

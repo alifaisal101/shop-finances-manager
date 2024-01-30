@@ -6,7 +6,7 @@ import Content from '../../components/stateless/Content/Content';
 const RejectedItems = () => {
   return (
     <IonPage>
-      <Header title="السلع المرفوضة" />
+      <Header title="المواد المرفوضة" />
       <Content className="page_content"></Content>
     </IonPage>
   );
