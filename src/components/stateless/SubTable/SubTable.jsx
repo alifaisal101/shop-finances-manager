@@ -7,29 +7,29 @@ createTheme(
   'dark-subtable',
   {
     text: {
-      primary: '#FFFFFF',
-      secondary: '#2aa198',
+      primary: '#f4f5f8',
+      secondary: '#d7d8da',
     },
     background: {
-      default: '#002b36',
-    },
-    context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-    },
-    divider: {
-      default: '#073642',
-    },
-    action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
+      default: '#282a2e',
     },
   },
   'dark'
 );
 
-createTheme('light-subtable', {}, 'light');
+createTheme(
+  'light-subtable',
+  {
+    text: {
+      primary: '#121212',
+      secondary: '#1e2023',
+    },
+    background: {
+      default: '#e5e6e9',
+    },
+  },
+  'light'
+);
 
 const SubTable = (props) => {
   const [themetoggle, setThemeToggle] = useRecoilState(themeState);

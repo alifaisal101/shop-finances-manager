@@ -5,9 +5,33 @@ import { themeState } from './../../../store/theme.store';
 import { useRecoilState } from 'recoil';
 import { IonSpinner } from '@ionic/react';
 
-createTheme('dark-table', {}, 'dark');
+createTheme(
+  'dark-table',
+  {
+    text: {
+      primary: '#f4f5f8',
+      secondary: '#d7d8da',
+    },
+    background: {
+      default: '#1e2025',
+    },
+  },
+  'dark'
+);
 
-createTheme('light-table', {}, 'light');
+createTheme(
+  'light-table',
+  {
+    text: {
+      primary: '#121212',
+      secondary: '#1e2023',
+    },
+    background: {
+      default: '#f5f6f9',
+    },
+  },
+  'light'
+);
 
 const Table = (props) => {
   const [themetoggle, setThemeToggle] = useRecoilState(themeState);
