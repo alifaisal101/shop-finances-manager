@@ -5,14 +5,23 @@ import Content from '../../components/stateless/Content/Content';
 
 import RejectedItemsTable from './../../components/containers/RejectedItemsTable/RejectedItems';
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../store/modal.store';
 
 const RejectedItems = () => {
+  const [isOpen, setIsOpen] = useRecoilState(modalState);
+
+  const actionHandler = () => {
+    setIsOpen(true);
+  };
   return (
     <IonPage>
       <Header title="المواد المرفوضة" />
       <Content className="page_content">
         <div className="action-button-container">
-          <ActionButton color="danger">اضافة مواد مرفوضة</ActionButton>
+          <ActionButton onClick={actionHandler} color="danger">
+            اضافة مواد مرفوضة
+          </ActionButton>
         </div>
         <RejectedItemsTable></RejectedItemsTable>
       </Content>

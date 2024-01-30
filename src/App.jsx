@@ -44,6 +44,7 @@ import Settings from './pages/Settings/Settings';
 
 import { useRecoilState } from 'recoil';
 import { themeState } from './store/theme.store';
+import Modal from './components/stateless/Modal/Modal';
 
 setupIonicReact();
 
@@ -53,6 +54,7 @@ function App() {
 
   return (
     <IonApp>
+      <Modal></Modal>
       <IonReactRouter>
         <IonSplitPane contentId="main">
           <SideMenu />
