@@ -61,19 +61,19 @@ function App() {
     <IonApp>
       <Modal>
         <IonReactRouter>
-          <Route path="/purchase-records/:purchaseRecordId" exact={true}>
+          <Route path="/purchase-records/" exact={true}>
             <PurchaseRecordsForm></PurchaseRecordsForm>
           </Route>
-          <Route path="/rejected-items/:rejectItemId" exact={true}>
+          <Route path="/rejected-items/" exact={true}>
             <RejectedItemsForm></RejectedItemsForm>
           </Route>
-          <Route path="/other-spendings/:otherSpending" exact={true}>
+          <Route path="/other-spendings/" exact={true}>
             <OtherSpendingsForm></OtherSpendingsForm>
           </Route>
-          <Route path="/employees/:employee" exact={true}>
+          <Route path="/employees/" exact={true}>
             <EmployeesForm></EmployeesForm>
           </Route>
-          <Route path="/earnings/:earning" exact={true}>
+          <Route path="/earnings/" exact={true}>
             <EarningsForm></EarningsForm>
           </Route>
         </IonReactRouter>

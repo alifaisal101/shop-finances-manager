@@ -11,3 +11,12 @@
 .action-button-container ion-button {
   font-size: 1.2rem;
 }
+
+/* .form_ion-item {
+  border-bottom: 1px var(--ion-border-color) solid;
+  transition: border-color 0.5s !important;
+}
+
+.form_ion-item:focus-within {
+  border-bottom: 1px var(--ion-color-primary-tint) solid;
+} */

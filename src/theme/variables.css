@@ -74,6 +74,9 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** Border color**/
+  --ion-border-color: #d8d8d8;
 }
 
 body.dark {
@@ -139,6 +142,9 @@ body.dark {
   --ion-color-light-contrast-rgb: 255, 255, 255;
   --ion-color-light-shade: #1e2023;
   --ion-color-light-tint: #383a3e;
+
+  /** Border color**/
+  --ion-border-color: #d8d8d8;
 }
 
 .ios body.dark {
@@ -191,7 +197,8 @@ body.dark {
   --ion-text-color: #ffffff;
   --ion-text-color-rgb: 255, 255, 255;
 
-  --ion-border-color: #222222;
+  /** Border color**/
+  --ion-border-color: rgb(82, 82, 82);
 
   --ion-color-step-50: #1e1e1e;
   --ion-color-step-100: #2a2a2a;
