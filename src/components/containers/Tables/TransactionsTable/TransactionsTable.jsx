@@ -1,4 +1,4 @@
-import SubTable from '../../stateless/SubTable/SubTable';
+import SubTable from '../../../stateless/SubTable/SubTable';
 import './__TransactionsTable.css';
 
 const transactionsColumns = [

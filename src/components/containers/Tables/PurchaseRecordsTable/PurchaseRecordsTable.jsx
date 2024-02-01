@@ -1,10 +1,13 @@
 import './__PurchaseRecordsTable.css';
 
-import Table from '../../stateless/Table/Table';
+import Table from '../../../stateless/Table/Table';
 
 import PaymentsRecordsTable from './../PaymentsRecordsTable/PaymentsRecordsTable';
-import { purchaseRecords } from './../../../preset-data';
-import { displayDate, paymentTypeMap } from '../../../util/display.functions';
+import { purchaseRecords } from '../../../../preset-data';
+import {
+  displayDate,
+  paymentTypeMap,
+} from '../../../../util/display.functions';
 
 const purchaseColumns = [
   {

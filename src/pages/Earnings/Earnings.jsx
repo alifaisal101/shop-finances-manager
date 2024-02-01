@@ -2,7 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import './__Earnings.css';
 import Header from '../../global/Header/Header';
 import Content from '../../components/stateless/Content/Content';
-import EarningsTable from '../../components/containers/EarningsTable/EarningsTable';
+import EarningsTable from '../../components/containers/Tables/EarningsTable//EarningsTable';
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../../store/modal.store';

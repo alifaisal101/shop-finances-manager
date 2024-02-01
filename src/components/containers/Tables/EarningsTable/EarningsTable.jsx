@@ -1,8 +1,8 @@
-import Table from '../../stateless/Table/Table';
+import Table from '../../../stateless/Table/Table';
 import './__EarningsTable.css';
 
-import { displayDate } from '../../../util/display.functions';
-import { earnings } from '../../../preset-data';
+import { displayDate } from '../../../../util/display.functions';
+import { earnings } from '../../../../preset-data';
 
 const earningsColumns = [
   {

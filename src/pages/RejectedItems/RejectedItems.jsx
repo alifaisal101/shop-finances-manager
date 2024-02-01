@@ -3,7 +3,7 @@ import './__RejectedItems.css';
 import Header from '../../global/Header/Header';
 import Content from '../../components/stateless/Content/Content';
 
-import RejectedItemsTable from './../../components/containers/RejectedItemsTable/RejectedItems';
+import RejectedItemsTable from './../../components/containers/Tables/RejectedItemsTable/RejectedItems';
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../../store/modal.store';

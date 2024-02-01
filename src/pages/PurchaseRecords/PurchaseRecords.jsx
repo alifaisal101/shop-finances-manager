@@ -2,7 +2,7 @@ import { IonPage } from '@ionic/react';
 import './__PurchaseRecords.css';
 import Header from '../../global/Header/Header';
 
-import PurchaseRecordsTable from './../../components/containers/PurchaseRecordsTable/PurchaseRecordsTable';
+import PurchaseRecordsTable from './../../components/containers/Tables/PurchaseRecordsTable/PurchaseRecordsTable';
 import Content from '../../components/stateless/Content/Content';
 
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';

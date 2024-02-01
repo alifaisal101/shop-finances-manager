@@ -2,7 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import './__Employees.css';
 import Header from '../../global/Header/Header';
 import Content from '../../components/stateless/Content/Content';
-import EmployeesTable from '../../components/containers/EmployeesTable/EmployeesTable';
+import EmployeesTable from '../../components/containers/Tables/EmployeesTable/EmployeesTable';
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../../store/modal.store';

@@ -1,13 +1,7 @@
 import './App.css';
 import '@ionic/react/css/core.css';
 import { setupIonicReact } from '@ionic/react';
-import {
-  IonButton,
-  IonDatetime,
-  IonApp,
-  IonRouterOutlet,
-  IonSplitPane,
-} from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
 import { Redirect, Route } from 'react-router-dom';
@@ -45,11 +39,11 @@ import Settings from './pages/Settings/Settings';
 import { useRecoilState } from 'recoil';
 import { themeState } from './store/theme.store';
 import Modal from './components/stateless/Modal/Modal';
-import PurchaseRecordsForm from './components/containers/PurchaseRecordsForm/PurchaseRecordsForm';
-import RejectedItemsForm from './components/containers/RejectedItemsForm/RejectedItemsForm';
-import OtherSpendingsForm from './components/containers/OtherSpendingsForm/OtherSpendingsForm';
-import EmployeesForm from './components/containers/EmployeesForm/EmployeesForm';
-import EarningsForm from './components/containers/EarningsForm/EarningsForm';
+import PurchaseRecordsForm from './components/containers/Forms/PurchaseRecordsForm/PurchaseRecordsForm';
+import RejectedItemsForm from './components/containers/Forms/RejectedItemsForm/RejectedItemsForm';
+import OtherSpendingsForm from './components/containers/Forms/OtherSpendingsForm/OtherSpendingsForm';
+import EmployeesForm from './components/containers/Forms/EmployeesForm/EmployeesForm';
+import EarningsForm from './components/containers/Forms/EarningsForm/EarningsForm';
 
 setupIonicReact();
 

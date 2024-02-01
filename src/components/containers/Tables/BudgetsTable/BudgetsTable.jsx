@@ -1,8 +1,8 @@
 import './__BudgetsTable.css';
-import Table from './../../stateless/Table/Table';
+import Table from '../../../stateless/Table/Table';
 
-import { displayDate } from './../../../util/display.functions';
-import { budgets } from '../../../preset-data';
+import { displayDate } from '../../../../util/display.functions';
+import { budgets } from '../../../../preset-data';
 import TransactionsTable from '../TransactionsTable/TransactionsTable';
 
 const budgetsColumns = [

@@ -1,7 +1,10 @@
-import { paymentTypeMap, displayDate } from '../../../util/display.functions';
-import Table from '../../stateless/Table/Table';
+import {
+  paymentTypeMap,
+  displayDate,
+} from '../../../../util/display.functions';
+import Table from '../../../stateless/Table/Table';
 import './__OtherSpendingsTable.css';
-import { otherSpendings } from '../../../preset-data';
+import { otherSpendings } from '../../../../preset-data';
 import PaymentsRecordsTable from '../PaymentsRecordsTable/PaymentsRecordsTable';
 
 const otherSpendingsTableColumns = [

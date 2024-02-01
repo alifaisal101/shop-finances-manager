@@ -1,6 +1,6 @@
 import './__PaymentsRecordsTable.css';
-import SubTable from './../../stateless/SubTable/SubTable';
-import { displayDate } from '../../../util/display.functions';
+import SubTable from '../../../stateless/SubTable/SubTable';
+import { displayDate } from '../../../../util/display.functions';
 
 const paymentsColumns = [
   {

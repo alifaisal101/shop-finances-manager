@@ -2,7 +2,7 @@ import { IonContent, IonPage } from '@ionic/react';
 import './__Budget.css';
 import Header from '../../global/Header/Header';
 import Content from '../../components/stateless/Content/Content';
-import BudgetsTable from '../../components/containers/BudgetsTable/BudgetsTable';
+import BudgetsTable from '../../components/containers/Tables/BudgetsTable/BudgetsTable';
 
 const Budget = () => {
   return (

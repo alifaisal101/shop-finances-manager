@@ -1,8 +1,11 @@
 import './__RejectedItems.css';
 
-import { rejectedItems } from '../../../preset-data';
-import Table from '../../stateless/Table/Table';
-import { displayDate, paymentTypeMap } from '../../../util/display.functions';
+import { rejectedItems } from '../../../../preset-data';
+import Table from '../../../stateless/Table/Table';
+import {
+  displayDate,
+  paymentTypeMap,
+} from '../../../../util/display.functions';
 
 const rejectedItemsColumns = [
   {

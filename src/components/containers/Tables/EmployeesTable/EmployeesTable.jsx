@@ -1,7 +1,7 @@
-import Table from '../../stateless/Table/Table';
+import Table from '../../../stateless/Table/Table';
 import './__EmployeesTable.css';
-import { displayDate, displaySex } from '../../../util/display.functions';
-import { employees } from '../../../preset-data';
+import { displayDate, displaySex } from '../../../../util/display.functions';
+import { employees } from '../../../../preset-data';
 
 const employeesColumns = [
   {
