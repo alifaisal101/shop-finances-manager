@@ -18,11 +18,21 @@ import './__PurchaseRecordsForm.css';
 import { useLocation } from 'react-router-dom';
 import PaymentsRecordsData from '../PaymentsRecordsData/PaymentsRecordsData';
 import { displayDate } from '../../../../util/display.functions';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { addOutline } from 'ionicons/icons';
+import { controlInput } from '../../../../util/state.functions';
 
 const PurchaseRecordsForm = () => {
-  const location = useLocation();
+  const [purchaseRecord, setPurchaseRecord] = useState({
+    recordNumber: null,
+    company: '',
+    paymentType: null,
+    totalCost: null,
+    date: new Date(),
+    payments: [],
+  });
+
+  console.log(purchaseRecord.paymentType);
 
   return (
     <div className="purchase-records-form-container form">
@@ -55,6 +65,10 @@ const PurchaseRecordsForm = () => {
               interface="popover"
               placeholder="حدد نوع الدفع"
               className="form_input"
+              value={purchaseRecord.paymentType}
+              onIonChange={(e) => {
+                controlInput(e, 'paymentType', setPurchaseRecord);
+              }}
             >
               <IonSelectOption value="direct">نقد</IonSelectOption>
               <IonSelectOption value="indirect">أجل</IonSelectOption>
@@ -84,51 +98,53 @@ const PurchaseRecordsForm = () => {
           </IonCol>
         </IonRow>
 
-        <Fragment>
-          <IonRow>
-            <IonCol>
-              <IonTitle class="form_title">اضافة الدفعات</IonTitle>
-            </IonCol>
-          </IonRow>
+        {purchaseRecord.paymentType === 'indirect' ? (
+          <Fragment>
+            <IonRow>
+              <IonCol>
+                <IonTitle class="form_title">اضافة الدفعات</IonTitle>
+              </IonCol>
+            </IonRow>
 
-          <IonRow>
-            <IonCol>
-              <IonInput
-                label="الدفعة"
-                labelPlacement="floating"
-                placeholder="أدخل الكلفة الكلية"
-                className="form_input"
-                type="number"
-                step="1000"
-                max={1000000000}
-                min={0}
-              ></IonInput>
-            </IonCol>
-            <IonCol>
-              <IonInput
-                label="التاريخ"
-                labelPlacement="stacked"
-                placeholder="أدخل تاريخ القائمة"
-                type="date"
-                value={displayDate(new Date())}
-                className="form_input"
-              ></IonInput>
-            </IonCol>
-            <IonCol size="auto" className="form_addbtn-container">
-              <IonButton shape="circle">
-                <IonIcon slot="icon-only" icon={addOutline}></IonIcon>
-              </IonButton>
-            </IonCol>
-          </IonRow>
-          <IonRow className="form_row">
-            <IonCol>
-              <PaymentsRecordsData
-                pagination={false}
-                data={{ payments: [] }}
-              ></PaymentsRecordsData>
-            </IonCol>
-          </IonRow>
-        </Fragment>
+            <IonRow>
+              <IonCol>
+                <IonInput
+                  label="الدفعة"
+                  labelPlacement="floating"
+                  placeholder="أدخل الكلفة الكلية"
+                  className="form_input"
+                  type="number"
+                  step="1000"
+                  max={1000000000}
+                  min={0}
+                ></IonInput>
+              </IonCol>
+              <IonCol>
+                <IonInput
+                  label="التاريخ"
+                  labelPlacement="stacked"
+                  placeholder="أدخل تاريخ القائمة"
+                  type="date"
+                  value={displayDate(new Date())}
+                  className="form_input"
+                ></IonInput>
+              </IonCol>
+              <IonCol size="auto" className="form_addbtn-container">
+                <IonButton shape="circle">
+                  <IonIcon slot="icon-only" icon={addOutline}></IonIcon>
+                </IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow className="form_row">
+              <IonCol>
+                <PaymentsRecordsData
+                  pagination={false}
+                  data={{ payments: [] }}
+                ></PaymentsRecordsData>
+              </IonCol>
+            </IonRow>
+          </Fragment>
+        ) : null}
       </IonGrid>
     </div>
   );
