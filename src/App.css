@@ -54,3 +54,7 @@ ion-button[shape='circle'] {
 .form_addbtn-container {
   margin: 0px 5px;
 }
+
+.form_month-picker {
+  margin: auto;
+}
