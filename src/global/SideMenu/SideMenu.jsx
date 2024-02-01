@@ -11,7 +11,6 @@ import {
 } from '@ionic/react';
 import { useLocation } from 'react-router-dom';
 import {
-  bookmarkOutline,
   receiptOutline,
   warningOutline,
   peopleOutline,
@@ -67,8 +66,6 @@ const appPages = [
   },
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-
 const SideMenu = () => {
   const location = useLocation();
 
@@ -80,7 +77,7 @@ const SideMenu = () => {
       className="global_sidemenu"
     >
       <IonContent>
-        <IonList id="inbox-list">
+        <IonList className="side-menu_items-list" id="inbox-list">
           <IonListHeader>Inbox</IonListHeader>
           <IonNote>hi@ionicframework.com</IonNote>
           {appPages.map((appPage, index) => {
@@ -108,16 +105,6 @@ const SideMenu = () => {
             );
           })}
         </IonList>
-
-        {/* <IonList id="labels-list">
-          <IonListHeader>text</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon aria-hidden="true" slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList> */}
       </IonContent>
     </IonMenu>
   );

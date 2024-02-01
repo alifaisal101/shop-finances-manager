@@ -5,7 +5,7 @@ ion-menu ion-content {
   ) !important;
 }
 
-ion-list {
+.side-menu_items-list {
   direction: rtl;
   background: var(--ion-item-background, var(--ion-background-color, #fff));
 }
@@ -17,7 +17,7 @@ ion-menu.md ion-content {
   --padding-bottom: 20px;
 }
 
-ion-menu.md ion-list {
+ion-menu.md .side-menu_items-list {
   padding: 20px 0;
 }
 
@@ -73,7 +73,7 @@ ion-menu.ios ion-content {
   --padding-bottom: 20px;
 }
 
-ion-menu.ios ion-list {
+ion-menu.ios .side-menu_items-list {
   padding: 20px 0 0 0;
 }
 

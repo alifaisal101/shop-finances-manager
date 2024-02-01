@@ -8,43 +8,84 @@ const PurchaseRecordsForm = () => {
   console.log(location);
   return (
     <div className="purchase-records-form-container">
-      <IonList>
-        <IonItem>
-          <IonInput
-            label="رقم القائمة"
-            labelPlacement="floating"
-            placeholder="Enter text"
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonInput
-            label="Floating label"
-            labelPlacement="floating"
-            placeholder="Enter text"
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonInput
-            label="Floating label"
-            labelPlacement="floating"
-            placeholder="Enter text"
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonInput
-            label="Floating label"
-            labelPlacement="floating"
-            placeholder="Enter text"
-          ></IonInput>
-        </IonItem>
-        <IonItem>
-          <IonInput
-            label="Floating label"
-            labelPlacement="floating"
-            placeholder="Enter text"
-          ></IonInput>
-        </IonItem>
-      </IonList>
+      <IonInput
+        color="primary"
+        label="رقم القائمة"
+        labelPlacement="floating"
+        placeholder="أدخل رقم القائمة"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        color="primary"
+        label="رقم القائمة"
+        labelPlacement="floating"
+        placeholder="أدخل رقم القائمة"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>{' '}
+      <IonInput
+        color="primary"
+        label="رقم القائمة"
+        labelPlacement="floating"
+        placeholder="أدخل رقم القائمة"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
+      <IonInput
+        label="Floating label"
+        labelPlacement="floating"
+        placeholder="Enter text"
+      ></IonInput>
     </div>
   );
 };

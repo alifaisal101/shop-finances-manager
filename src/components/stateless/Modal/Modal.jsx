@@ -14,6 +14,7 @@ import {
 } from '@ionic/react';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../../../store/modal.store';
+import Content from '../Content/Content';
 
 const Modal = (props) => {
   const [isOpen, setIsOpen] = useRecoilState(modalState);
@@ -54,7 +55,7 @@ const Modal = (props) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent className="ion-padding">{props.children}</IonContent>
+      <Content className="ion-padding">{props.children}</Content>
     </IonModal>
   );
 };
