@@ -20,3 +20,36 @@
 .form_ion-item:focus-within {
   border-bottom: 1px var(--ion-color-primary-tint) solid;
 } */
+
+.form {
+  direction: rtl;
+}
+
+.form_input {
+  background-color: var(--ion-color-step-50);
+  padding: 2px 20px !important;
+  padding-bottom: 12px !important;
+}
+
+ion-select {
+  height: 100%;
+  --color: var(--ion-color-step-950) !important;
+}
+
+.form .form_row {
+  margin-bottom: 10px;
+}
+
+.form_title {
+  text-align: center;
+}
+
+ion-button[shape='circle'] {
+  --border-radius: 50%;
+  width: 56px;
+  height: 56px;
+}
+
+.form_addbtn-container {
+  margin: 0px 5px;
+}
