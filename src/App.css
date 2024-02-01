@@ -25,7 +25,8 @@
   direction: rtl;
 }
 
-.form_input {
+.form_input,
+.form_text-area {
   background-color: var(--ion-color-step-50);
   padding: 2px 20px !important;
   padding-bottom: 12px !important;

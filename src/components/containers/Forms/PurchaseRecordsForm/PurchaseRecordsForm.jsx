@@ -1,14 +1,9 @@
 import {
   IonButton,
   IonCol,
-  IonDatetime,
-  IonDatetimeButton,
   IonGrid,
   IonIcon,
   IonInput,
-  IonItem,
-  IonList,
-  IonModal,
   IonRow,
   IonSelect,
   IonSelectOption,
@@ -31,8 +26,6 @@ const PurchaseRecordsForm = () => {
     date: new Date(),
     payments: [],
   });
-
-  console.log(purchaseRecord.paymentType);
 
   return (
     <div className="purchase-records-form-container form">
