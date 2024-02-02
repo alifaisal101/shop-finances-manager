@@ -2,6 +2,8 @@ import Table from '../../../stateless/Table/Table';
 import './__EmployeesTable.css';
 import { displayDate, displaySex } from '../../../../util/display.functions';
 import { employees } from '../../../../preset-data';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
 
 const employeesColumns = [
   {
@@ -23,6 +25,14 @@ const employeesColumns = [
   {
     name: 'موعد الدفع',
     selector: (employee) => displayDate(employee.payDate),
+  },
+  {
+    name: 'تعديل',
+    selector: (employee) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (employee) => <DeleteBtnTable />,
   },
 ];
 

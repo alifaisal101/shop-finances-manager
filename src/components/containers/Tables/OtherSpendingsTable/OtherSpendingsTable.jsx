@@ -6,6 +6,8 @@ import Table from '../../../stateless/Table/Table';
 import './__OtherSpendingsTable.css';
 import { otherSpendings } from '../../../../preset-data';
 import PaymentsRecordsTable from '../PaymentsRecordsTable/PaymentsRecordsTable';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
 
 const otherSpendingsTableColumns = [
   {
@@ -27,6 +29,14 @@ const otherSpendingsTableColumns = [
   {
     name: 'التاريخ',
     selector: (otherSpending) => displayDate(otherSpending.date),
+  },
+  {
+    name: 'تعديل',
+    selector: (otherSpending) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (otherSpending) => <DeleteBtnTable />,
   },
 ];
 

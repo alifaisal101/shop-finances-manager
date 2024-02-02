@@ -3,6 +3,8 @@ import './__EarningsTable.css';
 
 import { displayDate } from '../../../../util/display.functions';
 import { earnings } from '../../../../preset-data';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
 
 const earningsColumns = [
   {
@@ -12,6 +14,14 @@ const earningsColumns = [
   {
     name: 'اﻹيراد',
     selector: (earning) => earning.amount,
+  },
+  {
+    name: 'تعديل',
+    selector: (earning) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (earning) => <DeleteBtnTable />,
   },
 ];
 

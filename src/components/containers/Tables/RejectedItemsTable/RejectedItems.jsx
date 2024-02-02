@@ -6,6 +6,8 @@ import {
   displayDate,
   paymentTypeMap,
 } from '../../../../util/display.functions';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
 
 const rejectedItemsColumns = [
   {
@@ -23,6 +25,14 @@ const rejectedItemsColumns = [
   {
     name: 'الوصف',
     selector: (rejectedItem) => rejectedItem.desc,
+  },
+  {
+    name: 'تعديل',
+    selector: (rejectedItem) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (rejectedItem) => <DeleteBtnTable />,
   },
 ];
 

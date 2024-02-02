@@ -1,3 +1,5 @@
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import SubTable from '../../../stateless/SubTable/SubTable';
 import './__TransactionsTable.css';
 
@@ -17,6 +19,14 @@ const transactionsColumns = [
   {
     name: 'الوقت',
     selector: (transactionRecord) => transactionRecord.time,
+  },
+  {
+    name: 'تعديل',
+    selector: (transactionRecord) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (transactionRecord) => <DeleteBtnTable />,
   },
 ];
 

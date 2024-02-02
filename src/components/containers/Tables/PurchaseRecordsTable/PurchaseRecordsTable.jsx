@@ -8,6 +8,8 @@ import {
   displayDate,
   paymentTypeMap,
 } from '../../../../util/display.functions';
+import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
 
 const purchaseColumns = [
   {
@@ -33,6 +35,14 @@ const purchaseColumns = [
   {
     name: 'تاريخ القائمة',
     selector: (purchaseRecord) => displayDate(purchaseRecord.date),
+  },
+  {
+    name: 'تعديل',
+    selector: (purchaseRecord) => <EditBtnTable />,
+  },
+  {
+    name: 'حذف',
+    selector: (purchaseRecord) => <DeleteBtnTable />,
   },
 ];
 
