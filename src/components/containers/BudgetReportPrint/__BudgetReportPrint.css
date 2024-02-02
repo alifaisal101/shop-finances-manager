@@ -1,0 +1,15 @@
+@media print {
+  /* unsets all the previous styles made by Ionic that breaks the printing*/
+  * {
+    all: unset !important;
+  }
+  /* for some reason, this adds all the css rules as text in the printing page, under the html, so this removes it.*/
+  html {
+    font-size: 0 !important;
+  }
+
+  /* sets the font back to normal*/
+  body {
+    font-size: 13px !important;
+  }
+}

@@ -4,6 +4,9 @@ import Table from '../../../stateless/Table/Table';
 import { displayDate } from '../../../../util/display.functions';
 import { budgets } from '../../../../preset-data';
 import TransactionsTable from '../TransactionsTable/TransactionsTable';
+import Example from '../../Print';
+import BudgetReportPrint from '../../BudgetReportPrint/BudgetReportPrint';
+import { IonButton } from '@ionic/react';
 
 const budgetsColumns = [
   {
@@ -27,6 +30,7 @@ const budgetsColumns = [
 const BudgetsTable = () => {
   return (
     <div className="budgets-table-container">
+      <BudgetReportPrint PrintOnClickComp={<IonButton />}></BudgetReportPrint>
       <Table
         columns={budgetsColumns}
         data={budgets}
