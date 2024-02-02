@@ -7,3 +7,11 @@
   height: 100px;
   margin: 245px 20px;
 }
+
+.data-table .rdt_TableCol,
+.data-table .rdt_TableCell {
+  justify-content: center;
+}
+.data-table .rdt_TableCol {
+  font-weight: 800;
+}

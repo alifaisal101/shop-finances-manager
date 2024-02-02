@@ -38,6 +38,7 @@ const Table = (props) => {
 
   return (
     <DataTable
+      className="data-table"
       columns={props.columns}
       data={props.data}
       expandableRows={(props.expandable && props.expandedComponent) || false}

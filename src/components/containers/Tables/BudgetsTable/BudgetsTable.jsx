@@ -4,33 +4,53 @@ import Table from '../../../stateless/Table/Table';
 import { displayDate } from '../../../../util/display.functions';
 import { budgets } from '../../../../preset-data';
 import TransactionsTable from '../TransactionsTable/TransactionsTable';
-import Example from '../../Print';
 import BudgetReportPrint from '../../BudgetReportPrint/BudgetReportPrint';
-import { IonButton } from '@ionic/react';
-
-const budgetsColumns = [
-  {
-    name: 'التاريخ',
-    selector: (budget) => displayDate(budget.date),
-  },
-  {
-    name: 'الموازنة الحالية',
-    selector: (budget) => budget.currentAmount,
-  },
-  {
-    name: 'أعلى موازنة',
-    selector: (budget) => budget.maxReachedAmount,
-  },
-  {
-    name: 'أقل موازنة',
-    selector: (budget) => budget.lowestReachedAmount,
-  },
-];
+import { IonButton, IonIcon } from '@ionic/react';
+import { printOutline } from 'ionicons/icons';
+import { useRef } from 'react';
 
 const BudgetsTable = () => {
+  let printLink = useRef(null);
+
+  const budgetsColumns = [
+    {
+      name: 'التاريخ',
+      selector: (budget) => displayDate(budget.date),
+    },
+    {
+      name: 'الموازنة الحالية',
+      selector: (budget) => budget.currentAmount,
+    },
+    {
+      name: 'أعلى موازنة',
+      selector: (budget) => budget.maxReachedAmount,
+    },
+    {
+      name: 'أقل موازنة',
+      selector: (budget) => budget.lowestReachedAmount,
+    },
+    {
+      name: 'طباعة',
+      selector: (budget) => (
+        <IonButton
+          onClick={() => {
+            printLink.click();
+          }}
+          color="light"
+        >
+          <IonIcon slot="icon-only" icon={printOutline}></IonIcon>
+        </IonButton>
+      ),
+    },
+  ];
+
   return (
     <div className="budgets-table-container">
-      <BudgetReportPrint PrintOnClickComp={<IonButton />}></BudgetReportPrint>
+      <BudgetReportPrint
+        getPrintLink={(_printLink) => {
+          printLink = _printLink;
+        }}
+      ></BudgetReportPrint>
       <Table
         columns={budgetsColumns}
         data={budgets}
