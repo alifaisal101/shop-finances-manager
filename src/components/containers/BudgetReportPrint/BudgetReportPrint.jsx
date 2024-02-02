@@ -17,6 +17,7 @@ class BudgetReportPrint extends PureComponent {
             // to the root node of the returned component as it will be overwritten.
             return (
               <a
+                className="hide"
                 ref={(printLink) => {
                   this.props.getPrintLink(printLink);
                 }}
@@ -25,7 +26,11 @@ class BudgetReportPrint extends PureComponent {
           }}
           content={() => this.componentRef}
         />
-        <BudgetReportPrintContent ref={(el) => (this.componentRef = el)} />
+        <BudgetReportPrintContent
+          className="hide component-to-print"
+          budgetData={this.props.budgetData}
+          ref={(el) => (this.componentRef = el)}
+        />
       </div>
     );
   }

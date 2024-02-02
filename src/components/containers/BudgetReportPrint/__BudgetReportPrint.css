@@ -1,3 +1,13 @@
+.hide {
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.component-to-print {
+  display: none;
+}
+
 @media print {
   /* unsets all the previous styles made by Ionic that breaks the printing*/
   * {

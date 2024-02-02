@@ -50,6 +50,7 @@ const BudgetsTable = () => {
         getPrintLink={(_printLink) => {
           printLink = _printLink;
         }}
+        budgetData={budgets[0]}
       ></BudgetReportPrint>
       <Table
         columns={budgetsColumns}

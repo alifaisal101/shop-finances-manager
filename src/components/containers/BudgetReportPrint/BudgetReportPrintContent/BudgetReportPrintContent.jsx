@@ -6,8 +6,9 @@ export class BudgetReportPrintContent extends PureComponent {
     super(props);
   }
   render() {
+    console.log(this.props.budgetData);
     return (
-      <div className="printed-content-container">
+      <div className={'printed-content-container ' + this.props.className}>
         <h1>aaaa</h1>
       </div>
     );
