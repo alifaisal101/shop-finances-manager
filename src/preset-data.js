@@ -276,9 +276,37 @@ export const budgets = [
       {
         _id: 1234,
         refId: 4,
+        title: 'إيراد',
+        amount: 2000000,
+        type: 'income', // income, expense
+        time: '12:00 ص',
+        index: 1,
+      },
+      {
+        _id: 1234,
+        refId: 4,
         title: 'قائمة شراء',
-        amount: -2000000,
-        time: '12:00 AM',
+        amount: 2000000,
+        type: 'expense', // income, expense
+        time: '12:00 ص',
+        index: 1,
+      },
+      {
+        _id: 1234,
+        refId: 4,
+        title: 'قائمة شراء',
+        amount: 2000000,
+        type: 'expense', // income, expense
+        time: '12:00 م',
+        index: 1,
+      },
+      {
+        _id: 1234,
+        refId: 4,
+        title: 'قائمة شراء',
+        amount: 2000000,
+        type: 'expense', // income, expense
+        time: '12:00 م',
         index: 1,
       },
     ],

@@ -1,5 +1,6 @@
-import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
-import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
+import { IonButton, IonIcon, IonLabel } from '@ionic/react';
+import { mapTransactionType } from '../../../../util/display.functions';
+import { trendingDownOutline, trendingUpOutline } from 'ionicons/icons';
 import SubTable from '../../../stateless/SubTable/SubTable';
 import './__TransactionsTable.css';
 
@@ -14,19 +15,32 @@ const transactionsColumns = [
   },
   {
     name: 'السعر',
-    selector: (transactionRecord) => transactionRecord.amount,
+    selector: (transactionRecord) => (
+      <IonButton
+        className="label"
+        size="small"
+        color={transactionRecord.type == 'expense' ? 'danger' : 'success'}
+      >
+        <IonIcon
+          icon={
+            transactionRecord.type == 'expense'
+              ? trendingDownOutline
+              : trendingUpOutline
+          }
+          slot="end"
+        ></IonIcon>
+        {transactionRecord.amount}
+      </IonButton>
+    ),
   },
+  {
+    name: 'نوع اﻹجراء',
+    selector: (transactionRecord) => mapTransactionType(transactionRecord.type),
+  },
+
   {
     name: 'الوقت',
     selector: (transactionRecord) => transactionRecord.time,
-  },
-  {
-    name: 'تعديل',
-    selector: (transactionRecord) => <EditBtnTable />,
-  },
-  {
-    name: 'حذف',
-    selector: (transactionRecord) => <DeleteBtnTable />,
   },
 ];
 

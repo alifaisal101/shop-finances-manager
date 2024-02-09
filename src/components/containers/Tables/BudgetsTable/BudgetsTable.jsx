@@ -22,6 +22,14 @@ const BudgetsTable = () => {
       selector: (budget) => budget.currentAmount,
     },
     {
+      name: 'اﻹيراد الكلي',
+      selector: (budget) => budget.currentAmount,
+    },
+    {
+      name: 'المصروف الكلي',
+      selector: (budget) => budget.currentAmount,
+    },
+    {
       name: 'أعلى موازنة',
       selector: (budget) => budget.maxReachedAmount,
     },

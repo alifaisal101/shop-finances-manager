@@ -25,7 +25,7 @@ createTheme(
       secondary: '#1e2023',
     },
     background: {
-      default: '#e5e6e9',
+      default: '#f1f1f1',
     },
   },
   'light'

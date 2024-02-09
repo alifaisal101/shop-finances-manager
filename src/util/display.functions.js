@@ -24,3 +24,12 @@ export const displaySex = (sex) => {
 
   return sexesObj[sex];
 };
+
+export const mapTransactionType = (transactionType) => {
+  const transactionTypeObj = {
+    expense: 'مصروف',
+    income: 'إيراد',
+  };
+
+  return transactionTypeObj[transactionType];
+};
