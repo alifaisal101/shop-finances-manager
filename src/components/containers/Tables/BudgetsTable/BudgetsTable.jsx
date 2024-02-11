@@ -10,7 +10,14 @@ import { printOutline } from 'ionicons/icons';
 import { useRef } from 'react';
 
 const BudgetsTable = () => {
-  let printLink = useRef(null);
+  const handleBudgetPrint = (budget) => {
+    e_print.printBudget(budget, (error, result) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log(result);
+    });
+  };
 
   const budgetsColumns = [
     {
@@ -42,7 +49,7 @@ const BudgetsTable = () => {
       selector: (budget) => (
         <IonButton
           onClick={() => {
-            printLink.click();
+            handleBudgetPrint(budget);
           }}
           color="light"
         >
@@ -54,12 +61,6 @@ const BudgetsTable = () => {
 
   return (
     <div className="budgets-table-container">
-      <BudgetReportPrint
-        getPrintLink={(_printLink) => {
-          printLink = _printLink;
-        }}
-        budgetData={budgets[0]}
-      ></BudgetReportPrint>
       <Table
         columns={budgetsColumns}
         data={budgets}

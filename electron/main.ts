@@ -36,6 +36,7 @@ const bootstrap = async () => {
     : path.join(process.env.DIST, '../public');
 
   let win: BrowserWindow | null;
+  let printBudgetWin: BrowserWindow | null;
   // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
   const VITE_DEV_SERVER_URL = process.env['VITE_DEV_SERVER_URL'];
 
@@ -46,9 +47,16 @@ const bootstrap = async () => {
       icon: path.join(process.env.PUBLIC, 'electron-vite.svg'),
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
-        // contextIsolation: true,
       },
     });
+
+    printBudgetWin = new BrowserWindow({
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+      },
+    });
+
+    printBudgetWin.loadFile('./print.html');
 
     // Test active push message to Renderer-process.
     win.webContents.on('did-finish-load', () => {
@@ -95,6 +103,12 @@ const bootstrap = async () => {
   ipcMain.on('focus-fix', () => {
     win.blur();
     win.focus();
+  });
+
+  // Handle printing
+  ipcMain.on('print_budget', (event, budget) => {
+    console.log("im' working");
+    printBudgetWin.webContents.send('print_window_execute', budget);
   });
 };
 

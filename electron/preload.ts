@@ -1,7 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron';
-import { InProduct } from './models/product';
 import { arrayBufferToJson, jsonToBase64Url } from './utils/data';
-import { InPrintSettings } from './models/printsettings';
 
 function domReady(
   condition: DocumentReadyState[] = ['complete', 'interactive']
@@ -119,5 +117,25 @@ contextBridge.exposeInMainWorld('e_util', {
     const res = window.confirm(msg);
     ipcRenderer.send('focus-fix');
     return res;
+  },
+});
+
+contextBridge.exposeInMainWorld('e_print', {
+  printBudget: (budget: Object, cb: Function) => {
+    ipcRenderer.send('print_budget', budget);
+    ipcRenderer.on('print_budget_result', (_event, result: Object) => {
+      cb(null, result);
+    });
+    ipcRenderer.on('print_budget_error', (_event, error: Error) => {
+      cb(error, null);
+    });
+  },
+
+  handlePrintWindow: (cb: Function) => {
+    console.log('Handle print window');
+    ipcRenderer.on('print_window_execute', (_event, budget: Object) => {
+      console.log('hello');
+      cb(budget);
+    });
   },
 });
