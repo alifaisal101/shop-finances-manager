@@ -56,7 +56,7 @@ const bootstrap = async () => {
       },
     });
 
-    printBudgetWin.loadFile('./print.html');
+    printBudgetWin.loadFile('./src/print/index.html');
 
     // Test active push message to Renderer-process.
     win.webContents.on('did-finish-load', () => {
@@ -107,7 +107,6 @@ const bootstrap = async () => {
 
   // Handle printing
   ipcMain.on('print_budget', (event, budget) => {
-    console.log("im' working");
     printBudgetWin.webContents.send('print_window_execute', budget);
   });
 };
