@@ -5,6 +5,8 @@ import { displayDate } from '../../../../util/display.functions';
 import { earnings } from '../../../../preset-data';
 import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { earningsStore } from '../../../../store/earnings.store';
 
 const earningsColumns = [
   {
@@ -26,11 +28,13 @@ const earningsColumns = [
 ];
 
 const EarningsTable = () => {
+  const [earningsState, setEarningsState] = useRecoilState(earningsStore);
+
   return (
     <div className="earnings-table-container">
       <Table
         columns={earningsColumns}
-        data={earnings}
+        data={earningsState}
         expandable={false}
       ></Table>
     </div>

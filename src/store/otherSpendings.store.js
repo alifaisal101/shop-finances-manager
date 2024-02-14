@@ -12,24 +12,24 @@ export const otherSpendingsStore = atom({
       payments: [
         {
           _id: 1,
-          paydate: new Date('2/12/24'),
+          paydate: new Date('2/13/24'),
           paymentAmount: 1000000,
         },
         {
           _id: 2,
-          paydate: new Date('2/13/24'),
+          paydate: new Date('2/14/24'),
           paymentAmount: 1000000,
         },
       ],
 
-      date: new Date('2/12/24'),
+      date: new Date('2/13/24'),
     },
     {
       _id: 65,
       paymentType: 'direct', // direct or indirect'
       totalCost: 100000,
       title: 'الانترنت',
-      date: new Date('2/13/24'),
+      date: new Date('2/14/24'),
     },
   ],
 });

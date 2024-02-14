@@ -8,8 +8,12 @@ import BudgetReportPrint from '../../BudgetReportPrint/BudgetReportPrint';
 import { IonButton, IonIcon } from '@ionic/react';
 import { printOutline } from 'ionicons/icons';
 import { useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import { budgetStore } from '../../../../store/budgets.store';
 
 const BudgetsTable = () => {
+  const [budgetState, setBudgetState] = useRecoilState(budgetStore);
+
   const handleBudgetPrint = (budget) => {
     e_print.printBudget(budget, (error, result) => {
       if (error) {
@@ -63,11 +67,9 @@ const BudgetsTable = () => {
     <div className="budgets-table-container">
       <Table
         columns={budgetsColumns}
-        data={budgets}
+        data={budgetState}
         expandable={true}
-        expandableRowDisabled={(purchaseRecord) =>
-          purchaseRecord.transactions.length == 0
-        }
+        expandableRowDisabled={(budget) => budget.transactions.length == 0}
         expandedComponent={TransactionsTable}
       ></Table>
     </div>

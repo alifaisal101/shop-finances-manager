@@ -9,7 +9,7 @@ export const rejectedItemsStore = atom({
         _id: 4,
         number: 4356,
       },
-      date: new Date('2/13/24'),
+      date: new Date('2/14/24'),
       price: 1000000,
       desc: 'مواد اكسباير',
     },

@@ -8,6 +8,8 @@ import { otherSpendings } from '../../../../preset-data';
 import PaymentsRecordsTable from '../PaymentsRecordsTable/PaymentsRecordsTable';
 import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import { useRecoilState } from 'recoil';
+import { otherSpendingsStore } from '../../../../store/otherSpendings.store';
 
 const otherSpendingsTableColumns = [
   {
@@ -41,11 +43,14 @@ const otherSpendingsTableColumns = [
 ];
 
 const OtherSpendingsTable = () => {
+  const [otherSpendingsState, setOtherSpendingsState] =
+    useRecoilState(otherSpendingsStore);
+
   return (
     <div className="other-spendings-table-container">
       <Table
         columns={otherSpendingsTableColumns}
-        data={otherSpendings}
+        data={otherSpendingsState}
         expandable={true}
         expandedComponent={PaymentsRecordsTable}
         expandableRowDisabled={(otherSpending) =>

@@ -10,22 +10,34 @@ import {
   IonTitle,
 } from '@ionic/react';
 import './__PurchaseRecordsForm.css';
-import { useLocation } from 'react-router-dom';
 import PaymentsRecordsData from '../PaymentsRecordsData/PaymentsRecordsData';
 import { displayDate } from '../../../../util/display.functions';
 import { Fragment, useState } from 'react';
 import { addOutline } from 'ionicons/icons';
 import { controlInput } from '../../../../util/state.functions';
+import { useRecoilState } from 'recoil';
+import { purchaseRecordStoreForm } from '../../../../store/purchaseRecords.store';
 
-const PurchaseRecordsForm = () => {
-  const [purchaseRecord, setPurchaseRecord] = useState({
-    recordNumber: null,
-    company: '',
-    paymentType: null,
-    totalCost: null,
-    date: new Date(),
-    payments: [],
-  });
+const PurchaseRecordsForm = (props) => {
+  const [purchaseRecord, setPurchaseRecord] = useRecoilState(
+    purchaseRecordStoreForm
+  );
+
+  const defaultPayment = {
+    paymentAmount: null,
+    paydate: new Date(),
+  };
+  const [payment, setPayment] = useState(defaultPayment);
+  const handleAddPayment = () => {
+    setPurchaseRecord((_purchaseRecord) => {
+      const purchaseRecord = { ..._purchaseRecord };
+      const payments = [...purchaseRecord.payments, payment];
+      purchaseRecord.payments = payments;
+      return purchaseRecord;
+    });
+
+    setPayment(defaultPayment);
+  };
 
   return (
     <div className="purchase-records-form-container form">
@@ -38,6 +50,10 @@ const PurchaseRecordsForm = () => {
               labelPlacement="floating"
               placeholder="أدخل رقم القائمة"
               className="form_input"
+              value={purchaseRecord.recordNumber}
+              onIonChange={(e) => {
+                controlInput(e, 'recordNumber', setPurchaseRecord);
+              }}
             ></IonInput>
           </IonCol>
           <IonCol>
@@ -47,6 +63,10 @@ const PurchaseRecordsForm = () => {
               labelPlacement="floating"
               placeholder="أدخل اسم الشركة"
               className="form_input"
+              value={purchaseRecord.company}
+              onIonChange={(e) => {
+                controlInput(e, 'company', setPurchaseRecord);
+              }}
             ></IonInput>
           </IonCol>
         </IonRow>
@@ -77,6 +97,10 @@ const PurchaseRecordsForm = () => {
               step="1000"
               max={1000000000}
               min={0}
+              value={purchaseRecord.totalCost}
+              onIonChange={(e) => {
+                controlInput(e, 'totalCost', setPurchaseRecord);
+              }}
             ></IonInput>
           </IonCol>
           <IonCol>
@@ -85,8 +109,12 @@ const PurchaseRecordsForm = () => {
               labelPlacement="stacked"
               placeholder="أدخل تاريخ القائمة"
               type="date"
-              value={displayDate(new Date())}
+              value={displayDate(purchaseRecord.date)}
               className="form_input"
+              onIonChange={(e) => {
+                e.target.value = new Date(e.target.value);
+                controlInput(e, 'date', setPurchaseRecord);
+              }}
             ></IonInput>
           </IonCol>
         </IonRow>
@@ -104,12 +132,16 @@ const PurchaseRecordsForm = () => {
                 <IonInput
                   label="الدفعة"
                   labelPlacement="floating"
-                  placeholder="أدخل الكلفة الكلية"
+                  placeholder="أدخل  الدفعة"
                   className="form_input"
                   type="number"
                   step="1000"
                   max={1000000000}
                   min={0}
+                  value={payment.paymentAmount}
+                  onIonChange={(e) => {
+                    controlInput(e, 'paymentAmount', setPayment);
+                  }}
                 ></IonInput>
               </IonCol>
               <IonCol>
@@ -118,12 +150,16 @@ const PurchaseRecordsForm = () => {
                   labelPlacement="stacked"
                   placeholder="أدخل تاريخ القائمة"
                   type="date"
-                  value={displayDate(new Date())}
+                  value={displayDate(payment.paydate)}
                   className="form_input"
+                  onIonChange={(e) => {
+                    e.target.value = new Date(e.target.value);
+                    controlInput(e, 'paydate', setPayment);
+                  }}
                 ></IonInput>
               </IonCol>
               <IonCol size="auto" className="form_addbtn-container">
-                <IonButton shape="circle">
+                <IonButton shape="circle" onClick={handleAddPayment}>
                   <IonIcon slot="icon-only" icon={addOutline}></IonIcon>
                 </IonButton>
               </IonCol>
@@ -132,7 +168,7 @@ const PurchaseRecordsForm = () => {
               <IonCol>
                 <PaymentsRecordsData
                   pagination={false}
-                  data={{ payments: [] }}
+                  data={{ payments: purchaseRecord.payments }}
                 ></PaymentsRecordsData>
               </IonCol>
             </IonRow>

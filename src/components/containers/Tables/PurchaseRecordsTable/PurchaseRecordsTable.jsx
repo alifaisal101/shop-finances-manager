@@ -10,6 +10,8 @@ import {
 } from '../../../../util/display.functions';
 import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import { useRecoilState } from 'recoil';
+import { purchaseRecordsStore } from '../../../../store/purchaseRecords.store';
 
 const purchaseColumns = [
   {
@@ -47,11 +49,14 @@ const purchaseColumns = [
 ];
 
 const PurchaseRecordsTable = (props) => {
+  const [purchaseRecordsState, setPurchaseRecordsState] =
+    useRecoilState(purchaseRecordsStore);
+
   return (
     <div className="purchase-records-table-container">
       <Table
         columns={purchaseColumns}
-        data={purchaseRecords}
+        data={purchaseRecordsState}
         expandable={true}
         expandedComponent={PaymentsRecordsTable}
         expandableRowDisabled={(purchaseRecord) =>

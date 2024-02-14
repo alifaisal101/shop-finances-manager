@@ -4,6 +4,8 @@ import { displayDate, displaySex } from '../../../../util/display.functions';
 import { employees } from '../../../../preset-data';
 import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import { useRecoilState } from 'recoil';
+import { employeesStore } from '../../../../store/employees.store';
 
 const employeesColumns = [
   {
@@ -37,11 +39,12 @@ const employeesColumns = [
 ];
 
 const EmployeesTable = () => {
+  const [employeesState, setEmployeesState] = useRecoilState(employeesStore);
   return (
     <div className="employees-table-container">
       <Table
         columns={employeesColumns}
-        data={employees}
+        data={employeesState}
         expandable={false}
       ></Table>
     </div>

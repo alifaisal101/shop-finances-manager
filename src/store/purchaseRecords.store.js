@@ -5,11 +5,11 @@ export const purchaseRecordsStore = atom({
   default: [
     {
       _id: 1,
-      recordNumber: 123,
+      recordNumber: 133,
       company: 'درة',
       paymentType: 'direct',
       totalCost: 1000000,
-      date: new Date('2/12/24'),
+      date: new Date('2/13/24'),
     },
     {
       _id: 2,
@@ -17,7 +17,7 @@ export const purchaseRecordsStore = atom({
       company: 'فلان',
       paymentType: 'direct',
       totalCost: 500000,
-      date: new Date('2/12/24'),
+      date: new Date('2/13/24'),
     },
     {
       _id: 3,
@@ -29,23 +29,44 @@ export const purchaseRecordsStore = atom({
         {
           _id: 1,
           paymentAmount: 1000000,
-          paydate: new Date('2/12/24'),
+          paydate: new Date('2/13/24'),
         },
         {
           _id: 2,
           paymentAmount: 1000000,
-          paydate: new Date('2/13/24'),
+          paydate: new Date('2/14/24'),
         },
       ],
-      date: new Date('2/12/24'),
+      date: new Date('2/13/24'),
     },
     {
       _id: 4,
-      recordNumber: 1221,
+      recordNumber: 1321,
       company: '6فلان',
       paymentType: 'direct',
       totalCost: 1500000,
-      date: new Date('2/13/24'),
+      date: new Date('2/14/24'),
     },
   ],
 });
+
+export const purchaseRecordStoreForm = atom({
+  key: 'purcahseRecordState',
+  default: {
+    recordNumber: null,
+    company: '',
+    paymentType: null,
+    totalCost: null,
+    date: new Date(),
+    payments: [],
+  },
+});
+
+export const purchaseRecordStoreFormDefault = {
+  recordNumber: null,
+  company: '',
+  paymentType: null,
+  totalCost: null,
+  date: new Date(),
+  payments: [],
+};

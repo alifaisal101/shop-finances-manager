@@ -8,6 +8,8 @@ import {
 } from '../../../../util/display.functions';
 import EditBtnTable from '../../../stateless/EditBtnTable/EditBtnTable';
 import DeleteBtnTable from '../../../stateless/DeleteBtnTable/DeleteBtnTable';
+import { useRecoilState } from 'recoil';
+import { rejectedItemsStore } from '../../../../store/rejectedItem.store';
 
 const rejectedItemsColumns = [
   {
@@ -37,11 +39,13 @@ const rejectedItemsColumns = [
 ];
 
 const RejectedItemsTable = (props) => {
+  const [rejectedItemsState, setRejectedItemsState] =
+    useRecoilState(rejectedItemsStore);
   return (
     <div className="rejected-items-table-container">
       <Table
         columns={rejectedItemsColumns}
-        data={rejectedItems}
+        data={rejectedItemsState}
         expandable={false}
       ></Table>
     </div>
