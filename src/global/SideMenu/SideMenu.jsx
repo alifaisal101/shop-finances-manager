@@ -78,8 +78,6 @@ const SideMenu = () => {
     >
       <IonContent>
         <IonList className="side-menu_items-list" id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
           {appPages.map((appPage, index) => {
             let selectedClass =
               location.pathname === appPage.url ? 'selected' : '';

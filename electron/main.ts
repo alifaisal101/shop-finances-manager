@@ -51,6 +51,7 @@ const bootstrap = async () => {
     });
 
     printBudgetWin = new BrowserWindow({
+      show: false,
       webPreferences: {
         preload: path.join(__dirname, 'preload.js'),
       },

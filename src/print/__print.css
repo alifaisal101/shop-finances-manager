@@ -17,7 +17,6 @@
 html,
 body,
 .print-budget-container {
-  height: 100%;
   font-size: 14px;
 }
 
@@ -70,16 +69,4 @@ table {
   width: 100%;
   height: 100%;
   border: 1px solid black;
-}
-table thead {
-  display: table-header-group;
-}
-table tfoot {
-  display: table-footer-group;
-}
-table tbody {
-  display: table-row-group;
-}
-.page-break {
-  page-break-after: always;
 }
