@@ -1,7 +1,7 @@
-import 'dotenv/config';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
-import mongoose from 'mongoose';
+import Datastore from '@seald-io/nedb';
+
 // import { dirname } from 'path';
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -25,6 +25,25 @@ const messages = {
 };
 
 const bootstrap = async () => {
+  const db = new Datastore({ filename: './database.json' });
+  const doc = {
+    hello: 'world',
+    n: 5,
+    today: new Date(),
+    nedbIsAwesome: true,
+    notthere: null,
+    notToBeSaved: undefined, // Will not be saved
+    fruits: ['apple', 'orange', 'pear'],
+    infos: { name: '@seald-io/nedb' },
+  };
+
+  try {
+    await db.loadDatabaseAsync();
+    const newDoc = await db.insertAsync(doc);
+  } catch (err) {
+    console.log(err);
+  }
+
   let failedToConnectToDB = false;
   let failedToActivate = false;
 
