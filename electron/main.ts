@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import Datastore from '@seald-io/nedb';
+import { checkActiveStatus } from './activation';
 
 // import { dirname } from 'path';
 
@@ -25,24 +26,11 @@ const messages = {
 };
 
 const bootstrap = async () => {
-  const db = new Datastore({ filename: './database.json' });
-  const doc = {
-    hello: 'world',
-    n: 5,
-    today: new Date(),
-    nedbIsAwesome: true,
-    notthere: null,
-    notToBeSaved: undefined, // Will not be saved
-    fruits: ['apple', 'orange', 'pear'],
-    infos: { name: '@seald-io/nedb' },
-  };
-
-  try {
-    await db.loadDatabaseAsync();
-    const newDoc = await db.insertAsync(doc);
-  } catch (err) {
-    console.log(err);
-  }
+  // try {
+  //   await checkActiveStatus();
+  // } catch (err) {
+  //   console.log('Not Active');
+  // }
 
   let failedToConnectToDB = false;
   let failedToActivate = false;
