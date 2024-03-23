@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-03-23T12:42:19.123Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="iVNBhMAl6nWZIuolkYSr" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-23T13:21:50.162Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-jPwUMMXPyZ1tTM_y8BL" version="23.1.5" type="device">
   <diagram name="Page-1" id="WmKcBqQ57zAdK9sFzErc">
-    <mxGraphModel dx="995" dy="3279" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+    <mxGraphModel dx="1194" dy="3395" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -263,7 +263,7 @@
         <mxCell id="fqKE6zB5EEerR9ECs1fo-91" value="income" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="fqKE6zB5EEerR9ECs1fo-90" vertex="1">
           <mxGeometry y="26" width="240" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="fqKE6zB5EEerR9ECs1fo-92" value="expence" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="fqKE6zB5EEerR9ECs1fo-90" vertex="1">
+        <mxCell id="fqKE6zB5EEerR9ECs1fo-92" value="expense" style="text;strokeColor=default;fillColor=none;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=12;whiteSpace=wrap;html=1;" parent="fqKE6zB5EEerR9ECs1fo-90" vertex="1">
           <mxGeometry y="56" width="240" height="30" as="geometry" />
         </mxCell>
         <mxCell id="fqKE6zB5EEerR9ECs1fo-100" value="companies (Main Document)" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=center;fontSize=14;" parent="1" vertex="1">
