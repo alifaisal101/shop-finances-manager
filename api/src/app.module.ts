@@ -12,6 +12,8 @@ import { EmployeesModule } from './employees/employees.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MONGODB_URI } from './config';
 import { APP_PIPE } from '@nestjs/core';
+import { ChartsModule } from './charts/charts.module';
+import { EarningsModule } from './earnings/earnings.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { APP_PIPE } from '@nestjs/core';
     OtherSpendingsModule,
     SubscriptionsModule,
     EmployeesModule,
+    ChartsModule,
+    EarningsModule,
   ],
   controllers: [AppController],
   providers: [
