@@ -22,7 +22,10 @@ export class ReturnedItemsService {
     const skip = (page - 1) * recordsPerPage;
 
     try {
-      await this.returnedItemsModel.find().skip(skip).limit(recordsPerPage);
+      return await this.returnedItemsModel
+        .find()
+        .skip(skip)
+        .limit(recordsPerPage);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -33,7 +36,7 @@ export class ReturnedItemsService {
 
   async create(returnedItems: PostReturnedItemsDto) {
     try {
-      await this.returnedItemsModel.create(returnedItems);
+      return await this.returnedItemsModel.create(returnedItems);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -47,7 +50,7 @@ export class ReturnedItemsService {
     delete returnedItems.returnedItemsId;
 
     try {
-      await this.returnedItemsModel.findByIdAndUpdate(
+      return await this.returnedItemsModel.findByIdAndUpdate(
         returnedItemsId,
         returnedItems,
       );
@@ -61,7 +64,7 @@ export class ReturnedItemsService {
 
   async delete(returnedItemsId: Types.ObjectId) {
     try {
-      await this.returnedItemsModel.findByIdAndDelete(returnedItemsId);
+      return await this.returnedItemsModel.findByIdAndDelete(returnedItemsId);
     } catch (err) {
       throw new InternalServerErrorException(
         err,

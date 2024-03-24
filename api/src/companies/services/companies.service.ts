@@ -17,7 +17,7 @@ export class CompaniesService {
     const skip = (page - 1) * recordsPerPage;
 
     try {
-      await this.companyModel.find().skip(skip).limit(recordsPerPage);
+      return await this.companyModel.find().skip(skip).limit(recordsPerPage);
     } catch (err) {
       throw new InternalServerErrorException(err, 'Failed to fetch companies.');
     }
@@ -25,7 +25,7 @@ export class CompaniesService {
 
   async create(company: PostCompanyDto) {
     try {
-      await this.companyModel.create(company);
+      return await this.companyModel.create(company);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -39,7 +39,7 @@ export class CompaniesService {
     delete newCompany.companyId;
 
     try {
-      await this.companyModel.findByIdAndUpdate(companyId, newCompany);
+      return await this.companyModel.findByIdAndUpdate(companyId, newCompany);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -50,7 +50,7 @@ export class CompaniesService {
 
   async delete(companyId: Types.ObjectId) {
     try {
-      await this.companyModel.findByIdAndDelete(companyId);
+      return await this.companyModel.findByIdAndDelete(companyId);
     } catch (err) {
       throw new InternalServerErrorException(
         err,

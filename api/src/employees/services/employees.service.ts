@@ -18,7 +18,7 @@ export class EmployeesService {
     const skip = (page - 1) * recordsPerPage;
 
     try {
-      await this.employeeModel.find().skip(skip).limit(recordsPerPage);
+      return await this.employeeModel.find().skip(skip).limit(recordsPerPage);
     } catch (err) {
       throw new InternalServerErrorException(err, 'Failed to fetch employees.');
     }
@@ -26,7 +26,7 @@ export class EmployeesService {
 
   async create(employee: PostEmployeeDto) {
     try {
-      await this.employeeModel.create(employee);
+      return await this.employeeModel.create(employee);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -40,7 +40,10 @@ export class EmployeesService {
     delete newEmployee.employeeId;
 
     try {
-      await this.employeeModel.findByIdAndUpdate(employeeId, newEmployee);
+      return await this.employeeModel.findByIdAndUpdate(
+        employeeId,
+        newEmployee,
+      );
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -51,7 +54,7 @@ export class EmployeesService {
 
   async delete(employeeId: Types.ObjectId) {
     try {
-      await this.employeeModel.findByIdAndDelete(employeeId);
+      return await this.employeeModel.findByIdAndDelete(employeeId);
     } catch (err) {
       throw new InternalServerErrorException(
         err,

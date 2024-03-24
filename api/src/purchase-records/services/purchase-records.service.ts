@@ -22,7 +22,10 @@ export class PurchaseRecordsService {
     const skip = (page - 1) * recordsPerPage;
 
     try {
-      await this.purchaseRecordModel.find().skip(skip).limit(recordsPerPage);
+      return await this.purchaseRecordModel
+        .find()
+        .skip(skip)
+        .limit(recordsPerPage);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -33,7 +36,7 @@ export class PurchaseRecordsService {
 
   async create(purchaseRecord: PostPurchaseRecord) {
     try {
-      await this.purchaseRecordModel.create(purchaseRecord);
+      return await this.purchaseRecordModel.create(purchaseRecord);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -47,7 +50,7 @@ export class PurchaseRecordsService {
     delete newPurchaseRecord.purchaseRecordId;
 
     try {
-      await this.purchaseRecordModel.findByIdAndUpdate(
+      return await this.purchaseRecordModel.findByIdAndUpdate(
         purchaseRecordId,
         newPurchaseRecord,
       );
@@ -61,7 +64,7 @@ export class PurchaseRecordsService {
 
   async delete(purchaseRecordId: Types.ObjectId) {
     try {
-      await this.purchaseRecordModel.findByIdAndDelete(purchaseRecordId);
+      return await this.purchaseRecordModel.findByIdAndDelete(purchaseRecordId);
     } catch (err) {
       throw new InternalServerErrorException(
         err,

@@ -22,7 +22,10 @@ export class OtherSpendingsService {
     const skip = (page - 1) * recordsPerPage;
 
     try {
-      await this.otherSpendingModel.find().skip(skip).limit(recordsPerPage);
+      return await this.otherSpendingModel
+        .find()
+        .skip(skip)
+        .limit(recordsPerPage);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -33,7 +36,7 @@ export class OtherSpendingsService {
 
   async create(otherSpending: PostOtherSpendingDto) {
     try {
-      await this.otherSpendingModel.create(otherSpending);
+      return await this.otherSpendingModel.create(otherSpending);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -47,7 +50,7 @@ export class OtherSpendingsService {
     delete newOtherSpending.otherSpendingId;
 
     try {
-      await this.otherSpendingModel.findByIdAndUpdate(
+      return await this.otherSpendingModel.findByIdAndUpdate(
         otherSpendingId,
         newOtherSpending,
       );
@@ -61,7 +64,7 @@ export class OtherSpendingsService {
 
   async delete(otherSpendingId: Types.ObjectId) {
     try {
-      await this.otherSpendingModel.findByIdAndDelete(otherSpendingId);
+      return await this.otherSpendingModel.findByIdAndDelete(otherSpendingId);
     } catch (err) {
       throw new InternalServerErrorException(
         err,
