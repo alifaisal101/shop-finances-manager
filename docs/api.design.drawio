@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-03-24T04:55:07.213Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="UkXnypVYYqD7OM4eAoGn" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-24T10:55:03.094Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="CTnASIBZjhGUVT1n39tx" version="23.1.5" type="device">
   <diagram name="Page-1" id="WmKcBqQ57zAdK9sFzErc">
     <mxGraphModel dx="830" dy="604" grid="1" gridSize="12" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="3600" math="0" shadow="0">
       <root>
@@ -363,12 +363,12 @@
         <mxCell id="unXY_0qLraqO0LoRJPVi-107" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;top=0;left=0;bottom=0;right=0;collapsible=0;dropTarget=0;fillColor=none;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-103">
           <mxGeometry y="60" width="336" height="36" as="geometry" />
         </mxCell>
-        <mxCell id="unXY_0qLraqO0LoRJPVi-108" value="GET" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-107">
+        <mxCell id="unXY_0qLraqO0LoRJPVi-108" value="POST" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-107">
           <mxGeometry width="75" height="36" as="geometry">
             <mxRectangle width="75" height="36" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="unXY_0qLraqO0LoRJPVi-109" value="/get-earnings" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-107">
+        <mxCell id="unXY_0qLraqO0LoRJPVi-109" value="/fetch-earnings" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-107">
           <mxGeometry x="75" width="261" height="36" as="geometry">
             <mxRectangle width="261" height="36" as="alternateBounds" />
           </mxGeometry>
@@ -1538,7 +1538,7 @@
             <mxRectangle width="75" height="36" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="unXY_0qLraqO0LoRJPVi-533" value="/fetch-transactions" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-531">
+        <mxCell id="unXY_0qLraqO0LoRJPVi-533" value="/get-transactions" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;strokeColor=inherit;fontSize=16;" vertex="1" parent="unXY_0qLraqO0LoRJPVi-531">
           <mxGeometry x="75" width="261" height="36" as="geometry">
             <mxRectangle width="261" height="36" as="alternateBounds" />
           </mxGeometry>
