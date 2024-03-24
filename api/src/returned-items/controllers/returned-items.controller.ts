@@ -3,7 +3,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { ReturnedItemsService } from '../services/returned-items.service';
@@ -26,12 +28,12 @@ export class ReturnedItemsController {
     return await this.returnedItemsSrv.create(body);
   }
 
-  @Post('modify-return')
+  @Patch('modify-return')
   async modifyReturn(@Body() body: PatchReturnedItemsDto) {
     return await this.returnedItemsSrv.update(body);
   }
 
-  @Post('delete-return/:returnItemsId')
+  @Delete('delete-return/:returnItemsId')
   async deleteReturn(@Param('returnItemsId') returnItemsId: string) {
     try {
       if (!returnItemsId || !isMongoId(returnItemsId)) {
