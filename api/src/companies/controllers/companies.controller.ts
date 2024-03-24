@@ -11,7 +11,6 @@ import {
 import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
 import { PostCompanyDto } from '../dtos/req/post-company.dto';
 import { PatchCompanyDto } from '../dtos/req/patch-company.dto';
-import { IsMongoId } from 'class-validator';
 import { isMongoId } from 'validator';
 import { CompaniesService } from '../services/companies.service';
 
@@ -19,13 +18,19 @@ import { CompaniesService } from '../services/companies.service';
 export class CompaniesController {
   constructor(private companiesSrv: CompaniesService) {}
   @Post('fetch-companies')
-  fetchCompanies(@Body() body: FetchRecordsDto) {}
+  async fetchCompanies(@Body() body: FetchRecordsDto) {
+    return await this.companiesSrv.findAll(body);
+  }
 
   @Post('add-company')
-  addCompany(@Body() body: PostCompanyDto) {}
+  async addCompany(@Body() body: PostCompanyDto) {
+    return await this.companiesSrv.create(body);
+  }
 
   @Patch('modify-company')
-  modifyCompany(@Body() body: PatchCompanyDto) {}
+  async modifyCompany(@Body() body: PatchCompanyDto) {
+    return await this.companiesSrv.update(body);
+  }
 
   @Delete('delete-company/:companyId')
   async deleteCompany(@Param('companyId') companyId: string) {
