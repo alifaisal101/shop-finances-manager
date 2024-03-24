@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 import {
   IsAlphanumeric,
   IsArray,
+  IsMongoId,
   IsNotEmpty,
   IsNumber,
   IsOptional,
@@ -10,6 +11,10 @@ import {
 } from 'class-validator';
 
 export class PatchCompanyDto {
+  @IsMongoId()
+  @IsNotEmpty()
+  companyId: Types.ObjectId;
+
   @IsOptional()
   @IsAlphanumeric()
   @IsNotEmpty()
