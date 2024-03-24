@@ -14,7 +14,7 @@ import { IsPaymentType } from 'src/validators/is-payment-type.validator';
 import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
 import { Type } from 'class-transformer';
 
-export class PostPurchaseRecord {
+export class PatchPurchaseRecord {
   @IsMongoId()
   @IsNotEmpty()
   purchaseRecordId: Types.ObjectId;
