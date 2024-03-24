@@ -7,7 +7,9 @@ import {
   IsOptional,
   Max,
   Min,
+  ValidateNested,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class PostCompanyDto {
   @IsAlphanumeric()
@@ -24,5 +26,7 @@ export class PostCompanyDto {
 
   @IsOptional()
   @IsArray()
+  @ValidateNested()
+  @Type(() => Types.ObjectId)
   purchaseRecords?: Types.ObjectId[];
 }
