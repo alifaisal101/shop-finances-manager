@@ -1,4 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import {
+  Transaction,
+  TransactionDocument,
+} from '../entities/transactions.entity';
+import { Model } from 'mongoose';
+import { warnLog } from 'src/utils/functions/log';
 
 @Injectable()
-export class TransactionsService {}
+export class TransactionsService {
+  constructor(
+    @InjectModel(Transaction.name)
+    private transactionModel: Model<TransactionDocument>,
+  ) {}
+
+  async findAll(page?: number) {
+    const perPage = 10;
+    page = page || 1;
+    const skip = (page - 1) * perPage;
+
+    try {
+      return await this.transactionModel.find().skip(skip).limit(perPage);
+    } catch (err) {
+      warnLog(err);
+      throw new InternalServerErrorException(
+        err,
+        'Failed to fetch transactions from database.',
+      );
+    }
+  }
+}
