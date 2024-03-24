@@ -1,0 +1,43 @@
+import { Type } from 'class-transformer';
+import {
+  IsAlpha,
+  IsArray,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumberString,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { Types } from 'mongoose';
+import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
+import { IsPaymentPeriod } from 'src/validators/is-payment-period.validator';
+
+export class PatchEmployeeDto {
+  @IsMongoId()
+  @IsNotEmpty()
+  employeeId: Types.ObjectId;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  @IsNumberString()
+  phoneNumber: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  @IsPaymentPeriod()
+  paymentPeriod: string;
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested()
+  @Type(() => TransactionDto)
+  transactions: TransactionDto[];
+}
