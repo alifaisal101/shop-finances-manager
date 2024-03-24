@@ -7,10 +7,10 @@ import {
   requiredString,
 } from 'src/utils/objects/mongoose-options';
 
-export type EarningsDocument = HydratedDocument<Earnings>;
+export type EarningDocument = HydratedDocument<Earning>;
 
 @Schema()
-export class Earnings {
+export class Earning {
   @Prop(requiredDate)
   earningDate: Date;
 
@@ -30,4 +30,4 @@ export class Earnings {
   updatedAt: Date;
 }
 
-export const EarningsSchema = SchemaFactory.createForClass(Earnings);
+export const EarningSchema = SchemaFactory.createForClass(Earning);
