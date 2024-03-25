@@ -14,13 +14,9 @@ export class TransactionsService {
     private transactionModel: Model<TransactionDocument>,
   ) {}
 
-  async findAll(page?: number) {
-    const perPage = 10;
-    page = page || 1;
-    const skip = (page - 1) * perPage;
-
+  async findAll(date: Date) {
     try {
-      return await this.transactionModel.find().skip(skip).limit(perPage);
+      return await this.transactionModel.find({ transactionDate: date });
     } catch (err) {
       warnLog(err);
       throw new InternalServerErrorException(

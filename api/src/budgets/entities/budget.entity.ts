@@ -21,12 +21,6 @@ export class Budget {
   @Prop(requiredNumber)
   totalExpense: number;
 
-  @Prop(requiredNumber)
-  highestReachedAmount: number;
-
-  @Prop(requiredNumber)
-  lowestReachedAmount: number;
-
   @Prop(requiredDate)
   createdAt: Date;
 

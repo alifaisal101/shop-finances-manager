@@ -1,9 +1,6 @@
-import { IsDate, IsNumber, Min } from 'class-validator';
+import { IsNumber, Min } from 'class-validator';
 
-export class CreateBudgetDto {
-  @IsDate()
-  budgetDate: Date;
-
+export class BudgetValues {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   currentAmount: number;
 

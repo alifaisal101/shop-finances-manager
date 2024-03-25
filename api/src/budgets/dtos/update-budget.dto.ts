@@ -15,30 +15,19 @@ export class UpdateBudgetDto {
 
   @IsOptional()
   @IsDate()
-  budgetDate: Date;
+  budgetDate?: Date;
+
+  @IsOptional()
+  @IsNumber({ allowInfinity: false, allowNaN: false })
+  currentAmount?: number;
 
   @IsOptional()
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  currentAmount: number;
+  totalIncome?: number;
 
   @IsOptional()
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  totalIncome: number;
-
-  @IsOptional()
-  @IsNumber({ allowInfinity: false, allowNaN: false })
-  @Min(0)
-  totalExpense: number;
-
-  @IsOptional()
-  @IsNumber({ allowInfinity: false, allowNaN: false })
-  @Min(0)
-  highestReachedAmount: number;
-
-  @IsOptional()
-  @IsNumber({ allowInfinity: false, allowNaN: false })
-  @Min(0)
-  lowestReachedAmount: number;
+  totalExpense?: number;
 }
