@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { BudgetsController } from './controllers/budgets.controller';
 import { BudgetsService } from './services/budgets.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Budget, BudgetSchema } from './entites/budget.entity';
+import { Budget, BudgetSchema } from './entities/budget.entity';
 
 @Module({
   imports: [
