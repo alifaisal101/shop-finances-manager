@@ -12,5 +12,6 @@ import { TransactionsService } from 'src/transactions/services/transactions.serv
   ],
   controllers: [BudgetsController],
   providers: [BudgetsService],
+  exports: [BudgetsService],
 })
 export class BudgetsModule {}
