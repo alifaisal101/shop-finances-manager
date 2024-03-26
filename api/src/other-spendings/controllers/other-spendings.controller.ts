@@ -25,12 +25,12 @@ export class OtherSpendingsController {
 
   @Post('add-spending')
   async addSpending(@Body() body: PostOtherSpendingDto) {
-    return await this.otherSpendingSrv.create(body);
+    // return await this.otherSpendingSrv.create(body);
   }
 
   @Patch('modify-spending')
   async modifySpending(@Body() body: PatchOtherSpendingDto) {
-    return await this.otherSpendingSrv.update(body);
+    // return await this.otherSpendingSrv.update(body);
   }
 
   @Delete('delete-spending/:spendingId')
@@ -40,7 +40,7 @@ export class OtherSpendingsController {
         throw new Error('Invalid spending id');
       }
 
-      return await this.otherSpendingSrv.delete(new Types.ObjectId(spendingId));
+      // return await this.otherSpendingSrv.delete(new Types.ObjectId(spendingId));
     } catch (err) {
       throw new BadRequestException(err);
     }
