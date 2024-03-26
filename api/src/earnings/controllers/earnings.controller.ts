@@ -25,12 +25,12 @@ export class EarningsController {
 
   @Post('add-earning')
   async addEarning(@Body() body: PostEarningsDto) {
-    return await this.earningSrv.create(body);
+    //return await this.earningSrv.create(body);
   }
 
   @Patch('modify-earning')
   async modifyEarning(@Body() body: PatchEarningsDto) {
-    return await this.earningSrv.update(body);
+    //return await this.earningSrv.update(body);
   }
 
   @Delete('delete-earning')
@@ -43,6 +43,6 @@ export class EarningsController {
       throw new BadRequestException(err);
     }
 
-    return await this.earningSrv.delete(new Types.ObjectId(earningId));
+    //return await this.earningSrv.delete(new Types.ObjectId(earningId));
   }
 }
