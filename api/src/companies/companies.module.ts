@@ -10,5 +10,6 @@ import { Company, CompanySchema } from './entities/companies.enetity';
   ],
   controllers: [CompaniesController],
   providers: [CompaniesService],
+  exports: [CompaniesService],
 })
 export class CompaniesModule {}

@@ -11,6 +11,14 @@ export class CompaniesService {
   constructor(
     @InjectModel(Company.name) private companyModel: Model<CompanyDocument>,
   ) {}
+  async findById(companyId: Types.ObjectId) {
+    try {
+      return await this.companyModel.findById(companyId);
+    } catch (err) {
+      throw new InternalServerErrorException(err, 'Failed to fetch company.');
+    }
+  }
+
   async findAll(options: FetchRecordsDto) {
     const page = options.page || 1;
     const recordsPerPage = options.recordsPerPage || 10;

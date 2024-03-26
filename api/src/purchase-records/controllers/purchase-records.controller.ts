@@ -25,12 +25,12 @@ export class PurchaseRecordsController {
 
   @Post('add-record')
   async addRecord(@Body() body: PostPurchaseRecord) {
-    return await this.purchaseRecordsSrv.create(body);
+    // return await this.purchaseRecordsSrv.create(body);
   }
 
   @Patch('modify-record')
   async modifyRecord(@Body() body: PatchPurchaseRecord) {
-    return await this.purchaseRecordsSrv.update(body);
+    // return await this.purchaseRecordsSrv.update(body);
   }
 
   @Delete('delete-record/:recordId')
@@ -43,6 +43,6 @@ export class PurchaseRecordsController {
       throw new BadRequestException(err);
     }
 
-    return await this.purchaseRecordsSrv.delete(new Types.ObjectId(recordId));
+    // return await this.purchaseRecordsSrv.delete(new Types.ObjectId(recordId));
   }
 }

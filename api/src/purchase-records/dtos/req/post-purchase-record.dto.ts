@@ -16,7 +16,7 @@ import { Type } from 'class-transformer';
 export class PostPurchaseRecord {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  number: number;
+  number: string;
 
   @IsMongoId()
   @IsNotEmpty()

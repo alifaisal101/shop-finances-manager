@@ -22,7 +22,7 @@ export class PatchPurchaseRecord {
   @IsOptional()
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  number: number;
+  number: string;
 
   @IsOptional()
   @IsMongoId()
