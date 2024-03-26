@@ -7,9 +7,9 @@ import {
 import { Model, Types } from 'mongoose';
 import { warnLog } from 'src/utils/functions/log';
 import { BudgetsService } from 'src/budgets/services/budgets.service';
-import { TransactionDto } from '../dtos/transaction.dto';
 import { AddTransactionDto } from '../dtos/add-transaction.dto';
 import { ModifyTransactionDto } from '../dtos/modify-transaction.dto';
+import { BudgetDocument } from 'src/budgets/entities/budget.entity';
 
 @Injectable()
 export class TransactionsService {
@@ -31,36 +31,35 @@ export class TransactionsService {
     }
   }
 
-  // async addManyTransactions(transactions: AddTransactionDto[]) {
-  //   try {
+  async addTransactions(transactions: AddTransactionDto[]) {
+    const currentDate = new Date();
+    const transactionsWithDates = transactions.map((transaction) => {
+      return { ...transaction, createdAt: currentDate, updatedAt: currentDate };
+    });
 
-  //   } catch {
-
-  //   }
-
-  //   try {
-  //     const reevaluatedBudget = await this.budgetsSrv.reevaluateBudget(transaction.date);
-  //   }  catch (err) {
-  //     // Undo transaction changes
-  //     throw new InternalServerErrorException(err ,"Failed to reevaluate budget.");
-  //   }
-  // }
-
-  async addOneTransaction(transaction: AddTransactionDto) {
     try {
-      const transactionResult = await this.transactionModel.create({
-        ...transaction,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
-      try {
-        const reevaluatedBudget = await this.budgetsSrv.reevaluateBudget(
-          transaction.transactionDate,
-        );
+      const transactionsResult = await this.transactionModel.insertMany(
+        transactionsWithDates,
+      );
 
-        return { reevaluatedBudget, transactionResult };
+      try {
+        const reevaluatedBudgets: BudgetDocument[] = [];
+        for (let i = 0; i < transactionsWithDates.length; i++) {
+          const transaction = transactionsWithDates[i];
+          const reevaluatedBudget = await this.budgetsSrv.reevaluateBudget(
+            transaction.transactionDate,
+          );
+
+          reevaluatedBudgets.push(reevaluatedBudget);
+        }
+
+        return { reevaluatedBudgets, transactionsResult };
       } catch (err) {
-        // Undo transaction changes
+        // Undo transactions changes
+        await this.transactionModel.deleteMany({
+          _id: { $in: transactionsResult.map((t) => t._id) },
+        });
+
         throw new InternalServerErrorException(
           err,
           'Failed to reevaluate budget.',
@@ -74,13 +73,68 @@ export class TransactionsService {
     }
   }
 
-  async modifyTransaction(newTransaction: ModifyTransactionDto) {}
+  async modifyTransaction(newTransaction: ModifyTransactionDto) {
+    const transactionId = newTransaction.transactionId;
+    delete newTransaction.transactionId;
 
-  private async deleteMany(transactionsIds: Types.ObjectId[]) {
     try {
-      return await this.transactionModel.deleteMany({
+      const transactionResult = await this.transactionModel.findByIdAndUpdate(
+        transactionId,
+        newTransaction,
+      );
+
+      try {
+        const reevaluatedBudget = await this.budgetsSrv.reevaluateBudget(
+          transactionResult.transactionDate,
+        );
+
+        return {
+          reevaluatedBudget,
+          transactionResult,
+        };
+      } catch (err) {
+        throw new InternalServerErrorException(
+          err,
+          'Failed to reevaluate budget.',
+        );
+      }
+    } catch (err) {
+      throw new InternalServerErrorException(
+        err,
+        'Failed to modify transaction.',
+      );
+    }
+  }
+
+  async removeTransactions(transactionsIds: Types.ObjectId[]) {
+    try {
+      const transactions = await this.transactionModel.find(
+        { _id: { $in: transactionsIds } },
+        { transactionDate: 1 },
+      );
+
+      const deleteManyResult = await this.transactionModel.deleteMany({
         _id: { $in: transactionsIds },
       });
+
+      try {
+        const reevaluatedBudgets: BudgetDocument[] = [];
+        for (let i = 0; i < transactions.length; i++) {
+          const transaction = transactions[i];
+          const reevaluatedBudget = await this.budgetsSrv.reevaluateBudget(
+            transaction.transactionDate,
+          );
+
+          reevaluatedBudgets.push(reevaluatedBudget);
+        }
+
+        return { reevaluatedBudgets, deleteManyResult };
+      } catch (err) {
+        throw new InternalServerErrorException(
+          err,
+          'Failed to reevaluate budget.',
+        );
+      }
     } catch (err) {
       throw new InternalServerErrorException('Failed to delete transactions.');
     }

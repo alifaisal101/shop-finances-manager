@@ -17,20 +17,4 @@ export class ModifyTransactionDto {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
   amount: number;
-
-  @IsString()
-  @IsNotEmpty()
-  section: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsTransactionType()
-  type: string;
-
-  @IsString()
-  @IsNotEmpty()
-  companyName?: string;
-
-  @IsDate()
-  transactionDate: Date;
 }
