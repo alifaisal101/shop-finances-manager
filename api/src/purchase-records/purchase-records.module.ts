@@ -6,16 +6,16 @@ import {
   PurchaseRecord,
   PurchaseRecordSchema,
 } from './entities/purchase-records.entity';
-import { CompaniesService } from 'src/companies/services/companies.service';
-import { TransactionsService } from 'src/transactions/services/transactions.service';
+import { CompaniesModule } from 'src/companies/companies.module';
+import { TransactionsModule } from 'src/transactions/transactions.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: PurchaseRecord.name, schema: PurchaseRecordSchema },
     ]),
-    CompaniesService,
-    TransactionsService,
+    CompaniesModule,
+    TransactionsModule,
   ],
   controllers: [PurchaseRecordsController],
   providers: [PurchaseRecordsService],

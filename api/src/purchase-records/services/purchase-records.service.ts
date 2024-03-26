@@ -131,4 +131,27 @@ export class PurchaseRecordsService {
       );
     }
   }
+
+  private modifyPurchaseRecord() {}
+
+  async removePurchaseRecord(
+    purchaseRecordId: Types.ObjectId,
+    deleteAllRelatedTransactions: boolean,
+  ) {
+    try {
+      const purchaseRecord =
+        await this.purchaseRecordModel.findById(purchaseRecordId);
+
+      if (deleteAllRelatedTransactions) {
+        this.transactionsSrv.removeTransactions(purchaseRecord.transactions);
+      }
+
+      return await this.delete(purchaseRecord._id);
+    } catch (err) {
+      throw new InternalServerErrorException(
+        err,
+        'Failed to find purchaseRecord.',
+      );
+    }
+  }
 }
