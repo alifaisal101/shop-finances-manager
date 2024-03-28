@@ -14,6 +14,7 @@ import { PostPurchaseRecord } from '../dtos/req/post-purchase-record.dto';
 import { PatchPurchaseRecord } from '../dtos/req/patch-purchase-record.dto';
 import { CompaniesService } from 'src/companies/services/companies.service';
 import { TransactionsService } from 'src/transactions/services/transactions.service';
+import { CreatePurchaseRecordDto } from '../dtos/create-purchase-record.dto';
 
 @Injectable()
 export class PurchaseRecordsService {
@@ -42,9 +43,13 @@ export class PurchaseRecordsService {
     }
   }
 
-  private async create(purchaseRecord: PurchaseRecord) {
+  private async create(purchaseRecord: CreatePurchaseRecordDto) {
     try {
-      return await this.purchaseRecordModel.create(purchaseRecord);
+      return await this.purchaseRecordModel.create({
+        ...purchaseRecord,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -93,8 +98,10 @@ export class PurchaseRecordsService {
       throw new BadRequestException();
     }
 
+    let paidTo = 0;
     const purchaseRecordTransactions = purchaseRecord.transactions.map(
       (transaction) => {
+        paidTo += transaction.amount;
         return {
           ...transaction,
           section: 'purchaseRecords',
@@ -103,6 +110,9 @@ export class PurchaseRecordsService {
         };
       },
     );
+
+    let debt = purchaseRecord.price - paidTo;
+
     const addTransactionResults = await this.transactionsSrv.addTransactions(
       purchaseRecordTransactions,
     );
@@ -110,12 +120,14 @@ export class PurchaseRecordsService {
     delete purchaseRecord.transactions;
     const purchaseRecordResult = await this.create({
       ...purchaseRecord,
+      paidTo,
+      debt,
       transactions: addTransactionResults.transactionsResult.map((t) => t._id),
-      createdAt: new Date(),
-      updatedAt: new Date(),
     });
 
     company.purchaseRecords.push(purchaseRecordResult._id);
+    company.totalDebt += debt;
+    company.totalPaidTo += paidTo;
 
     try {
       await company.save();
@@ -132,7 +144,9 @@ export class PurchaseRecordsService {
     }
   }
 
-  private modifyPurchaseRecord() {}
+  private modifyPurchaseRecord(newPurchaseRecord: PatchPurchaseRecord) {
+    const newPurchaseRecordId = newPurchaseRecord.purchaseRecordId;
+  }
 
   async removePurchaseRecord(
     purchaseRecordId: Types.ObjectId,

@@ -25,7 +25,7 @@ export class PurchaseRecordsController {
 
   @Post('add-record')
   async addRecord(@Body() body: PostPurchaseRecord) {
-    // return await this.purchaseRecordsSrv.create(body);
+    return await this.purchaseRecordsSrv.addRecord(body);
   }
 
   @Patch('modify-record')

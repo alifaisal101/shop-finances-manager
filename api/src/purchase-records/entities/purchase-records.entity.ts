@@ -25,7 +25,10 @@ export class PurchaseRecord {
   paymentType: string;
 
   @Prop(requiredNumber)
-  totalPayment: number;
+  price: number;
+
+  @Prop(requiredNumber)
+  paidTo: number;
 
   @Prop(requiredNumber)
   debt: number;

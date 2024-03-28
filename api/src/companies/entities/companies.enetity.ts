@@ -21,9 +21,6 @@ export class Company {
   totalDebt: number;
 
   @Prop(requiredDate)
-  lastPaymentDate: Date;
-
-  @Prop(requiredDate)
   createdAt: Date;
 
   @Prop(requiredDate)

@@ -10,10 +10,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { IsPaymentType } from 'src/validators/is-payment-type.validator';
-import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
 import { Type } from 'class-transformer';
 
-export class PostPurchaseRecord {
+export class CreatePurchaseRecordDto {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
   number: string;
@@ -31,11 +30,19 @@ export class PostPurchaseRecord {
   @Min(0)
   price: number;
 
+  @IsNumber({ allowInfinity: false, allowNaN: false })
+  @Min(0)
+  paidTo: number;
+
+  @IsNumber({ allowInfinity: false, allowNaN: false })
+  @Min(0)
+  debt: number;
+
   @IsDate()
   recordDate: Date;
 
   @IsArray()
   @ValidateNested()
-  @Type(() => TransactionDto)
-  transactions: TransactionDto[];
+  @Type(() => Types.ObjectId)
+  transactions: Types.ObjectId[];
 }
