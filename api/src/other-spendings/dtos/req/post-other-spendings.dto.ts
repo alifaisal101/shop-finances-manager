@@ -23,11 +23,7 @@ export class PostOtherSpendingDto {
 
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  totalPayment: number;
-
-  @IsNumber({ allowInfinity: false, allowNaN: false })
-  @Min(0)
-  debt: number;
+  price: number;
 
   @IsDate()
   spendingDate: Date;

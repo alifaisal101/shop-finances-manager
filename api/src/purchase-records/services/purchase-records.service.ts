@@ -256,7 +256,9 @@ export class PurchaseRecordsService {
       purchaseRecord.recordDate = newPurchaseRecord.recordDate;
     }
 
+    purchaseRecord.updatedAt = new Date();
     try {
+      await company.save();
       return await purchaseRecord.save();
     } catch (err) {
       throw new InternalServerErrorException(

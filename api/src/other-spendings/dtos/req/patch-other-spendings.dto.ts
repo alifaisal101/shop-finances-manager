@@ -13,6 +13,7 @@ import {
 } from 'class-validator';
 import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
 import { IsPaymentType } from 'src/validators/is-payment-type.validator';
+import { ModifyTransactionDto } from 'src/transactions/dtos/modify-transaction.dto';
 
 export class PatchOtherSpendingDto {
   @IsMongoId()
@@ -33,12 +34,7 @@ export class PatchOtherSpendingDto {
   @IsOptional()
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(0)
-  totalPayment: number;
-
-  @IsOptional()
-  @IsNumber({ allowInfinity: false, allowNaN: false })
-  @Min(0)
-  debt: number;
+  price: number;
 
   @IsOptional()
   @IsDate()
@@ -48,5 +44,17 @@ export class PatchOtherSpendingDto {
   @IsArray()
   @ValidateNested()
   @Type(() => TransactionDto)
-  transactions: TransactionDto[];
+  newTransactions: TransactionDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested()
+  @Type(() => ModifyTransactionDto)
+  modifiedTransactions: ModifyTransactionDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested()
+  @Type(() => Types.ObjectId)
+  removedTransactions: Types.ObjectId[];
 }

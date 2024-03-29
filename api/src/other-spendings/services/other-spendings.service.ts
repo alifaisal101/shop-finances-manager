@@ -6,9 +6,10 @@ import {
 } from '../entities/other-spendings.entity';
 import { Model, Types } from 'mongoose';
 import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
-import { PostOtherSpendingDto } from '../dtos/post-other-spendings.dto';
-import { PatchOtherSpendingDto } from '../dtos/patch-other-spendings.dto';
+import { PostOtherSpendingDto } from '../dtos/req/post-other-spendings.dto';
+import { PatchOtherSpendingDto } from '../dtos/req/patch-other-spendings.dto';
 import { TransactionsService } from 'src/transactions/services/transactions.service';
+import { CreateOtherSpendingDto } from '../dtos/create-other-spending.dto';
 
 @Injectable()
 export class OtherSpendingsService {
@@ -36,9 +37,13 @@ export class OtherSpendingsService {
     }
   }
 
-  private async create(otherSpending: OtherSpending) {
+  private async create(otherSpending: CreateOtherSpendingDto) {
     try {
-      return await this.otherSpendingModel.create(otherSpending);
+      return await this.otherSpendingModel.create({
+        ...otherSpending,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -52,10 +57,10 @@ export class OtherSpendingsService {
     delete newOtherSpending.otherSpendingId;
 
     try {
-      return await this.otherSpendingModel.findByIdAndUpdate(
-        otherSpendingId,
-        newOtherSpending,
-      );
+      return await this.otherSpendingModel.findByIdAndUpdate(otherSpendingId, {
+        ...newOtherSpending,
+        updatedAt: new Date(),
+      });
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -76,21 +81,24 @@ export class OtherSpendingsService {
   }
 
   async addSpending(otherSpending: PostOtherSpendingDto) {
+    let paidTo = 0;
     const spendingTransactions = otherSpending.transactions.map(
       (transaction) => {
+        paidTo += transaction.amount;
         return { ...transaction, section: 'otherSpending', type: 'expense' };
       },
     );
     delete otherSpending.transactions;
+    let debt = otherSpending.price - paidTo;
 
     const addTransactionResults =
       await this.transactionsSrv.addTransactions(spendingTransactions);
 
     const spending = await this.create({
       ...otherSpending,
+      debt,
+      paidTo,
       transactions: addTransactionResults.transactionsResult.map((t) => t._id),
-      createdAt: new Date(),
-      updatedAt: new Date(),
     });
 
     return { spending, spendingTransactions };

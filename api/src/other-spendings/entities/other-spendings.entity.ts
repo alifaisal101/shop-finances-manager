@@ -21,10 +21,13 @@ export class OtherSpending {
   paymentType: string;
 
   @Prop(requiredNumber)
-  totalPayment: number;
+  price: number;
 
   @Prop(requiredNumber)
   debt: number;
+
+  @Prop(requiredNumber)
+  paidTo: number;
 
   @Prop(requiredDate)
   spendingDate: Date;
