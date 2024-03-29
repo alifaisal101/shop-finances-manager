@@ -165,7 +165,7 @@ export class PurchaseRecordsService {
       (await this.companiesSrv.findById(purchaseRecord.companyId)) || false;
     if (!company) {
       throw new InternalServerErrorException(
-        'No company associated with purchaseRe.0cord was found. This is an unexpected behavior. Something went wrong.',
+        'No company associated with purchaseRecord was found. This is an unexpected behavior. Something went wrong.',
       );
     }
 
@@ -241,6 +241,8 @@ export class PurchaseRecordsService {
 
     purchaseRecord.debt += addedDebt;
     purchaseRecord.paidTo += addedPaidTo;
+    company.totalDebt += addedDebt;
+    company.totalPaidTo += addedPaidTo;
 
     if (newPurchaseRecord.number) {
       purchaseRecord.number = newPurchaseRecord.number;
@@ -272,10 +274,22 @@ export class PurchaseRecordsService {
       const purchaseRecord =
         await this.purchaseRecordModel.findById(purchaseRecordId);
 
+      const company =
+        (await this.companiesSrv.findById(purchaseRecord.companyId)) || false;
+      if (!company) {
+        throw new InternalServerErrorException(
+          'No company associated with purchaseRecord was found. This is an unexpected behavior. Something went wrong.',
+        );
+      }
+
+      company.totalDebt -= purchaseRecord.debt;
+      company.totalPaidTo -= purchaseRecord.paidTo;
+
       if (deleteAllRelatedTransactions) {
         this.transactionsSrv.removeTransactions(purchaseRecord.transactions);
       }
 
+      await company.save();
       return await this.delete(purchaseRecord._id);
     } catch (err) {
       throw new InternalServerErrorException(
