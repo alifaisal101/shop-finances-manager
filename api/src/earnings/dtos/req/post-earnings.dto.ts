@@ -3,6 +3,7 @@ import {
   IsArray,
   IsDate,
   IsNotEmpty,
+  IsNotEmptyObject,
   IsNumber,
   IsString,
   Min,
@@ -22,8 +23,7 @@ export class PostEarningsDto {
   @IsNotEmpty()
   category: string;
 
-  @IsArray()
-  @ValidateNested()
+  @IsNotEmptyObject()
   @Type(() => TransactionDto)
-  transactions: TransactionDto[];
+  transaction: TransactionDto;
 }

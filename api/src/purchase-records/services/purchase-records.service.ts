@@ -206,7 +206,7 @@ export class PurchaseRecordsService {
         );
         addedPaidTo = modifiedTransaction.amount - transactionDb.amount;
         modifiedTransactionsResult.push(
-          this.transactionsSrv.modifyTransaction(modifiedTransaction),
+          await this.transactionsSrv.modifyTransaction(modifiedTransaction),
         );
       }
     }

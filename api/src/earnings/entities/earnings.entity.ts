@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { transactionsObjIdArr } from 'src/transactions/entities/options/transactions.options';
+import { transactionObjId } from 'src/transactions/entities/options/transactions.options';
 import {
   requiredDate,
   requiredNumber,
@@ -20,8 +20,8 @@ export class Earning {
   @Prop(requiredString)
   category: string;
 
-  @Prop(transactionsObjIdArr)
-  transactions: Types.ObjectId[];
+  @Prop(transactionObjId)
+  transaction: Types.ObjectId;
 
   @Prop(requiredDate)
   createdAt: Date;

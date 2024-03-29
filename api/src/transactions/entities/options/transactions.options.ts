@@ -12,6 +12,11 @@ export const paymentType = {
   enum: ['direct', 'indirect'],
 };
 
+export const transactionObjId = {
+  ...requiredRefObjectId,
+  ref: 'transaction',
+};
+
 export const transactionsObjIdArr = {
   required: true,
   type: [

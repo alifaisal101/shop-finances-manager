@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Earning, EarningDocument } from '../entities/earnings.entity';
 import { Model, Types } from 'mongoose';
@@ -13,6 +17,14 @@ export class EarningsService {
     @InjectModel(Earning.name) private earningModel: Model<EarningDocument>,
     private transactionsSrv: TransactionsService,
   ) {}
+
+  async findById(earningId: Types.ObjectId) {
+    try {
+      return await this.earningModel.findById(earningId);
+    } catch (err) {
+      throw new InternalServerErrorException(err, 'Failed to fetch earning.');
+    }
+  }
 
   async findAll(options: FetchRecordsDto) {
     const page = options.page || 1;
@@ -63,26 +75,41 @@ export class EarningsService {
   }
 
   async addEarning(earning: PostEarningsDto) {
-    const earningTransactions = earning.transactions.map((transaction) => {
-      return {
-        ...transaction,
-        section: 'earnings',
-        type: 'income',
-      };
-    });
+    const earningTransaction = {
+      ...earning.transaction,
+      section: 'earnings',
+      type: 'income',
+    };
 
-    const addTransactionResults =
-      await this.transactionsSrv.addTransactions(earningTransactions);
-    delete earning.transactions;
+    const addTransactionResult = await this.transactionsSrv.addTransactions([
+      earningTransaction,
+    ]);
+    delete earning.transaction;
 
     const earningResult = await this.create({
       ...earning,
-      transactions: addTransactionResults.transactionsResult.map((t) => t._id),
+      transaction: addTransactionResult.transactionsResult[0]._id,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
 
-    return { earningResult, addTransactionResults };
+    return { earningResult, addTransactionResult };
+  }
+
+  async modifyEarning(newEarning: PatchEarningsDto) {
+    const earning = await this.findById(newEarning.earningId);
+    if (!earning) {
+      throw new NotFoundException('No earning with that Id was found/.');
+    }
+
+    if (newEarning.amount && newEarning.amount != earning.amount) {
+      await this.transactionsSrv.modifyTransaction({
+        amount: newEarning.amount,
+        transactionId: earning.transaction,
+      });
+    }
+
+    return await this.update(newEarning);
   }
 
   async removeEarning(
@@ -93,7 +120,7 @@ export class EarningsService {
       const earning = await this.earningModel.findById(earningId);
 
       if (deleteAllRelatedTransactions) {
-        this.transactionsSrv.removeTransactions(earning.transactions);
+        this.transactionsSrv.removeTransactions([earning.transaction]);
       }
 
       return await this.delete(earning._id);

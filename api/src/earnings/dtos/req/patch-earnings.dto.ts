@@ -1,7 +1,5 @@
 import { Types } from 'mongoose';
-import { Type } from 'class-transformer';
 import {
-  IsArray,
   IsDate,
   IsMongoId,
   IsNotEmpty,
@@ -9,9 +7,7 @@ import {
   IsOptional,
   IsString,
   Min,
-  ValidateNested,
 } from 'class-validator';
-import { TransactionDto } from 'src/transactions/dtos/transaction.dto';
 
 export class PatchEarningsDto {
   @IsMongoId()
@@ -31,10 +27,4 @@ export class PatchEarningsDto {
   @IsString()
   @IsNotEmpty()
   category: string;
-
-  @IsOptional()
-  @IsArray()
-  @ValidateNested()
-  @Type(() => TransactionDto)
-  transactions: TransactionDto[];
 }
