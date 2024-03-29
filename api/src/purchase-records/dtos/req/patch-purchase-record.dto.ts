@@ -26,11 +26,6 @@ export class PatchPurchaseRecord {
   number: string;
 
   @IsOptional()
-  @IsMongoId()
-  @IsNotEmpty()
-  companyId: Types.ObjectId;
-
-  @IsOptional()
   @IsString()
   @IsNotEmpty()
   @IsPaymentType()
@@ -49,11 +44,17 @@ export class PatchPurchaseRecord {
   @IsArray()
   @ValidateNested()
   @Type(() => TransactionDto)
-  transactions: TransactionDto[];
+  newTransactions: TransactionDto[];
 
   @IsOptional()
   @IsArray()
   @ValidateNested()
   @Type(() => ModifyTransactionDto)
   modifiedTransactions: ModifyTransactionDto[];
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested()
+  @Type(() => Types.ObjectId)
+  removedTransactions: Types.ObjectId[];
 }

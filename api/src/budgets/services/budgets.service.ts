@@ -6,14 +6,18 @@ import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
 import { CreateBudgetDto } from '../dtos/create-budget.dto';
 import { UpdateBudgetDto } from '../dtos/update-budget.dto';
 import { TransactionsService } from 'src/transactions/services/transactions.service';
-import { TransactionDocument } from 'src/transactions/entities/transactions.entity';
+import {
+  Transaction,
+  TransactionDocument,
+} from 'src/transactions/entities/transactions.entity';
 import { BudgetValues } from '../dtos/budget-values.dto';
 
 @Injectable()
 export class BudgetsService {
   constructor(
     @InjectModel(Budget.name) private budgetModel: Model<BudgetDocument>,
-    private transactionsSrv: TransactionsService,
+    @InjectModel(Transaction.name)
+    private transactionModel: Model<TransactionDocument>,
   ) {}
 
   // Calculates budgets current amount, total income, and total expense
@@ -34,7 +38,9 @@ export class BudgetsService {
   }
 
   async reevaluateBudget(budgetDate: Date) {
-    const transactions = await this.transactionsSrv.findAll(budgetDate);
+    const transactions = await this.transactionModel.find({
+      transactionDate: budgetDate,
+    });
     const budgetValues = this.calculateBudgetsValues(transactions);
 
     const budget = (await this.budgetModel.findOne({ budgetDate })) || false;

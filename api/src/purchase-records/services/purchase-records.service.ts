@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import {
@@ -40,6 +41,14 @@ export class PurchaseRecordsService {
         err,
         'Failed to fetch purchase records.',
       );
+    }
+  }
+
+  private async findById(purchaseRecordId: Types.ObjectId) {
+    try {
+      return this.purchaseRecordModel.findById(purchaseRecordId);
+    } catch (err) {
+      throw new InternalServerErrorException('Failed to find purchaseRecord');
     }
   }
 
@@ -144,8 +153,115 @@ export class PurchaseRecordsService {
     }
   }
 
-  private modifyPurchaseRecord(newPurchaseRecord: PatchPurchaseRecord) {
-    const newPurchaseRecordId = newPurchaseRecord.purchaseRecordId;
+  async modifyPurchaseRecord(newPurchaseRecord: PatchPurchaseRecord) {
+    const purchaseRecord =
+      (await this.findById(newPurchaseRecord.purchaseRecordId)) || false;
+
+    if (!purchaseRecord) {
+      throw new NotFoundException('No purchaseRecord was found.');
+    }
+
+    const company =
+      (await this.companiesSrv.findById(purchaseRecord.companyId)) || false;
+    if (!company) {
+      throw new InternalServerErrorException(
+        'No company associated with purchaseRe.0cord was found. This is an unexpected behavior. Something went wrong.',
+      );
+    }
+
+    let addedDebt = 0;
+    let addedPaidTo = 0;
+
+    // New Transactions
+    if (newPurchaseRecord?.newTransactions?.length > 0) {
+      const newPurchaseRecordTransactions =
+        newPurchaseRecord.newTransactions.map((transaction) => {
+          addedPaidTo += transaction.amount;
+          return {
+            ...transaction,
+            section: 'purchaseRecords',
+            type: 'expense',
+            companyName: company.name,
+          };
+        });
+
+      const addTransactionResults = await this.transactionsSrv.addTransactions(
+        newPurchaseRecordTransactions,
+      );
+
+      const addedTransactionsIds = addTransactionResults.transactionsResult.map(
+        (t) => t._id,
+      );
+      purchaseRecord.transactions.concat(addedTransactionsIds);
+    }
+
+    // Modified Transactions
+
+    if (newPurchaseRecord?.modifiedTransactions?.length > 0) {
+      const modifiedTransactionsResult = [];
+      for (let i = 0; i < newPurchaseRecord.modifiedTransactions.length; i++) {
+        const modifiedTransaction = newPurchaseRecord.modifiedTransactions[i];
+        const transactionDb = await this.transactionsSrv.findById(
+          modifiedTransaction.transactionId,
+        );
+        addedPaidTo = modifiedTransaction.amount - transactionDb.amount;
+        modifiedTransactionsResult.push(
+          this.transactionsSrv.modifyTransaction(modifiedTransaction),
+        );
+      }
+    }
+
+    // Removed Transactions
+    if (newPurchaseRecord?.removedTransactions?.length > 0) {
+      const removedTransactionsIds = [];
+
+      for (let i = 0; i < newPurchaseRecord.removedTransactions.length; i++) {
+        const transactionToRemoveId = newPurchaseRecord.removedTransactions[i];
+        const transactionDb = await this.transactionsSrv.findById(
+          transactionToRemoveId,
+        );
+
+        removedTransactionsIds.push(transactionToRemoveId);
+        addedPaidTo -= transactionDb.amount;
+      }
+      const removedTransactionsResult =
+        await this.transactionsSrv.removeTransactions(
+          newPurchaseRecord.removedTransactions,
+        );
+
+      purchaseRecord.transactions = purchaseRecord.transactions.filter(
+        (transactionId) => !removedTransactionsIds.includes(transactionId),
+      );
+    }
+
+    if (newPurchaseRecord.price) {
+      addedDebt = newPurchaseRecord.price - purchaseRecord.price;
+      purchaseRecord.price = newPurchaseRecord.price;
+    }
+
+    purchaseRecord.debt += addedDebt;
+    purchaseRecord.paidTo += addedPaidTo;
+
+    if (newPurchaseRecord.number) {
+      purchaseRecord.number = newPurchaseRecord.number;
+    }
+
+    if (newPurchaseRecord.paymentType) {
+      purchaseRecord.paymentType = newPurchaseRecord.paymentType;
+    }
+
+    if (newPurchaseRecord.recordDate) {
+      purchaseRecord.recordDate = newPurchaseRecord.recordDate;
+    }
+
+    try {
+      return await purchaseRecord.save();
+    } catch (err) {
+      throw new InternalServerErrorException(
+        err,
+        'Failed to modify purchaseRecord.',
+      );
+    }
   }
 
   async removePurchaseRecord(

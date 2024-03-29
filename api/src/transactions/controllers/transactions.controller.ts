@@ -5,8 +5,4 @@ import { TransactionsService } from '../services/transactions.service';
 @Controller('transactions')
 export class TransactionsController {
   constructor(private transactionsSrv: TransactionsService) {}
-  @Post('fetch-transactions')
-  async fetchTransactions(@Body() body: FetchRecordsDto) {
-    return await this.transactionsSrv.findAll();
-  }
 }

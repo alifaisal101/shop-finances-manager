@@ -19,6 +19,17 @@ export class TransactionsService {
     private budgetsSrv: BudgetsService,
   ) {}
 
+  async findById(transactionId: Types.ObjectId) {
+    try {
+      return await this.transactionModel.findById(transactionId);
+    } catch (err) {
+      throw new InternalServerErrorException(
+        err,
+        'Failed to fetch transaction.',
+      );
+    }
+  }
+
   async findAll(date: Date) {
     try {
       return await this.transactionModel.find({ transactionDate: date });
