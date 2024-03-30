@@ -88,6 +88,53 @@ export class EmployeesService {
       );
       throw new InternalServerErrorException(notFoundErr);
     }
+
+    const latestEmployeeTransaction = await this.transactionsSrv.findAll([
+      {
+        $match: {
+          _id: { $in: employee.transactions },
+        },
+      },
+      {
+        $sort: { transactionDate: -1 },
+      },
+      { $limit: 1 },
+    ]);
+
+    if (latestEmployeeTransaction.length == 0) {
+      return false;
+    }
+
+    const currentDate = new Date();
+    const dateDifference =
+      (currentDate.getTime() -
+        latestEmployeeTransaction[0].transactionDate.getTime()) /
+      (1000 * 60 * 60 * 24);
+
+    switch (employee.paymentPeriod) {
+      case 'daily':
+        if (dateDifference >= 1) {
+          return false;
+        }
+        break;
+      case 'weekly':
+        if (dateDifference >= 7) {
+          return false;
+        }
+        break;
+      case 'monthly':
+        if (dateDifference >= 30) {
+          return false;
+        }
+        break;
+      case 'yearly':
+        if (dateDifference >= 365) {
+          return false;
+        }
+        break;
+    }
+
+    return true;
   }
 
   async paySalary(employeeId: Types.ObjectId) {

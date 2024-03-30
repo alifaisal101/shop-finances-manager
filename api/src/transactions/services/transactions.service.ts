@@ -4,7 +4,7 @@ import {
   Transaction,
   TransactionDocument,
 } from '../entities/transactions.entity';
-import { Model, Types } from 'mongoose';
+import { Model, PipelineStage, Types } from 'mongoose';
 import { warnLog } from 'src/utils/functions/log';
 import { BudgetsService } from 'src/budgets/services/budgets.service';
 import { AddTransactionDto } from '../dtos/add-transaction.dto';
@@ -30,9 +30,11 @@ export class TransactionsService {
     }
   }
 
-  async findAll(date: Date) {
+  async findAll(
+    pipelineStage: PipelineStage[],
+  ): Promise<TransactionDocument[] | []> {
     try {
-      return await this.transactionModel.find({ transactionDate: date });
+      return await this.transactionModel.aggregate(pipelineStage);
     } catch (err) {
       warnLog(err);
       throw new InternalServerErrorException(
