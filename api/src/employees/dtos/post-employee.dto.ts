@@ -36,9 +36,4 @@ export class PostEmployeeDto {
   @IsNotEmpty()
   @IsPaymentPeriod()
   paymentPeriod: string;
-
-  @IsArray()
-  @ValidateNested()
-  @Type(() => TransactionDto)
-  transactions: TransactionDto[];
 }

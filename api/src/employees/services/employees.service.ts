@@ -5,12 +5,25 @@ import { Model, Types } from 'mongoose';
 import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
 import { PostEmployeeDto } from '../dtos/post-employee.dto';
 import { PatchEmployeeDto } from '../dtos/patch-employee.dto';
+import { TransactionsService } from 'src/transactions/services/transactions.service';
+import { AddTransactionDto } from 'src/transactions/dtos/add-transaction.dto';
 
 @Injectable()
 export class EmployeesService {
   constructor(
     @InjectModel(Employee.name) private employeeModel: Model<EmployeeDocument>,
+    private transactionsSrv: TransactionsService,
   ) {}
+
+  async findById(employeeId: Types.ObjectId) {
+    try {
+      return await this.employeeModel.findById(employeeId);
+    } catch (err) {
+      throw new InternalServerErrorException(
+        'Failed to fetch employee from database.',
+      );
+    }
+  }
 
   async findAll(options: FetchRecordsDto) {
     const page = options.page || 1;
@@ -26,7 +39,10 @@ export class EmployeesService {
 
   async create(employee: PostEmployeeDto) {
     try {
-      return await this.employeeModel.create(employee);
+      return await this.employeeModel.create({
+        ...employee,
+        createdAt: new Date(),
+      });
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -40,10 +56,10 @@ export class EmployeesService {
     delete newEmployee.employeeId;
 
     try {
-      return await this.employeeModel.findByIdAndUpdate(
-        employeeId,
-        newEmployee,
-      );
+      return await this.employeeModel.findByIdAndUpdate(employeeId, {
+        ...newEmployee,
+        updatedAt: new Date(),
+      });
     } catch (err) {
       throw new InternalServerErrorException(
         err,
@@ -59,6 +75,49 @@ export class EmployeesService {
       throw new InternalServerErrorException(
         err,
         'Failed to delete the employee.',
+      );
+    }
+  }
+
+  async checkSalaryPaymentStatus(employeeId: Types.ObjectId) {
+    const employee = await this.employeeModel.findById(employeeId);
+
+    if (!employee) {
+      const notFoundErr = new Error(
+        'Failed to find employee id, while trying to check payment status.',
+      );
+      throw new InternalServerErrorException(notFoundErr);
+    }
+  }
+
+  async paySalary(employeeId: Types.ObjectId) {
+    const employee = await this.employeeModel.findById(employeeId);
+
+    if (!employee) {
+      const notFoundErr = new Error(
+        'Failed to find employee id, while trying to paySalary. This is unexpected behavior.',
+      );
+      throw new InternalServerErrorException(notFoundErr);
+    }
+
+    const transaction: AddTransactionDto = {
+      amount: employee.salary,
+      transactionDate: new Date(),
+      section: 'employees',
+      type: 'expense',
+    };
+
+    const addedTransactionId = (
+      await this.transactionsSrv.addTransactions([transaction])
+    ).transactionsResult[0]._id;
+
+    employee.transactions.push(addedTransactionId);
+
+    try {
+      return await employee.save();
+    } catch (err) {
+      throw new InternalServerErrorException(
+        'Failed to save employee to the database.',
       );
     }
   }

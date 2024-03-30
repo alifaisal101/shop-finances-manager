@@ -48,10 +48,4 @@ export class PatchEmployeeDto {
   @IsNotEmpty()
   @IsPaymentPeriod()
   paymentPeriod: string;
-
-  @IsOptional()
-  @IsArray()
-  @ValidateNested()
-  @Type(() => TransactionDto)
-  transactions: TransactionDto[];
 }
