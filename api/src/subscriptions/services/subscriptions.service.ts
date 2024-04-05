@@ -9,13 +9,14 @@ import { Model, Types } from 'mongoose';
 import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
 import { PostSubscriptionDto } from '../dtos/post-subscription.dto';
 import { PatchSubscriptionDto } from '../dtos/patch-subscription.dto';
+import { AddTransactionDto } from 'src/transactions/dtos/add-transaction.dto';
 
 @Injectable()
 export class SubscriptionsService {
   constructor(
     @InjectModel(Subscription.name)
     private subscriptionModel: Model<SubscriptionDocument>,
-    private transactionSrv: TransactionsService,
+    private transactionsSrv: TransactionsService,
   ) {}
 
   async findById(subscriptionId: Types.ObjectId) {
@@ -91,7 +92,7 @@ export class SubscriptionsService {
       throw new InternalServerErrorException(notFoundError);
     }
 
-    const latestSubscriptionTransaction = await this.transactionSrv.findAll([
+    const latestSubscriptionTransaction = await this.transactionsSrv.findAll([
       {
         $match: {
           _id: { $in: subscription.transactions },
@@ -136,5 +137,36 @@ export class SubscriptionsService {
         break;
     }
     return true;
+  }
+
+  async paySubscription(subscriptionId: Types.ObjectId) {
+    const subscription = await this.findById(subscriptionId);
+
+    if (!subscription) {
+      const notFoundErr = new Error(
+        'Failed to find subscription id, while trying to paySalary. This is unexpected behavior.',
+      );
+      throw new InternalServerErrorException(notFoundErr);
+    }
+
+    const transaction: AddTransactionDto = {
+      amount: subscription.amount,
+      transactionDate: new Date(),
+      section: 'subscriptions',
+      type: 'expense',
+    };
+
+    const addedTransactionId = (
+      await this.transactionsSrv.addTransactions([transaction])
+    ).transactionsResult[0]._id;
+
+    subscription.transactions.push(addedTransactionId);
+    try {
+      return await subscription.save();
+    } catch (err) {
+      throw new InternalServerErrorException(
+        'Failed to save subscription to the database.',
+      );
+    }
   }
 }

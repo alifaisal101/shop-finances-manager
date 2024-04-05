@@ -138,7 +138,7 @@ export class EmployeesService {
   }
 
   async paySalary(employeeId: Types.ObjectId) {
-    const employee = await this.employeeModel.findById(employeeId);
+    const employee = await this.findById(employeeId);
 
     if (!employee) {
       const notFoundErr = new Error(
@@ -146,7 +146,6 @@ export class EmployeesService {
       );
       throw new InternalServerErrorException(notFoundErr);
     }
-
     const transaction: AddTransactionDto = {
       amount: employee.salary,
       transactionDate: new Date(),
