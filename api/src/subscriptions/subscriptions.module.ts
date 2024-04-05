@@ -6,12 +6,14 @@ import {
   Subscription,
   SubscriptionSchema,
 } from './entities/subscriptions.entity';
+import { TransactionsModule } from 'src/transactions/transactions.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: Subscription.name, schema: SubscriptionSchema },
     ]),
+    TransactionsModule,
   ],
   providers: [SubscriptionsService],
   controllers: [SubscriptionsController],

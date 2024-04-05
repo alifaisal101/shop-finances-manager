@@ -1,3 +1,4 @@
+import { TransactionsService } from './../../transactions/services/transactions.service';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import {
@@ -14,8 +15,19 @@ export class SubscriptionsService {
   constructor(
     @InjectModel(Subscription.name)
     private subscriptionModel: Model<SubscriptionDocument>,
+    private transactionSrv: TransactionsService,
   ) {}
 
+  async findById(subscriptionId: Types.ObjectId) {
+    try {
+      return this.subscriptionModel.findById(subscriptionId);
+    } catch (err) {
+      throw new InternalServerErrorException(
+        err,
+        'Failed to fetch subscription from database.',
+      );
+    }
+  }
   async findAll(options: FetchRecordsDto) {
     const page = options.page || 1;
     const recordsPerPage = options.recordsPerPage || 10;
@@ -68,5 +80,61 @@ export class SubscriptionsService {
         'Failed to delete subscription.',
       );
     }
+  }
+
+  async checkSubscriptionPaymentStatus(subscriptionId: Types.ObjectId) {
+    const subscription = await this.findById(subscriptionId);
+    if (!subscription) {
+      const notFoundError = new Error(
+        'Failed to find subscription, while trying to check subscription payment status.',
+      );
+      throw new InternalServerErrorException(notFoundError);
+    }
+
+    const latestSubscriptionTransaction = await this.transactionSrv.findAll([
+      {
+        $match: {
+          _id: { $in: subscription.transactions },
+        },
+      },
+      {
+        $sort: { transactionDate: -1 },
+      },
+      { $limit: 1 },
+    ]);
+
+    if (latestSubscriptionTransaction.length == 0) {
+      return false;
+    }
+
+    const currentDate = new Date();
+    const dateDifference =
+      (currentDate.getTime() -
+        latestSubscriptionTransaction[0].transactionDate.getTime()) /
+      (1000 * 60 * 60 * 24);
+
+    switch (subscription.paymentPeriod) {
+      case 'daily':
+        if (dateDifference >= 1) {
+          return false;
+        }
+        break;
+      case 'weekly':
+        if (dateDifference >= 7) {
+          return false;
+        }
+        break;
+      case 'monthly':
+        if (dateDifference >= 30) {
+          return false;
+        }
+        break;
+      case 'yearly':
+        if (dateDifference >= 365) {
+          return false;
+        }
+        break;
+    }
+    return true;
   }
 }
