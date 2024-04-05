@@ -16,6 +16,7 @@ import { TransactionsModule } from 'src/transactions/transactions.module';
     TransactionsModule,
   ],
   providers: [SubscriptionsService],
+  exports: [SubscriptionsService],
   controllers: [SubscriptionsController],
 })
 export class SubscriptionsModule {}

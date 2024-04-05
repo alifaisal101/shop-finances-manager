@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, Max, Min } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional, Max, Min } from 'class-validator';
 
 export class FetchRecordsDto {
   @IsOptional()
@@ -11,4 +11,8 @@ export class FetchRecordsDto {
   @IsNumber({ allowInfinity: false, allowNaN: false })
   @Min(1)
   page?: number;
+
+  @IsOptional()
+  @IsBoolean()
+  all?: boolean;
 }

@@ -25,10 +25,21 @@ export class EmployeesService {
     }
   }
 
-  async findAll(options: FetchRecordsDto) {
+  async findAll(options?: FetchRecordsDto) {
     const page = options.page || 1;
     const recordsPerPage = options.recordsPerPage || 10;
     const skip = (page - 1) * recordsPerPage;
+
+    if (options?.all) {
+      try {
+        return await this.employeeModel.find();
+      } catch (err) {
+        throw new InternalServerErrorException(
+          err,
+          'Failed to fetch employees.',
+        );
+      }
+    }
 
     try {
       return await this.employeeModel.find().skip(skip).limit(recordsPerPage);
@@ -79,16 +90,7 @@ export class EmployeesService {
     }
   }
 
-  async checkSalaryPaymentStatus(employeeId: Types.ObjectId) {
-    const employee = await this.findById(employeeId);
-
-    if (!employee) {
-      const notFoundErr = new Error(
-        'Failed to find employee id, while trying to check payment status.',
-      );
-      throw new InternalServerErrorException(notFoundErr);
-    }
-
+  async checkSalaryPaymentStatus(employee: Employee) {
     const latestEmployeeTransaction = await this.transactionsSrv.findAll([
       {
         $match: {
@@ -137,15 +139,7 @@ export class EmployeesService {
     return true;
   }
 
-  async paySalary(employeeId: Types.ObjectId) {
-    const employee = await this.findById(employeeId);
-
-    if (!employee) {
-      const notFoundErr = new Error(
-        'Failed to find employee id, while trying to paySalary. This is unexpected behavior.',
-      );
-      throw new InternalServerErrorException(notFoundErr);
-    }
+  async paySalary(employee: EmployeeDocument) {
     const transaction: AddTransactionDto = {
       amount: employee.salary,
       transactionDate: new Date(),

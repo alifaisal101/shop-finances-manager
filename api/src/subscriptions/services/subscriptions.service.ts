@@ -29,10 +29,21 @@ export class SubscriptionsService {
       );
     }
   }
-  async findAll(options: FetchRecordsDto) {
+  async findAll(options?: FetchRecordsDto) {
     const page = options.page || 1;
     const recordsPerPage = options.recordsPerPage || 10;
     const skip = (page - 1) * recordsPerPage;
+
+    if (options?.all) {
+      try {
+        return await this.subscriptionModel.find();
+      } catch (err) {
+        throw new InternalServerErrorException(
+          err,
+          'Failed to fetch subscriptions.',
+        );
+      }
+    }
 
     try {
       return await this.subscriptionModel
@@ -83,15 +94,7 @@ export class SubscriptionsService {
     }
   }
 
-  async checkSubscriptionPaymentStatus(subscriptionId: Types.ObjectId) {
-    const subscription = await this.findById(subscriptionId);
-    if (!subscription) {
-      const notFoundError = new Error(
-        'Failed to find subscription, while trying to check subscription payment status.',
-      );
-      throw new InternalServerErrorException(notFoundError);
-    }
-
+  async checkSubscriptionPaymentStatus(subscription: SubscriptionDocument) {
     const latestSubscriptionTransaction = await this.transactionsSrv.findAll([
       {
         $match: {
@@ -139,16 +142,7 @@ export class SubscriptionsService {
     return true;
   }
 
-  async paySubscription(subscriptionId: Types.ObjectId) {
-    const subscription = await this.findById(subscriptionId);
-
-    if (!subscription) {
-      const notFoundErr = new Error(
-        'Failed to find subscription id, while trying to paySalary. This is unexpected behavior.',
-      );
-      throw new InternalServerErrorException(notFoundErr);
-    }
-
+  async paySubscription(subscription: SubscriptionDocument) {
     const transaction: AddTransactionDto = {
       amount: subscription.amount,
       transactionDate: new Date(),

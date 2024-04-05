@@ -13,6 +13,7 @@ import { TransactionsModule } from 'src/transactions/transactions.module';
     TransactionsModule,
   ],
   providers: [EmployeesService],
+  exports: [EmployeesService],
   controllers: [EmployeesController],
 })
 export class EmployeesModule {}
