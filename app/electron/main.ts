@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
 import Datastore from '@seald-io/nedb';
 import { checkActiveStatus } from './activation';
+import { checkApiConnection } from './api-status';
 
 // import { dirname } from 'path';
 
@@ -14,10 +15,10 @@ const messages = {
   No database connection string was found. Existing...
 `,
 
-  failedToConnectToDatabase: `
-    فشل الاتصال في قاعدة البيانات
-    Failed to connect to database. Existing...
-  `,
+  failedToConnectToApi: `
+    فشل الاتصال
+    Failed to connect to the API
+    `,
 
   failedToActivate: `
     فشل تفعيل البرنامج
@@ -26,16 +27,18 @@ const messages = {
 };
 
 const bootstrap = async () => {
+  let failedToConnectToTheAPI = true;
+  let failedToActivate = false;
+
   // try {
   //   await checkActiveStatus();
   // } catch (err) {
   //   console.log('Not Active');
   // }
 
-  let failedToConnectToDB = false;
-  let failedToActivate = false;
-
-  // await mongoose.connect(process.env.MONGODB_URI);
+  if ((await checkApiConnection()) || false) {
+    failedToConnectToTheAPI = false;
+  }
 
   process.env.DIST = path.join(__dirname, '../dist');
   process.env.PUBLIC = app.isPackaged
@@ -88,26 +91,21 @@ const bootstrap = async () => {
 
   app.whenReady().then(createWindow);
 
-  // ipcMain.on('ready', (event) => {
-  //   if (!process.env.MONGODB_URI) {
-  //     event.reply('alert_exit_error', messages.noMongodbURIFound);
-  //   }
+  ipcMain.on('ready', (event) => {
+    if (failedToActivate) {
+      return event.reply('alert_exit_error', messages.failedToActivate);
+    }
 
-  //   if (failedToConnectToDB) {
-  //     event.reply('alert_exit_error', messages.failedToConnectToDatabase);
-  //   }
-
-  //   if (failedToActivate) {
-  //     event.reply('alert_exit_error', messages.failedToActivate);
-  //   }
-  // });
+    if (failedToConnectToTheAPI) {
+      return event.reply('alert_exit_error', messages.failedToConnectToApi);
+    }
+  });
 
   ipcMain.on('exit_error', () => {
     return process.exit(1);
   });
 
-  // Input can't be focued after alert/confirm, fix
-
+  // Input can't be focused after alert/confirm, fix
   ipcMain.on('focus-fix', () => {
     win.blur();
     win.focus();

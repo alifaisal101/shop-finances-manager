@@ -86,7 +86,7 @@ function useLoading() {
       ipcRenderer.send('ready');
       ipcRenderer.on('alert_exit_error', (_event, message: string) => {
         alert(message);
-        ipcRenderer.send('exit_error');
+        return ipcRenderer.send('exit_error');
       });
     },
   };
