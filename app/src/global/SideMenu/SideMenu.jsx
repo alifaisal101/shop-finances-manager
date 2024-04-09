@@ -4,13 +4,13 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonListHeader,
   IonMenu,
   IonMenuToggle,
   IonNote,
 } from '@ionic/react';
 import { useLocation } from 'react-router-dom';
 import {
+  businessOutline,
   receiptOutline,
   warningOutline,
   peopleOutline,
@@ -18,10 +18,18 @@ import {
   cashOutline,
   cartOutline,
   cogOutline,
+  pieChartOutline,
+  cardOutline,
 } from 'ionicons/icons';
 import './__SideMenu.css';
 
 const appPages = [
+  {
+    title: 'الشركات',
+    url: '/companies',
+    iosIcon: businessOutline,
+    mdIcon: businessOutline,
+  },
   {
     title: 'قوائم الشركات',
     url: '/purchase-records',
@@ -41,6 +49,12 @@ const appPages = [
     mdIcon: cartOutline,
   },
   {
+    title: 'الاشتراكات',
+    url: '/subscriptions',
+    iosIcon: cardOutline,
+    mdIcon: cardOutline,
+  },
+  {
     title: 'الموظفين',
     url: '/employees',
     iosIcon: peopleOutline,
@@ -57,6 +71,12 @@ const appPages = [
     url: '/earnings',
     iosIcon: cashOutline,
     mdIcon: cashOutline,
+  },
+  {
+    title: 'المخططات البيانية',
+    url: '/dashboard',
+    iosIcon: pieChartOutline,
+    mdIcon: pieChartOutline,
   },
   {
     title: 'اﻹعدادات',

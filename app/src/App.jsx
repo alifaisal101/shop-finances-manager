@@ -52,6 +52,9 @@ import {
 import { budgetStore } from './store/budgets.store';
 import { budgets } from './preset-data';
 import { displayDate } from './util/display.functions';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Companies from './pages/Companies/Companies';
+import Subscriptions from './pages/Subscriptions/Subscriptions';
 
 setupIonicReact();
 
@@ -132,6 +135,9 @@ function App() {
       <IonSplitPane contentId="main">
         <SideMenu />
         <IonRouterOutlet id="main" animated={true}>
+          <Route path="/companies" exact={true}>
+            <Companies />
+          </Route>
           <Route path="/" exact={true}>
             <Redirect to="/purchase-records" />
           </Route>
@@ -140,6 +146,9 @@ function App() {
           </Route>
           <Route path="/rejected-items" exact={true}>
             <RejectedItems />
+          </Route>
+          <Route path="/subscriptions" exact={true}>
+            <Subscriptions />
           </Route>
           <Route path="/other-spendings" exact={true}>
             <OtherSpendings />
@@ -152,6 +161,9 @@ function App() {
           </Route>
           <Route path="/earnings" exact={true}>
             <Earnings />
+          </Route>
+          <Route path="/dashboard" exact={true}>
+            <Dashboard />
           </Route>
           <Route path="/settings" exact={true}>
             <Settings />
