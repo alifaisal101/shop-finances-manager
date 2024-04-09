@@ -10,8 +10,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { PostOtherSpendingDto } from '../dtos/post-other-spendings.dto';
-import { PatchOtherSpendingDto } from '../dtos/patch-other-spendings.dto';
+import { PostOtherSpendingDto } from '../dtos/req/post-other-spendings.dto';
+import { PatchOtherSpendingDto } from '../dtos/req/patch-other-spendings.dto';
 import { isMongoId } from 'class-validator';
 
 @Controller('other-spendings')
