@@ -1,4 +1,5 @@
 import { IonPage } from '@ionic/react';
+
 import './__PurchaseRecords.css';
 import Header from '../../global/Header/Header';
 
@@ -8,6 +9,7 @@ import Content from '../../components/stateless/Content/Content';
 import ActionButton from '../../components/stateless/ActionButton/ActionButton';
 import { useRecoilState } from 'recoil';
 import { modalState } from '../../store/modal.store';
+import Search from '../../components/stateless/Search/Search';
 
 const PurchaseRecords = () => {
   const [isOpen, setIsOpen] = useRecoilState(modalState);
@@ -22,6 +24,8 @@ const PurchaseRecords = () => {
         <div className="action-button-container">
           <ActionButton onClick={actionHandler}>اضافة قائمة</ActionButton>
         </div>
+
+        <Search />
         <PurchaseRecordsTable></PurchaseRecordsTable>
       </Content>
     </IonPage>

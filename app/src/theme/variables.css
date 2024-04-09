@@ -3,6 +3,11 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  /** search input shadow **/
+  --first-search-shadow-value: 0, 0, 0, 0.4;
+  --second-search-shadow-value: 0, 0, 0, 0.3;
+  --third-search-shadow-value: 0, 0, 0, 0.2;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
