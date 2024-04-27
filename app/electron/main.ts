@@ -1,6 +1,5 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
-import Datastore from '@seald-io/nedb';
 import { checkActiveStatus } from './activation';
 import { checkApiConnection } from './api-status';
 

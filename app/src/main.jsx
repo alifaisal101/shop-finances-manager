@@ -9,7 +9,8 @@ import { IonReactRouter } from '@ionic/react-router';
 
 alert = e_util.alert;
 confirm = e_util.confirm;
-
+window.config = e_util.getConfig();
+// console.log(window.config);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RecoilRoot>
     <IonReactRouter>
