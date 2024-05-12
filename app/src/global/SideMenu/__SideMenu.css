@@ -124,3 +124,16 @@ ion-item.selected {
 .global_sidemenu {
   flex: 0;
 }
+
+.global_sidemenu_specialItem {
+  --background: var(--ion-color-primary-darker);
+}
+
+.global_sidemenu_specialItem {
+  --background: rgba(var(--ion-color-primary-darker-rgb), 0.5);
+  color: var(--ion-color-primary) !important;
+}
+
+.global_sidemenu_specialItem ion-icon {
+  color: var(--ion-color-primary) !important;
+}
