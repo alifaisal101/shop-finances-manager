@@ -291,12 +291,6 @@ const appPages = [
         iosIcon: businessOutline,
         mdIcon: businessOutline,
       },
-      {
-        title: 'حسابات الزبائن',
-        url: '/employees-accounts',
-        iosIcon: peopleOutline,
-        mdIcon: peopleOutline,
-      },
     ],
   },
   {

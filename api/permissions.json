@@ -1,0 +1,261 @@
+{
+  "mainFeatures": {
+    "adminPanel": {
+      "access": "adminPanel",
+      "subFeatures": {
+        "users": {
+          "access": "adminPanel.users",
+          "delete": "adminPanel.users.delete",
+          "modify": "adminPanel.users.modify",
+          "create": "adminPanel.users.create",
+          "suspend": "adminPanel.users.suspend",
+          "forceLogout": "adminPanel.users.forceLogout"
+        },
+        "roles": {
+          "access": "adminPanel.roles",
+          "delete": "adminPanel.roles.delete",
+          "modify": "adminPanel.roles.modify",
+          "create": "adminPanel.roles.create"
+        },
+        "logs": {
+          "access": "adminPanel.logs",
+          "delete": "adminPanel.logs.delete"
+        },
+        "database": {
+          "access": "adminPanel.database",
+          "modify": "adminPanel.database.modify",
+          "backup": "adminPanel.database.backup"
+        },
+        "appSettings": {
+          "access": "adminPanel.appSettings",
+          "modify": "adminPanel.appSettings.modify"
+        }
+      }
+    },
+    "cashier": {
+      "access": "cashier",
+      "subFeatures": {
+        "pos": {
+          "access": "cashier.pos"
+        },
+        "refund": {
+          "access": "cashier.refund",
+          "delete": "cashier.refund.delete",
+          "modify": "cashier.refund.modify",
+          "create": "cashier.refund.create"
+        },
+        "returns": {
+          "access": "cashier.returns",
+          "delete": "cashier.returns.delete",
+          "modify": "cashier.returns.modify",
+          "create": "cashier.returns.create"
+        }
+      }
+    },
+    "warehouses": {
+      "access": "warehouses",
+      "subFeatures": {
+        "warehouses": {
+          "access": "warehouses.warehouses",
+          "delete": "warehouses.warehouses.delete",
+          "modify": "warehouses.warehouses.modify",
+          "create": "warehouses.warehouses.create"
+        },
+        "items": {
+          "access": "warehouses.items",
+          "delete": "warehouses.items.delete",
+          "modify": "warehouses.items.modify",
+          "create": "warehouses.items.create"
+        },
+        "moveItems": {
+          "access": "warehouses.moveItems",
+          "delete": "warehouses.moveItems.delete",
+          "modify": "warehouses.moveItems.modify",
+          "create": "warehouses.moveItems.create"
+        },
+        "emptyItems": {
+          "access": "warehouses.emptyItems"
+        },
+        "expiredItems": {
+          "access": "warehouses.expiredItems"
+        },
+        "printBarcode": {
+          "access": "warehouses.printBarcode",
+          "delete": "warehouses.printBarcode.delete",
+          "modify": "warehouses.printBarcode.modify",
+          "create": "warehouses.printBarcode.create"
+        },
+        "addItems": {
+          "access": "warehouses.addItems",
+          "delete": "warehouses.addItems.delete",
+          "modify": "warehouses.addItems.modify",
+          "create": "warehouses.addItems.create"
+        },
+        "removeItems": {
+          "access": "warehouses.removeItems",
+          "delete": "warehouses.removeItems.delete",
+          "modify": "warehouses.removeItems.modify",
+          "create": "warehouses.removeItems.create"
+        }
+      }
+    },
+    "sells": {
+      "access": "sells",
+      "subFeatures": {
+        "records": {
+          "access": "sells.records",
+          "delete": "sells.records.delete",
+          "modify": "sells.records.modify",
+          "create": "sells.records.create"
+        },
+        "modifyRecord": {
+          "access": "sells.modifyRecord",
+          "delete": "sells.modifyRecord.delete",
+          "modify": "sells.modifyRecord.modify",
+          "create": "sells.modifyRecord.create"
+        },
+
+        "returnRecord": {
+          "access": "sells.returnRecord",
+          "delete": "sells.returnRecord.delete",
+          "modify": "sells.returnRecord.modify",
+          "create": "sells.returnRecord.create"
+        },
+        "modifyReturnRecord": {
+          "access": "sells.modifyReturnRecord",
+          "delete": "sells.modifyReturnRecord.delete",
+          "modify": "sells.modifyReturnRecord.modify",
+          "create": "sells.modifyReturnRecord.create"
+        }
+      }
+    },
+    "purchases": {
+      "access": "purchases",
+      "subFeatures": {
+        "records": {
+          "access": "purchases.records",
+          "delete": "purchases.records.delete",
+          "modify": "purchases.records.modify",
+          "create": "purchases.records.create"
+        },
+        "modifyRecord": {
+          "access": "purchases.modifyRecord",
+          "delete": "purchases.modifyRecord.delete",
+          "modify": "purchases.modifyRecord.modify",
+          "create": "purchases.modifyRecord.create"
+        },
+
+        "returnRecord": {
+          "access": "purchases.returnRecord",
+          "delete": "purchases.returnRecord.delete",
+          "modify": "purchases.returnRecord.modify",
+          "create": "purchases.returnRecord.create"
+        },
+        "modifyReturnRecord": {
+          "access": "purchases.modifyReturnRecord",
+          "delete": "purchases.modifyReturnRecord.delete",
+          "modify": "purchases.modifyReturnRecord.modify",
+          "create": "purchases.modifyReturnRecord.create"
+        }
+      }
+    },
+    "providers": {
+      "access": "providers",
+      "subFeatures": {
+        "companies": {
+          "access": "providers.companies",
+          "delete": "providers.companies.delete",
+          "modify": "providers.companies.modify",
+          "create": "providers.companies.create"
+        },
+        "delegates": {
+          "access": "providers.delegates",
+          "delete": "providers.delegates.delete",
+          "modify": "providers.delegates.modify",
+          "create": "providers.delegates.create"
+        }
+      }
+    },
+    "management": {
+      "access": "management",
+      "subFeatures": {
+        "employees": {
+          "access": "management.employees",
+          "delete": "management.employees.delete",
+          "modify": "management.employees.modify",
+          "create": "management.employees.create",
+          "suspend": "management.employees.suspend"
+        },
+        "otherSpendings": {
+          "access": "management.otherSpendings",
+          "delete": "management.otherSpendings.delete",
+          "modify": "management.otherSpendings.modify",
+          "create": "management.otherSpendings.create",
+          "suspend": "management.otherSpendings.suspend"
+        },
+        "subscriptions": {
+          "access": "management.subscriptions",
+          "delete": "management.subscriptions.delete",
+          "modify": "management.subscriptions.modify",
+          "create": "management.subscriptions.create",
+          "suspend": "management.subscriptions.suspend"
+        }
+      }
+    },
+    "financesAccounts": {
+      "access": "financesAccounts",
+      "subFeatures": {
+        "specialAccounts": {
+          "access": "financesAccounts.specialAccounts",
+          "delete": "financesAccounts.specialAccounts.delete",
+          "modify": "financesAccounts.specialAccounts.modify",
+          "create": "financesAccounts.specialAccounts.create"
+        },
+        "companiesAccounts": {
+          "access": "financesAccounts.companiesAccounts",
+          "delete": "financesAccounts.companiesAccounts.delete",
+          "modify": "financesAccounts.companiesAccounts.modify",
+          "create": "financesAccounts.companiesAccounts.create"
+        }
+      }
+    },
+    "reports": {
+      "access": "reports",
+      "subFeatures": {
+        "sellsReports": {
+          "access": "reports.sellsReports",
+          "delete": "reports.sellsReports.delete",
+          "modify": "reports.sellsReports.modify",
+          "create": "reports.sellsReports.create"
+        },
+        "warehousesReports": {
+          "access": "reports.warehouses",
+          "delete": "reports.warehouses.delete",
+          "modify": "reports.warehouses.modify",
+          "create": "reports.warehouses.create"
+        },
+        "financesReports": {
+          "access": "reports.financesReports",
+          "delete": "reports.financesReports.delete",
+          "modify": "reports.financesReports.modify",
+          "create": "reports.financesReports.create"
+        },
+        "usersReports": {
+          "access": "reports.usersReports",
+          "delete": "reports.usersReports.delete",
+          "modify": "reports.usersReports.modify",
+          "create": "reports.usersReports.create"
+        },
+        "providersReports": {
+          "access": "reports.providersReports",
+          "delete": "reports.providersReports.delete",
+          "modify": "reports.providersReports.modify",
+          "create": "reports.providersReports.create"
+        }
+      }
+    },
+    "chartData": {
+      "access": "chartsData"
+    }
+  }
+}

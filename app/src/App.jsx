@@ -55,6 +55,7 @@ import { displayDate } from './util/display.functions';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Companies from './pages/Companies/Companies';
 import Subscriptions from './pages/Subscriptions/Subscriptions';
+import Login from './pages/Login/Login';
 
 setupIonicReact();
 
@@ -115,7 +116,7 @@ function App() {
 
   return (
     <IonApp>
-      <Modal confirmHandler={modalConfirmHandler}>
+      {/* <Modal confirmHandler={modalConfirmHandler}>
         <Route path="/purchase-records/" exact={true}>
           <PurchaseRecordsForm></PurchaseRecordsForm>
         </Route>
@@ -169,7 +170,8 @@ function App() {
             <Settings />
           </Route>
         </IonRouterOutlet>
-      </IonSplitPane>
+      </IonSplitPane> */}
+      <Login></Login>
     </IonApp>
   );
 }

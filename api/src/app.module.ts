@@ -14,6 +14,7 @@ import { MONGODB_URI } from './config';
 import { APP_PIPE } from '@nestjs/core';
 import { ChartsModule } from './charts/charts.module';
 import { EarningsModule } from './earnings/earnings.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { EarningsModule } from './earnings/earnings.module';
     EmployeesModule,
     ChartsModule,
     EarningsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [
