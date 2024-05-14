@@ -16,4 +16,4 @@ export const permissionsObj: InPermissionsObject = require('./../permissions.jso
 // Extract all permissions in one single array
 // export const permissions = permissionsExtractor(permissionsObj);
 
-const permissionsEnum = permissionsExtractor(permissionsObj);
+export const permissionsEnum = permissionsExtractor(permissionsObj);
