@@ -15,6 +15,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { ChartsModule } from './charts/charts.module';
 import { EarningsModule } from './earnings/earnings.module';
 import { UsersModule } from './users/users.module';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UsersModule } from './users/users.module';
     ChartsModule,
     EarningsModule,
     UsersModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [

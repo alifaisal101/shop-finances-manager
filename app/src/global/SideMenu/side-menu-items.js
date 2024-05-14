@@ -11,8 +11,6 @@ import {
   documentOutline,
   cardOutline,
   serverOutline,
-  chevronDownOutline,
-  chevronForwardOutline,
   personCircleOutline,
   briefcaseOutline,
   tvOutline,
