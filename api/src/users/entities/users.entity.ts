@@ -1,15 +1,47 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
-import { transactionObjId } from 'src/transactions/entities/options/transactions.options';
 import {
   requiredDate,
-  requiredNumber,
+  requiredRefObjectId,
   requiredString,
+  unRequiredString,
+  uniqueRequiredString,
+  uniqueUnRequiredString,
 } from 'src/utils/objects/mongoose-options';
 
-export type EarningDocument = HydratedDocument<Earning>;
+export type UserDocument = HydratedDocument<User>;
 
 @Schema()
-export class Earning {}
+export class User {
+  @Prop(uniqueRequiredString)
+  username: string;
 
-export const EarningSchema = SchemaFactory.createForClass(Earning);
+  @Prop(requiredString)
+  password: string;
+
+  @Prop({ ...requiredRefObjectId, ref: 'role' })
+  roleId: Types.ObjectId;
+
+  @Prop(uniqueUnRequiredString)
+  phoneNumber?: string;
+
+  @Prop(requiredString)
+  fullName: string;
+
+  @Prop(unRequiredString)
+  workShift?: string;
+
+  @Prop(unRequiredString)
+  photo?: string;
+
+  @Prop(unRequiredString)
+  notes?: string;
+
+  @Prop(requiredDate)
+  createdAt: Date;
+
+  @Prop(requiredDate)
+  updatedAt: Date;
+}
+
+export const UserSchema = SchemaFactory.createForClass(User);

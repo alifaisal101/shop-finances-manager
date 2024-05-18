@@ -3,6 +3,7 @@ import { Schema as mongooseSchema } from 'mongoose';
 export const unRequiredString = { type: String, required: false };
 export const requiredString = { ...unRequiredString, required: true };
 export const uniqueRequiredString = { ...requiredString, unique: true };
+export const uniqueUnRequiredString = { ...unRequiredString, unique: true };
 
 export const unRequiredNumber = { type: Number, required: false };
 export const requiredNumber = { ...unRequiredNumber, required: true };
