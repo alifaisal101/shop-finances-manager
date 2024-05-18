@@ -32,7 +32,7 @@ export class User {
   workShift?: string;
 
   @Prop(unRequiredString)
-  photo?: string;
+  photoUrl?: string;
 
   @Prop(unRequiredString)
   notes?: string;

@@ -1,6 +1,17 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import {
+  FilterQuery,
+  Model,
+  PipelineStage,
+  ProjectionType,
+  Types,
+} from 'mongoose';
 import { User, UserDocument } from '../entities/users.entity';
 import { insertMany } from 'src/utils/functions/database';
 
@@ -43,7 +54,54 @@ export class UsersService {
     }
   }
 
-  async find() {}
+  async find(
+    filterObj: FilterQuery<User>,
+    projection: ProjectionType<User>,
+    includeRoles: boolean,
+    skip: number,
+    limit: number,
+  ) {
+    try {
+      const pipeline: PipelineStage[] = [
+        {
+          $match: filterObj, // Filter documents based on the filterObj
+        },
+        {
+          // @ts-ignore
+          $project: projection, // Project only the specified fields
+        },
+        {
+          $skip: skip, // Skip the specified number of documents
+        },
+        {
+          $limit: limit, // Limit the number of documents returned
+        },
+      ];
+
+      if (includeRoles)
+        pipeline.push({
+          $lookup: {
+            from: 'roles', // Name of the Roles collection
+            localField: 'roleId', // Field in the Users collection
+            foreignField: '_id', // Field in the Roles collection
+            as: 'role', // Alias for the joined role object
+          },
+        });
+
+      return await this.userModel.aggregate(pipeline);
+    } catch (err) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
+    }
+  }
 
   async findById() {}
 

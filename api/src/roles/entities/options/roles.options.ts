@@ -6,7 +6,6 @@ export const permissionsOptions = {
     {
       enum: permissionsEnum,
       type: requiredString,
-      unique: true,
     },
   ],
   unique: false,

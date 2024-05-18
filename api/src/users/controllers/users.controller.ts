@@ -1,29 +1,25 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UsersAdminService } from '../services/users.admin.service';
-import { CreateUserDto } from '../dtos/req/create-user.dto';
+import { CreateUserDto, RegisterUsersDto } from '../dtos/req/create-user.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersAdminSrv: UsersAdminService) {}
 
-  @Post('create-user')
-  createUser(@Body() body: CreateUserDto) {}
+  @Post('create')
+  async create(@Body() body: RegisterUsersDto) {
+    return await this.usersAdminSrv.registerUsers(body);
+  }
 
-  @Post('create-many-users')
-  createManyUsers() {}
+  @Post('modify')
+  modify() {}
 
-  @Post('modify-user')
-  modifyUser() {}
-
-  @Post('modify-many-user')
-  modifyManyUsers() {}
-
-  @Post('modify-admin-user')
+  @Post('modify-admin')
   modifyAdminUser() {}
 
-  @Post('fetch-users')
+  @Post('fetch')
   fetchUsers() {}
 
-  @Post('remove-users')
+  @Post('remove')
   removeUsers() {}
 }

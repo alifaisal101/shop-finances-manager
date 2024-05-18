@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Role, RoleDocument } from '../entities/roles.entity';
-import { FilterQuery, Model, Types } from 'mongoose';
+import { FilterQuery, Model, ProjectionType, Types } from 'mongoose';
 import { UsersService } from 'src/users/services/users.service';
 
 @Injectable()
@@ -20,8 +20,9 @@ export class RolesService {
     }
   }
 
-  async findAll(
+  async find(
     filterObj: FilterQuery<Role>,
+    projection: ProjectionType<Role>,
     includeUsers: boolean,
     skip: number,
     limit: number,
