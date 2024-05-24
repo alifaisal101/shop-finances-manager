@@ -1,8 +1,14 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Role, RoleDocument } from '../entities/roles.entity';
 import { FilterQuery, Model, ProjectionType, Types } from 'mongoose';
 import { UsersService } from 'src/users/services/users.service';
+import { insertMany } from 'src/utils/functions/database';
 
 @Injectable()
 export class RolesService {
@@ -16,7 +22,16 @@ export class RolesService {
     try {
       return await this.roleModel.findById(roleId);
     } catch (err) {
-      throw new InternalServerErrorException(err, 'Failed to find role.');
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
     }
   }
 
@@ -29,7 +44,7 @@ export class RolesService {
   ) {
     try {
       const roles = await this.roleModel
-        .find(filterObj)
+        .find(filterObj, projection)
         .skip(skip)
         .limit(limit);
 
@@ -37,7 +52,33 @@ export class RolesService {
         roles.push();
       }
     } catch (err) {
-      throw new InternalServerErrorException(err, 'Failed to find all roles.');
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
+    }
+  }
+
+  async createMany(roles: Role[]) {
+    try {
+      return await insertMany(roles, this.roleModel);
+    } catch (err) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
     }
   }
 }

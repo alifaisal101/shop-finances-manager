@@ -12,7 +12,7 @@ export type RoleDocument = HydratedDocument<Role>;
 @Schema()
 export class Role {
   @Prop(requiredString)
-  role: String;
+  role: string;
 
   @Prop(unRequiredString)
   description: string;
