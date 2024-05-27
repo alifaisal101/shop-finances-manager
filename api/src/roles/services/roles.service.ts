@@ -43,12 +43,13 @@ export class RolesService {
     includeUsers: boolean,
     skip: number,
     limit: number,
+    all: boolean,
   ) {
     try {
-      let query = this.roleModel
-        .find(filterObj, projection)
-        .skip(skip)
-        .limit(limit);
+      let query = this.roleModel.find(filterObj, projection);
+      if (!all) {
+        query = query.skip(skip).limit(limit);
+      }
 
       if (includeUsers) {
         query = query.populate('userId');

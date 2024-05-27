@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { FetchRolesDto } from '../dtos/req/fetch-roles.dto';
+import { RemoveRolesDto } from '../dtos/req/remove-roles.dto';
 
 @Injectable()
 export class RolesAdminService {
@@ -22,6 +23,13 @@ export class RolesAdminService {
       body.includeUsers,
       skip,
       limit,
+      body.all,
     );
+  }
+
+  async removeRoles(body: RemoveRolesDto) {
+    for (let i = 0; i < body.rolesIds.length; i++) {
+      const roleId = body.rolesIds[i];
+    }
   }
 }

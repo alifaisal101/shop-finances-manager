@@ -127,14 +127,29 @@ export class UsersAdminService {
       body.includeRoles,
       skip,
       limit,
+      body.all,
     );
   }
 
   async findUsername(username: string) {
-    return await this.usersSrv.find({ username }, { _id: 1 }, false, 0, 1);
+    return await this.usersSrv.find(
+      { username },
+      { _id: 1 },
+      false,
+      0,
+      1,
+      false,
+    );
   }
 
   async findPhoneNumber(phoneNumber: string) {
-    return await this.usersSrv.find({ phoneNumber }, { _id: 1 }, false, 0, 1);
+    return await this.usersSrv.find(
+      { phoneNumber },
+      { _id: 1 },
+      false,
+      0,
+      1,
+      false,
+    );
   }
 }

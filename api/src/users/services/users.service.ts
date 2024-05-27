@@ -50,6 +50,7 @@ export class UsersService {
     includeRoles: boolean,
     skip: number,
     limit: number,
+    all: boolean,
   ) {
     try {
       const pipeline: PipelineStage[] = [
@@ -60,13 +61,18 @@ export class UsersService {
           // @ts-ignore
           $project: projection, // Project only the specified fields
         },
-        {
-          $skip: skip, // Skip the specified number of documents
-        },
-        {
-          $limit: limit, // Limit the number of documents returned
-        },
       ];
+
+      if (!all) {
+        pipeline.push(
+          {
+            $skip: skip, // Skip the specified number of documents
+          },
+          {
+            $limit: limit, // Limit the number of documents returned
+          },
+        );
+      }
 
       if (includeRoles)
         pipeline.push({
