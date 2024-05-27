@@ -4,6 +4,7 @@ import {
   requiredDate,
   requiredString,
   unRequiredString,
+  uniqueRequiredString,
 } from 'src/utils/objects/mongoose-options';
 import { permissionsOptions } from './options/roles.options';
 
@@ -11,7 +12,7 @@ export type RoleDocument = HydratedDocument<Role>;
 
 @Schema()
 export class Role {
-  @Prop(requiredString)
+  @Prop(uniqueRequiredString)
   role: string;
 
   @Prop(unRequiredString)

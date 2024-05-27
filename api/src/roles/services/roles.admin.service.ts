@@ -4,6 +4,9 @@ import { FetchRolesDto } from '../dtos/req/fetch-roles.dto';
 import { RemoveRolesDto } from '../dtos/req/remove-roles.dto';
 import { UsersService } from 'src/users/services/users.service';
 import { badRequestExceptionCatch } from 'src/utils/functions/error';
+import { CreateRolesDto, RoleDto } from '../dtos/req/create-roles.dto';
+import { UpdateRolesDto } from '../dtos/req/update-roles.dto';
+import { Role } from '../entities/roles.entity';
 
 @Injectable()
 export class RolesAdminService {
@@ -11,6 +14,45 @@ export class RolesAdminService {
     private rolesSrv: RolesService,
     private usersSrv: UsersService,
   ) {}
+
+  async createRoles(body: CreateRolesDto) {
+    const roles: Role[] = [];
+    for (let i = 0; i < body.roles.length; i++) {
+      const role: Partial<Role> & RoleDto = body.roles[i];
+
+      try {
+        const notUniqueRoleName = (await this.findRoleName(role.role)) || false;
+        if (notUniqueRoleName) {
+          throw new Error('Role name already exists.');
+        }
+      } catch (err) {
+        throw badRequestExceptionCatch(err);
+      }
+      role.createdAt = new Date();
+      role.updatedAt = new Date();
+      roles.push(role as Role);
+    }
+    return await this.rolesSrv.createMany(roles);
+  }
+
+  async updateRoles(body: UpdateRolesDto) {
+    const roles: Role[] = [];
+    for (let i = 0; i < body.roles.length; i++) {
+      const role: Partial<Role> & RoleDto = body.roles[i];
+
+      try {
+        const notUniqueRoleName = (await this.findRoleName(role.role)) || false;
+        if (notUniqueRoleName) {
+          throw new Error('Role name already exists.');
+        }
+      } catch (err) {
+        throw badRequestExceptionCatch(err);
+      }
+      role.updatedAt = new Date();
+      roles.push(role as Role);
+    }
+    return await this.rolesSrv.updateMany(roles);
+  }
 
   async fetchRoles(body: FetchRolesDto) {
     const skip = ((body.page | 1) - 1) * (body.recordsPerPage | 5);
@@ -52,5 +94,9 @@ export class RolesAdminService {
     } catch (err) {
       throw badRequestExceptionCatch(err);
     }
+  }
+
+  async findRoleName(role: string) {
+    return await this.rolesSrv.find({ role }, { _id: 1 }, false, 0, 1, false);
   }
 }
