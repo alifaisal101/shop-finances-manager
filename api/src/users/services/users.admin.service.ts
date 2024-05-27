@@ -1,15 +1,16 @@
-import {
-  BadRequestException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto, RegisterUsersDto } from '../dtos/req/create-user.dto';
 import { RolesService } from 'src/roles/services/roles.service';
 import { hashSync } from 'bcryptjs';
 import { User } from '../entities/users.entity';
+import {
+  badRequestExceptionCatch,
+  internalErrorExceptionCatch,
+} from 'src/utils/functions/error';
+import { UpdateUserDto, UpdateUsersDto } from '../dtos/req/update-user.dto';
+import { FetchUsersDto } from '../dtos/req/fetch-users.dto';
+import { filterQueryBuilder } from 'src/utils/functions/database';
 
 @Injectable()
 export class UsersAdminService {
@@ -44,37 +45,89 @@ export class UsersAdminService {
           throw new Error('Invalid role ID');
         }
       } catch (err) {
-        throw new HttpException(
-          {
-            status: HttpStatus.BAD_REQUEST,
-            error: err.message,
-          },
-          HttpStatus.BAD_REQUEST,
-          {
-            cause: err,
-          },
-        );
+        throw badRequestExceptionCatch(err);
       }
 
       try {
         user.password = hashSync(user.password, 12);
       } catch (err) {
-        throw new HttpException(
-          {
-            status: HttpStatus.INTERNAL_SERVER_ERROR,
-            error: err.message,
-          },
-          HttpStatus.INTERNAL_SERVER_ERROR,
-          {
-            cause: err,
-          },
-        );
+        throw internalErrorExceptionCatch(err);
       }
       user.createdAt = new Date();
       user.updatedAt = new Date();
       users.push(user as User);
     }
-    return this.usersSrv.createMany(users);
+    return await this.usersSrv.createMany(users);
+  }
+
+  async updateUsers(body: UpdateUsersDto) {
+    const users = [];
+    for (let i = 0; i < body.users.length; i++) {
+      const user: UpdateUserDto & Partial<User> = body.users[i];
+
+      try {
+        const notFoundUser = (await this.usersSrv.findById(user._id)) || false;
+
+        if (notFoundUser) {
+          throw new Error('UserId not found');
+        }
+        if (user.phoneNumber) {
+          const notUniquePhoneNumber =
+            (await this.findPhoneNumber(user.phoneNumber)).length || false;
+          if (notUniquePhoneNumber) {
+            throw new Error('Phone number already used.');
+          }
+        }
+
+        if (user.username) {
+          const notUniqueUsername =
+            (await this.findUsername(user.username))?.length || false;
+
+          if (notUniqueUsername) {
+            throw new Error('Username is already used.');
+          }
+        }
+
+        if (user.roleId) {
+          const role = (await this.rolesSrv.findById(user.roleId)) || false;
+          if (!role) {
+            throw new Error('Invalid role ID');
+          }
+        }
+      } catch (err) {
+        throw badRequestExceptionCatch(err);
+      }
+
+      if (user.password) {
+        try {
+          user.password = hashSync(user.password, 12);
+        } catch (err) {
+          throw internalErrorExceptionCatch(err);
+        }
+      }
+      user.updatedAt = new Date();
+      users.push(user);
+    }
+    return await this.usersSrv.updateMany(users);
+  }
+
+  async fetchUsers(body: FetchUsersDto) {
+    const skip = ((body.page | 1) - 1) * (body.recordsPerPage | 5);
+    const limit = body.recordsPerPage | 5;
+
+    let filterObj = {};
+    if (body.searchQuery) {
+      // @ts-ignore
+      filterObj = filterQueryBuilder(body.searchQuery);
+    }
+
+    return await this.usersSrv.find(
+      filterObj,
+      { password: false },
+      body.includeRoles,
+      skip,
+      limit,
+    );
   }
 
   async findUsername(username: string) {

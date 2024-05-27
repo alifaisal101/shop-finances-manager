@@ -13,7 +13,8 @@ import {
   Types,
 } from 'mongoose';
 import { User, UserDocument } from '../entities/users.entity';
-import { insertMany } from 'src/utils/functions/database';
+import { insertMany, updateManyRecords } from 'src/utils/functions/database';
+import { internalErrorExceptionCatch } from 'src/utils/functions/error';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +24,7 @@ export class UsersService {
     try {
       return await this.userModel.create(user);
     } catch (err) {
-      throw new InternalServerErrorException(err, 'Failed to create user.');
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -31,10 +32,7 @@ export class UsersService {
     try {
       return await insertMany(users, this.userModel);
     } catch (err) {
-      throw new InternalServerErrorException(
-        err,
-        'Failed to create multiple users.',
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -43,14 +41,11 @@ export class UsersService {
     modifiedUser: Partial<User>,
   ) {}
 
-  async updateMany() {
+  async updateMany(users: Partial<User>[]) {
     try {
-      await console.log();
+      return await updateManyRecords(users, this.userModel);
     } catch (err) {
-      throw new InternalServerErrorException(
-        err,
-        'Failed to create multiple users.',
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -90,20 +85,17 @@ export class UsersService {
 
       return await this.userModel.aggregate(pipeline);
     } catch (err) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: err.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: err,
-        },
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
-  async findById() {}
+  async findById(userId: Types.ObjectId) {
+    try {
+      return await this.userModel.findById(userId);
+    } catch (err) {
+      throw internalErrorExceptionCatch(err);
+    }
+  }
 
   async remove() {}
 }

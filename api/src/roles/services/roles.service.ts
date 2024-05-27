@@ -18,9 +18,9 @@ export class RolesService {
     private userSrv: UsersService,
   ) {}
 
-  async findById(roleId: Types.ObjectId) {
+  async createMany(roles: Role[]) {
     try {
-      return await this.roleModel.findById(roleId);
+      return await insertMany(roles, this.roleModel);
     } catch (err) {
       throw new HttpException(
         {
@@ -65,9 +65,9 @@ export class RolesService {
     }
   }
 
-  async createMany(roles: Role[]) {
+  async findById(roleId: Types.ObjectId) {
     try {
-      return await insertMany(roles, this.roleModel);
+      return await this.roleModel.findById(roleId);
     } catch (err) {
       throw new HttpException(
         {
