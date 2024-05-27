@@ -2,7 +2,7 @@
 // insertion for documents, to prevent any kind of errors.
 
 import { InternalServerErrorException } from '@nestjs/common';
-import mongoose, { FilterQuery, Model } from 'mongoose';
+import mongoose, { FilterQuery, Model, Types } from 'mongoose';
 import {
   DateSearchIn,
   SearchQueryIn,
@@ -90,7 +90,9 @@ export const filterQueryBuilder = (searchQuery: SearchQueryIn) => {
 };
 
 // Function to build string filter
-function buildStringFilter(stringSearchIn: StringSearchIn): FilterQuery<any> {
+const buildStringFilter = (
+  stringSearchIn: StringSearchIn,
+): FilterQuery<any> => {
   const { searchString, searchType } = stringSearchIn;
   switch (searchType) {
     case 'startsWith':
@@ -106,10 +108,10 @@ function buildStringFilter(stringSearchIn: StringSearchIn): FilterQuery<any> {
     default:
       throw new Error('Invalid search type for string');
   }
-}
+};
 
 // Function to build date filter
-function buildDateFilter(dateSearchIn: DateSearchIn): FilterQuery<Date> {
+const buildDateFilter = (dateSearchIn: DateSearchIn): FilterQuery<Date> => {
   const { startDate, endDate, searchType } = dateSearchIn;
   switch (searchType) {
     case 'equals':
@@ -121,4 +123,4 @@ function buildDateFilter(dateSearchIn: DateSearchIn): FilterQuery<Date> {
     default:
       throw new Error('Invalid search type for date');
   }
-}
+};

@@ -1,21 +1,15 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  InternalServerErrorException,
-} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Role, RoleDocument } from '../entities/roles.entity';
 import { FilterQuery, Model, ProjectionType, Types } from 'mongoose';
-import { UsersService } from 'src/users/services/users.service';
-import { insertMany } from 'src/utils/functions/database';
+import { insertMany, updateManyRecords } from 'src/utils/functions/database';
+import { internalErrorExceptionCatch } from 'src/utils/functions/error';
 
 @Injectable()
 export class RolesService {
   constructor(
     @InjectModel(Role.name)
     private roleModel: Model<RoleDocument>,
-    private userSrv: UsersService,
   ) {}
 
   async createMany(roles: Role[]) {
@@ -35,6 +29,14 @@ export class RolesService {
     }
   }
 
+  async updateMany(roles: Partial<Role>[]) {
+    try {
+      return await updateManyRecords(roles, this.roleModel);
+    } catch (err) {
+      throw internalErrorExceptionCatch(err);
+    }
+  }
+
   async find(
     filterObj: FilterQuery<Role>,
     projection: ProjectionType<Role>,
@@ -43,14 +45,16 @@ export class RolesService {
     limit: number,
   ) {
     try {
-      const roles = await this.roleModel
+      let query = this.roleModel
         .find(filterObj, projection)
         .skip(skip)
         .limit(limit);
 
       if (includeUsers) {
-        roles.push();
+        query = query.populate('userId');
       }
+
+      return await query.exec();
     } catch (err) {
       throw new HttpException(
         {
@@ -80,5 +84,9 @@ export class RolesService {
         },
       );
     }
+  }
+
+  async removeMany(rolesIds: Types.ObjectId[]) {
+    return await this.roleModel.deleteMany({ _id: { $in: rolesIds } });
   }
 }

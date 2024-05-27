@@ -19,7 +19,7 @@ export class UsersController {
   }
 
   @Post('fetch')
-  async fetchUsers(@Body() body: FetchUsersDto) {
+  async fetch(@Body() body: FetchUsersDto) {
     return await this.usersAdminSrv.fetchUsers(body);
   }
 

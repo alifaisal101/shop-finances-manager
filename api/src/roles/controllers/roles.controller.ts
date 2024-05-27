@@ -10,6 +10,11 @@ export class RolesController {
   @Post('create')
   async create(@Body() body: CreateRolesDto) {}
 
+  @Post('update')
+  async update(@Body() body) {}
+
   @Post('fetch')
-  async fetchRoles(@Body() body: FetchRolesDto) {}
+  async fetchRoles(@Body() body: FetchRolesDto) {
+    return await this.rolesAdminSrv.fetchRoles(body);
+  }
 }
