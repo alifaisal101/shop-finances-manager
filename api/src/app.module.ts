@@ -16,6 +16,7 @@ import { ChartsModule } from './charts/charts.module';
 import { EarningsModule } from './earnings/earnings.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
+import { InitializerModule } from './initializer/initializer.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { RolesModule } from './roles/roles.module';
     EarningsModule,
     UsersModule,
     RolesModule,
+    InitializerModule,
   ],
   controllers: [AppController],
   providers: [

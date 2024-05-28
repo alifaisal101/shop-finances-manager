@@ -116,7 +116,7 @@ function App() {
 
   return (
     <IonApp>
-      {/* <Modal confirmHandler={modalConfirmHandler}>
+      <Modal confirmHandler={modalConfirmHandler}>
         <Route path="/purchase-records/" exact={true}>
           <PurchaseRecordsForm></PurchaseRecordsForm>
         </Route>
@@ -170,8 +170,8 @@ function App() {
             <Settings />
           </Route>
         </IonRouterOutlet>
-      </IonSplitPane> */}
-      <Login></Login>
+      </IonSplitPane>
+      {/* <Login></Login> */}
     </IonApp>
   );
 }

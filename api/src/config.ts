@@ -1,4 +1,5 @@
 import { InPermissionsObject } from './types/permissions';
+import { PredefinedRolesIn } from './types/roles';
 import { permissionsExtractor } from './utils/functions/permissions';
 
 // Server
@@ -17,3 +18,7 @@ export const permissionsObj: InPermissionsObject = require('./../permissions.jso
 // export const permissions = permissionsExtractor(permissionsObj);
 
 export const permissionsEnum = permissionsExtractor(permissionsObj);
+
+// Predefined data
+
+export const predefinedRoles: PredefinedRolesIn = require('./../predefined-data/roles.json');
