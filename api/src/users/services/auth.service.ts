@@ -33,7 +33,7 @@ export class AuthService {
         throw new Error('Wrong password.');
       }
 
-      return { user, token: await this.signJwt(user) };
+      return { ...user, token: await this.signJwt(user) };
     } catch (err) {
       throw badRequestExceptionCatch(err);
     }

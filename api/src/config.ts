@@ -25,5 +25,5 @@ export const permissionsEnum = permissionsExtractor(permissionsObj);
 export const predefinedRoles: PredefinedRolesIn = require('./../predefined-data/roles.json');
 
 // Json Web Token
-export const jwtExpiration = process.env.jwtExpiration || '1h';
+export const jwtExpiration = process.env.jwtExpiration || '9h';
 export const jwtSecret = process.env.jwtSecret || 'secret';
