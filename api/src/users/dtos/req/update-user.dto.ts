@@ -1,12 +1,9 @@
 import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
-  IsAlpha,
   IsAlphanumeric,
-  IsArray,
   IsMongoId,
   IsNotEmpty,
-  IsNotEmptyObject,
   IsOptional,
   IsString,
   ValidateNested,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import {
   Connection,
@@ -42,6 +42,7 @@ export class UsersService {
   ) {}
 
   async updateMany(users: Partial<User>[]) {
+    console.log(users);
     try {
       return await updateManyRecords(users, this.userModel);
     } catch (err) {
@@ -112,5 +113,11 @@ export class UsersService {
     }
   }
 
-  async remove() {}
+  async removeMany(usersIds: Types.ObjectId[]) {
+    try {
+      return await this.userModel.deleteMany({ _id: { $in: usersIds } });
+    } catch (err) {
+      throw internalErrorExceptionCatch(err);
+    }
+  }
 }

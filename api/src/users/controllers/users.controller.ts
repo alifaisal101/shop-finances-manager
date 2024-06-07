@@ -3,6 +3,7 @@ import { UsersAdminService } from '../services/users.admin.service';
 import { CreateUserDto, RegisterUsersDto } from '../dtos/req/create-user.dto';
 import { UpdateUsersDto } from '../dtos/req/update-user.dto';
 import { FetchUsersDto } from '../dtos/req/fetch-users.dto';
+import { RemoveUsersDto } from '../dtos/req/remove-users.dto';
 
 @Controller('users')
 export class UsersController {
@@ -24,5 +25,7 @@ export class UsersController {
   }
 
   @Post('remove')
-  removeUsers() {}
+  async removeUsers(@Body() body: RemoveUsersDto) {
+    return await this.usersAdminSrv.removeUsers(body);
+  }
 }

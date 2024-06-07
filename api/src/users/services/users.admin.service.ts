@@ -11,6 +11,8 @@ import {
 import { UpdateUserDto, UpdateUsersDto } from '../dtos/req/update-user.dto';
 import { FetchUsersDto } from '../dtos/req/fetch-users.dto';
 import { filterQueryBuilder } from 'src/utils/functions/database';
+import { Types } from 'mongoose';
+import { RemoveUsersDto } from '../dtos/req/remove-users.dto';
 
 @Injectable()
 export class UsersAdminService {
@@ -66,9 +68,9 @@ export class UsersAdminService {
       const user: UpdateUserDto & Partial<User> = body.users[i];
 
       try {
-        const notFoundUser = (await this.usersSrv.findById(user._id)) || false;
+        const userExists = (await this.usersSrv.findById(user._id)) || false;
 
-        if (notFoundUser) {
+        if (!userExists) {
           throw new Error('UserId not found');
         }
         if (user.phoneNumber) {
@@ -85,6 +87,12 @@ export class UsersAdminService {
 
           if (notUniqueUsername) {
             throw new Error('Username is already used.');
+          }
+
+          if (userExists.username == 'admin' || user?.username == 'admin') {
+            throw new Error(
+              "There must be one user that has the username 'admin'.",
+            );
           }
         }
 
@@ -151,5 +159,29 @@ export class UsersAdminService {
       1,
       false,
     );
+  }
+
+  async removeUsers(body: RemoveUsersDto) {
+    try {
+      const users = await this.usersSrv.find(
+        { _id: { $in: body.usersIds } },
+        { _id: 1, username: 1 },
+        false,
+        0,
+        0,
+        true,
+      );
+
+      for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        if (user.username == 'admin') {
+          throw new Error("Failed to delete. Can't delete admin user.");
+        }
+      }
+
+      return this.usersSrv.removeMany(body.usersIds);
+    } catch (err) {
+      throw badRequestExceptionCatch(err);
+    }
   }
 }

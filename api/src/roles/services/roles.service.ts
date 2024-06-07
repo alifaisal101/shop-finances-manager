@@ -25,16 +25,7 @@ export class RolesService {
     try {
       return await insertMany(roles, this.roleModel);
     } catch (err) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: err.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: err,
-        },
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -92,16 +83,7 @@ export class RolesService {
 
       return await this.roleModel.aggregate(pipeline);
     } catch (err) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: err.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: err,
-        },
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -126,16 +108,7 @@ export class RolesService {
     try {
       return await this.roleModel.deleteMany({ _id: { $in: rolesIds } });
     } catch (err) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: err.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: err,
-        },
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 
@@ -143,16 +116,7 @@ export class RolesService {
     try {
       return await this.roleModel.deleteMany({});
     } catch (err) {
-      throw new HttpException(
-        {
-          status: HttpStatus.INTERNAL_SERVER_ERROR,
-          error: err.message,
-        },
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        {
-          cause: err,
-        },
-      );
+      throw internalErrorExceptionCatch(err);
     }
   }
 }

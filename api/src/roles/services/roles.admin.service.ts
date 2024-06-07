@@ -99,4 +99,8 @@ export class RolesAdminService {
   async findRoleName(role: string) {
     return await this.rolesSrv.find({ role }, { _id: 1 }, false, 0, 1, false);
   }
+
+  async fetchRolesNames() {
+    return await this.rolesSrv.find({}, { _id: 1, role: 1 }, false, 0, 0, true);
+  }
 }
