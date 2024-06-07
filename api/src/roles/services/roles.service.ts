@@ -1,15 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Role, RoleDocument } from '../entities/roles.entity';
-import { FilterQuery, Model, ProjectionType, Types } from 'mongoose';
+import {
+  Connection,
+  FilterQuery,
+  Model,
+  PipelineStage,
+  ProjectionType,
+  Types,
+} from 'mongoose';
 import { insertMany, updateManyRecords } from 'src/utils/functions/database';
 import { internalErrorExceptionCatch } from 'src/utils/functions/error';
+import { isNotEmptyObject } from 'class-validator';
 
 @Injectable()
 export class RolesService {
   constructor(
     @InjectModel(Role.name)
     private roleModel: Model<RoleDocument>,
+    @InjectConnection() private connection: Connection,
   ) {}
 
   async createMany(roles: Role[]) {
@@ -46,16 +55,42 @@ export class RolesService {
     all: boolean,
   ) {
     try {
-      let query = this.roleModel.find(filterObj, projection);
+      const pipeline: PipelineStage[] = [
+        {
+          $match: filterObj,
+        },
+      ];
+
+      if (isNotEmptyObject(projection)) {
+        pipeline.push({
+          // @ts-ignore
+          $project: projection,
+        });
+      }
+
       if (!all) {
-        query = query.skip(skip).limit(limit);
+        pipeline.push(
+          {
+            $skip: skip, // Skip the specified number of documents
+          },
+          {
+            $limit: limit, // Limit the number of documents returned
+          },
+        );
       }
 
       if (includeUsers) {
-        query = query.populate('userId');
+        pipeline.push({
+          $lookup: {
+            from: 'users', // Name of the Roles collection
+            localField: '_id', // Field in the Users collection
+            foreignField: 'roleId', // Field in the Roles collection
+            as: 'users', // Alias for the joined role object
+          },
+        });
       }
 
-      return await query.exec();
+      return await this.roleModel.aggregate(pipeline);
     } catch (err) {
       throw new HttpException(
         {
@@ -88,6 +123,36 @@ export class RolesService {
   }
 
   async removeMany(rolesIds: Types.ObjectId[]) {
-    return await this.roleModel.deleteMany({ _id: { $in: rolesIds } });
+    try {
+      return await this.roleModel.deleteMany({ _id: { $in: rolesIds } });
+    } catch (err) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
+    }
+  }
+
+  async removeAll() {
+    try {
+      return await this.roleModel.deleteMany({});
+    } catch (err) {
+      throw new HttpException(
+        {
+          status: HttpStatus.INTERNAL_SERVER_ERROR,
+          error: err.message,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        {
+          cause: err,
+        },
+      );
+    }
   }
 }

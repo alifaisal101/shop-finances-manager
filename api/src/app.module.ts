@@ -17,6 +17,7 @@ import { EarningsModule } from './earnings/earnings.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
 import { InitializerModule } from './initializer/initializer.module';
+import { KeysModule } from './keys/keys.module';
 
 @Module({
   imports: [
@@ -34,6 +35,8 @@ import { InitializerModule } from './initializer/initializer.module';
     UsersModule,
     RolesModule,
     InitializerModule,
+    CompaniesModule,
+    KeysModule,
   ],
   controllers: [AppController],
   providers: [

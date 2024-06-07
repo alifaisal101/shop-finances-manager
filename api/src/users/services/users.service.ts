@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import {
+  Connection,
   FilterQuery,
   Model,
   PipelineStage,
@@ -10,10 +11,14 @@ import {
 import { User, UserDocument } from '../entities/users.entity';
 import { insertMany, updateManyRecords } from 'src/utils/functions/database';
 import { internalErrorExceptionCatch } from 'src/utils/functions/error';
+import { isNotEmptyObject } from 'class-validator';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    @InjectConnection() private connection: Connection,
+  ) {}
 
   async create(user: User) {
     try {
@@ -57,12 +62,14 @@ export class UsersService {
         {
           $match: filterObj, // Filter documents based on the filterObj
         },
-        {
-          // @ts-ignore
-          $project: projection, // Project only the specified fields
-        },
       ];
 
+      if (isNotEmptyObject(projection)) {
+        pipeline.push({
+          // @ts-ignore
+          $project: projection, // Project only the specified fields
+        });
+      }
       if (!all) {
         pipeline.push(
           {
@@ -75,14 +82,21 @@ export class UsersService {
       }
 
       if (includeRoles)
-        pipeline.push({
-          $lookup: {
-            from: 'roles', // Name of the Roles collection
-            localField: 'roleId', // Field in the Users collection
-            foreignField: '_id', // Field in the Roles collection
-            as: 'role', // Alias for the joined role object
+        pipeline.push(
+          {
+            $lookup: {
+              from: 'roles', // Name of the Roles collection
+              localField: 'roleId', // Field in the Users collection
+              foreignField: '_id', // Field in the Roles collection
+              as: 'role', // Alias for the joined role object
+            },
           },
-        });
+          {
+            $addFields: {
+              role: { $arrayElemAt: ['$role', 0] },
+            },
+          },
+        );
 
       return await this.userModel.aggregate(pipeline);
     } catch (err) {

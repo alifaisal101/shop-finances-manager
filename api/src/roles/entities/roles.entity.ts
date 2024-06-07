@@ -3,6 +3,7 @@ import { HydratedDocument, Types } from 'mongoose';
 import {
   requiredDate,
   requiredString,
+  unRequiredArrayOfStrings,
   unRequiredBoolean,
   unRequiredString,
   uniqueRequiredString,
@@ -22,7 +23,7 @@ export class Role {
   @Prop(unRequiredBoolean)
   default?: boolean;
 
-  @Prop(permissionsOptions)
+  @Prop(unRequiredArrayOfStrings)
   permissions?: string[];
 
   @Prop(requiredDate)

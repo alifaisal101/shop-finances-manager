@@ -2,7 +2,7 @@ import { Model, Types } from 'mongoose';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { FetchRecordsDto } from 'src/dtos/fetch-records.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Company, CompanyDocument } from '../entities/companies.enetity';
+import { Company, CompanyDocument } from '../entities/companies.entity';
 import { PostCompanyDto } from '../dtos/req/post-company.dto';
 import { PatchCompanyDto } from '../dtos/req/patch-company.dto';
 

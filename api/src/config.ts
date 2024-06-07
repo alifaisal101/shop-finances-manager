@@ -1,3 +1,4 @@
+import { writeFileSync } from 'fs';
 import { InPermissionsObject } from './types/permissions';
 import { PredefinedRolesIn } from './types/roles';
 import { permissionsExtractor } from './utils/functions/permissions';

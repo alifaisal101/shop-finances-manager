@@ -8,12 +8,17 @@ import { predefinedRoles } from 'src/config';
 import { Role } from 'src/roles/entities/roles.entity';
 import { UsersService } from 'src/users/services/users.service';
 import { Types } from 'mongoose';
+import { KeysService } from 'src/keys/services/keys.service';
+import { InAdminPromptData, PromptService } from './prompt.service';
+import { hashSync } from 'bcryptjs';
 
 @Injectable()
 export class InitializerService {
   constructor(
     private readonly rolesSrv: RolesService,
     private readonly usersSrv: UsersService,
+    private readonly keysSrv: KeysService,
+    private readonly promptSrv: PromptService,
   ) {}
   async createRoles() {
     try {
@@ -50,169 +55,170 @@ export class InitializerService {
     }
   }
 
-  // async checkInitializationStatus() {
-  //   // Checks and validates whether the default data and the preset data are available in the database.
-  //   // Checks the storage status
-  //   try {
-  //     // Initialization status
-  //     const initSettingStatus: any = (await this.settingSrv.findOne(
-  //       'init',
-  //     )) || {
-  //       initialized: false,
-  //     };
+  async setInitializedKey() {
+    try {
+      return await this.keysSrv.create({
+        name: 'initializationKey',
+        value: true,
+      });
+    } catch (err) {
+      systemError("Failed to set initialized key's value", err);
+    }
+  }
 
-  //     // Roles
-  //     const mainrolesDocs = await this.mainrolesSrv.findAll();
-  //     let mainrolesEnum = [...mainroles];
-  //     let adminMainroleId: mongoose.Types.ObjectId;
+  async initializationStatus() {
+    // Checks and validates whether the default data and the preset data are available in the database.
+    const statusObj = {
+      adminUser: {
+        exists: false,
+        value: null,
+      },
+      roles: {
+        exists: false,
+        value: null,
+      },
+      adminRole: {
+        exists: false,
+        value: null,
+      },
+      initializationKey: {
+        exists: false,
+        value: null,
+      },
+      initStatus: 'none',
+    };
+    // Fetches roles, admin-user, and initialization key.
+    try {
+      // Fetch admin user
+      const adminUser = (
+        await this.usersSrv.find({ username: 'admin' }, {}, true, 0, 1, false)
+      )[0];
 
-  //     const mainrolesHealthObj = {
-  //       mainrolesCount: mainrolesDocs?.length || 0,
-  //       mainroles: [],
-  //       valid: false,
-  //     };
+      statusObj.adminUser.exists = adminUser ? true : false;
+      statusObj.adminUser.value = adminUser;
 
-  //     // filling the mainroles in the mainrolesHealthObj. Obtaining the admin mainrole id
-  //     for (let i = 0; i < mainrolesDocs.length; i++) {
-  //       const mainrole = mainrolesDocs[i];
-  //       mainrolesHealthObj.mainroles.push(mainrole.label);
+      // fetch admin role
+      const adminRole = (
+        await this.rolesSrv.find({ role: 'admin' }, {}, false, 0, 1, false)
+      )[0];
 
-  //       if (mainrole.label === 'admin') {
-  //         adminMainroleId = mainrole._id;
-  //       }
-  //     }
+      statusObj.adminRole.exists = adminRole ? true : false;
+      statusObj.adminRole.value = adminRole;
 
-  //     // Compares the mainroles's enum to the fetched data from the database.
-  //     if (matchArrays(mainrolesHealthObj.mainroles, mainrolesEnum)) {
-  //       mainrolesHealthObj.valid = true;
-  //     }
+      // Fetch roles
+      const roles = await this.rolesSrv.find({}, {}, false, 0, 0, true);
 
-  //     // Admin User
-  //     const adminUser =
-  //       (await this.usersSrv.findOne({ MainroleId: adminMainroleId })) || false;
+      statusObj.roles.exists = roles.length > 0;
+      statusObj.roles.value = roles;
 
-  //     if (adminUser) {
-  //       // @ts-ignore
-  //       delete adminUser?._doc?.password;
-  //     }
-  //     // Storage Status
-  //     const storageStatus = this.storageSrv.checkStorageInitalization();
-  //     let storageOverallStatus: boolean = true;
+      // // Initialization key
+      const initializationKey =
+        await this.keysSrv.findByName('initializationKey');
 
-  //     // All this does is, loop through all the properties in the storage status object, and at the first prop it finds to be false,
-  //     // it breaks the scope, and sets the overall status to be false
-  //     storageOverallStatus_Process: {
-  //       let storageStatus_keys = Object.keys(storageStatus);
-  //       for (let i = 0; i < storageStatus_keys.length; i++) {
-  //         const storageObj = storageStatus[storageStatus_keys[i]];
-  //         const storageObj_keys = Object.keys(storageObj);
+      statusObj.initializationKey.exists = initializationKey ? true : false;
+      statusObj.initializationKey.value = initializationKey;
 
-  //         for (let y = 0; y < storageObj_keys.length; y++) {
-  //           const prop = storageObj[storageObj_keys[y]];
-  //           if (!prop) {
-  //             storageOverallStatus = false;
-  //             break storageOverallStatus_Process;
-  //           }
-  //         }
-  //       }
-  //     }
+      if (
+        statusObj.adminRole.exists &&
+        statusObj.adminUser.exists &&
+        statusObj.initializationKey.exists &&
+        statusObj.roles.exists
+      ) {
+        statusObj.initStatus = 'full';
+      } else if (
+        statusObj.adminRole.exists ||
+        statusObj.adminUser.exists ||
+        statusObj.initializationKey.exists ||
+        statusObj.roles.exists
+      ) {
+        statusObj.initStatus = 'partial';
+      }
+      return statusObj;
+    } catch (err) {
+      systemError('Failed to check the initialization status. ', err);
+    }
+  }
 
-  //     // Process the init status
-  //     let initStatus: 'full' | 'partial' | 'none' = 'none';
+  async initializationExecute(adminUser: InAdminPromptData) {
+    try {
+      // Create roles
+      const rolesRes = await this.createRoles();
 
-  //     if (
-  //       mainrolesHealthObj &&
-  //       initSettingStatus &&
-  //       adminUser &&
-  //       storageOverallStatus
-  //     ) {
-  //       initStatus = 'full';
-  //     } else if (
-  //       mainrolesHealthObj.valid ||
-  //       initSettingStatus.initialized ||
-  //       adminUser ||
-  //       storageOverallStatus
-  //     ) {
-  //       initStatus = 'partial';
-  //     }
+      // Fetching the newly created admin role
+      const adminRole = (
+        await this.rolesSrv.find(
+          { role: 'admin' },
+          { _id: 1 },
+          false,
+          0,
+          1,
+          false,
+        )
+      )[0];
 
-  //     return {
-  //       initSettingStatus,
-  //       mainrolesEnum: mainroles,
-  //       mainrolesHealthObj,
-  //       adminUser,
-  //       storageStatus,
-  //       storageOverallStatus,
-  //       initStatus,
-  //     };
-  //   } catch (err) {
-  //     systemError('Failed to check initialization status.', err);
-  //   }
-  // }
+      if (!adminRole) {
+        throw new Error('Failed to initialize. Error while creating roles.');
+      }
 
-  async initializationExecute() {}
+      // Creating admin user
+      const adminUserRes = await this.createAdminUser(
+        hashSync(adminUser.password, 12),
+        adminRole[0]._id,
+        adminUser.fullName,
+      );
+      const initializeKeyRes = await this.setInitializedKey();
+      return { rolesRes, adminUserRes, initializeKeyRes };
+    } catch (err) {
+      systemError('Failed to execute initialization.', err);
+    }
+  }
 
   async bootstrap(): Promise<void> {
-    // // Checks the initialization status
-    // const initializationStatus = await this.checkInitializationStatus();
-    // switch (initializationStatus.initStatus) {
-    //   // Fully initialized
-    //   case 'full':
-    //     successLog('System is fully initialized');
-    //     errorLog(
-    //       'Warning: Re-initializing the system, may lead to overwriting data, and data loss!',
-    //     );
-    //     if (
-    //       yToContinuePrompt(
-    //         'Would you like to see the initializationStatus object? ',
-    //       )
-    //     ) {
-    //       console.log(initializationStatus);
-    //     }
-    //     if (YEStoProceed('Would you like to Re-initialize the system ?')) {
-    //       await this.initializationExecute(initializationStatus);
-    //     }
-    //     break;
-    //   // Partially initialized
-    //   case 'partial':
-    //     errorLog(
-    //       'System is partially initialized. Something has gone wrong durning the initialization.',
-    //     );
-    //     errorLog(
-    //       'Warning: Re-initializing the system, may lead to overwriting data, and data loss!',
-    //     );
-    //     if (
-    //       yToContinuePrompt(
-    //         'Would you like to see the initializationStatus object ? ',
-    //       )
-    //     ) {
-    //       console.log(initializationStatus);
-    //     }
-    //     if (YEStoProceed('Would you like to Re-initialize the system ?')) {
-    //       await this.initializationExecute(initializationStatus);
-    //     }
-    //     break;
-    //   // Uninitialized
-    //   case 'none':
-    //     warnLog(
-    //       'System is not initialized. The system must be initialized before its ready for production.',
-    //     );
-    //     if (
-    //       yToContinuePrompt(
-    //         'Would you like to see the initializationStatus object ? ',
-    //       )
-    //     ) {
-    //       console.log(initializationStatus);
-    //     }
-    //     if (yToContinuePrompt('Would you like to initialize the system ?')) {
-    //       await this.initializationExecute(initializationStatus);
-    //     } else {
-    //       systemError(
-    //         'System will not start without being initialized first.',
-    //         new Error(),
-    //       );
-    //     }
-    //     break;
-    // }
+    // Checks the initialization status
+    const initializationStatus = await this.initializationStatus();
+
+    switch (initializationStatus.initStatus) {
+      // Fully initialized
+      case 'full':
+        successLog(' ----- System is fully initialized. -----');
+        break;
+      // Partially initialized
+      case 'partial':
+        errorLog(
+          'System is partially initialized. Something has gone wrong durning the initialization or the operation. Manual troubleshooting is required.',
+        );
+        if (
+          yToContinuePrompt(
+            'Would you like to see the initializationStatus object?',
+          )
+        ) {
+          console.log(initializationStatus);
+        }
+        break;
+      // Uninitialized
+      case 'none':
+        warnLog(
+          'System is not initialized. The system must be initialized before its ready for production.',
+        );
+
+        if (
+          yToContinuePrompt(
+            'Would you like to see the initializationStatus object?',
+          )
+        ) {
+          console.log(initializationStatus);
+        }
+        if (yToContinuePrompt('Would you like to initialize the system?')) {
+          const adminPromptData = this.promptSrv.adminPromptData();
+          await this.initializationExecute(adminPromptData);
+          console.log(await this.initializationStatus());
+        } else {
+          systemError(
+            'System will not start without being initialized first.',
+            new Error(),
+          );
+        }
+        break;
+    }
   }
 }
