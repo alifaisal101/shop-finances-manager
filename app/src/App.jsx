@@ -57,6 +57,14 @@ import Companies from './pages/Companies/Companies';
 import Subscriptions from './pages/Subscriptions/Subscriptions';
 import Login from './pages/Login/Login';
 import financesAccounts from './modules/finances-accounts';
+import cashier from './modules/cashier';
+import adminPanel from './modules/admin-panel';
+import warehouses from './modules/warehouses';
+import sells from './modules/sells';
+import purchases from './modules/purchases';
+import management from './modules/management';
+import reports from './modules/reports';
+import providers from './modules/providers';
 
 setupIonicReact();
 
@@ -114,7 +122,15 @@ function App() {
       <IonSplitPane contentId="main">
         <SideMenu />
         <IonRouterOutlet id="main" animated={true}>
-          <Route path="/finances-accounts" component={financesAccounts} />
+          {adminPanel}
+          {cashier}
+          {warehouses}
+          {sells}
+          {purchases}
+          {management}
+          {providers}
+          {financesAccounts}
+          {reports}
         </IonRouterOutlet>
       </IonSplitPane>
     </IonApp>

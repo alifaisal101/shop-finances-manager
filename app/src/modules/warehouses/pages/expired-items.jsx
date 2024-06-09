@@ -1,12 +1,12 @@
 import { IonPage } from '@ionic/react';
 import Header from '../../../global/Header/Header';
 
-const Warehouses = () => {
+const ExpiredItems = () => {
   return (
     <IonPage>
-      <Header title={'المخازن'}></Header>
+      <Header title={'المواد التالفة'}></Header>
     </IonPage>
   );
 };
 
-export default Warehouses;
+export default ExpiredItems;

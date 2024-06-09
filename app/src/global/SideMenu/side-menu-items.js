@@ -87,7 +87,7 @@ const appPages = [
     subPages: [
       {
         url: '/pos',
-        title: 'واجهة البيع',
+        title: 'واجهة البيع POS',
         iosIcon: tvOutline,
         mdIcon: tvOutline,
       },
@@ -323,7 +323,7 @@ const appPages = [
       },
       {
         title: 'تقارير المزودين',
-        url: '/providers-reports ',
+        url: '/providers-reports',
         iosIcon: peopleOutline,
         mdIcon: peopleOutline,
       },
