@@ -56,122 +56,67 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Companies from './pages/Companies/Companies';
 import Subscriptions from './pages/Subscriptions/Subscriptions';
 import Login from './pages/Login/Login';
+import financesAccounts from './modules/finances-accounts';
 
 setupIonicReact();
 
 function App() {
   const location = useLocation();
-
+  console.log(location);
   const [themetoggle, setThemeToggle] = useRecoilState(themeState);
   document.body.classList.toggle('dark', themetoggle);
 
-  const [purchaseRecordForm, setPurchaseRecordForm] = useRecoilState(
-    purchaseRecordStoreForm
-  );
-  const [purchaseRecordsState, setPurchaseRecordsState] =
-    useRecoilState(purchaseRecordsStore);
-
-  const [budgetState, setBudgetState] = useRecoilState(budgetStore);
-
-  const handleAddPurchaseRecord = () => {
-    setPurchaseRecordsState((_purchaseRecords) => {
-      return [..._purchaseRecords, purchaseRecordForm];
-    });
-
-    setBudgetState((_budgets) => {
-      for (let i = 0; i < _budgets.length; i++) {
-        if (
-          displayDate(_budgets[i].date) == displayDate(purchaseRecordForm.date)
-        ) {
-        }
-      }
-      return _budgets;
-    });
-    setPurchaseRecordForm(purchaseRecordStoreFormDefault);
-  };
-  const handleAddRejectedItems = () => {};
-  const handleAddOtherSpendings = () => {};
-  const handleAddEmployees = () => {};
-  const handleAddEarnings = () => {};
-
-  let modalConfirmHandler = () => {
-    switch (location.pathname) {
-      case '/purchase-records':
-        handleAddPurchaseRecord();
-        break;
-      case '/rejected-items':
-        handleAddRejectedItems();
-        break;
-      case '/other-spendings':
-        handleAddOtherSpendings();
-        break;
-      case '/employees':
-        handleAddEmployees();
-        break;
-      case '/earnings':
-        handleAddEarnings();
-        break;
-    }
-  };
+  // return (
+  //   <IonApp>
+  //     <IonSplitPane contentId="main">
+  //       <SideMenu />
+  //       <IonRouterOutlet id="main" animated={true}>
+  //         <Route path="/companies" exact={true}>
+  //           <Companies />
+  //         </Route>
+  //         <Route path="/" exact={true}>
+  //           <Redirect to="/purchase-records" />
+  //         </Route>
+  //         <Route path="/purchase-records" exact={true}>
+  //           <PurchaseRecords />
+  //         </Route>
+  //         <Route path="/rejected-items" exact={true}>
+  //           <RejectedItems />
+  //         </Route>
+  //         <Route path="/subscriptions" exact={true}>
+  //           <Subscriptions />
+  //         </Route>
+  //         <Route path="/other-spendings" exact={true}>
+  //           <OtherSpendings />
+  //         </Route>
+  //         <Route path="/employees" exact={true}>
+  //           <Employees />
+  //         </Route>
+  //         <Route path="/budget" exact={true}>
+  //           <Budget />
+  //         </Route>
+  //         <Route path="/earnings" exact={true}>
+  //           <Earnings />
+  //         </Route>
+  //         <Route path="/dashboard" exact={true}>
+  //           <Dashboard />
+  //         </Route>
+  //         <Route path="/settings" exact={true}>
+  //           <Settings />
+  //         </Route>
+  //       </IonRouterOutlet>
+  //     </IonSplitPane>
+  //   </IonApp>
+  // );
 
   return (
     <IonApp>
-      <Modal confirmHandler={modalConfirmHandler}>
-        <Route path="/purchase-records/" exact={true}>
-          <PurchaseRecordsForm></PurchaseRecordsForm>
-        </Route>
-        <Route path="/rejected-items/" exact={true}>
-          <RejectedItemsForm></RejectedItemsForm>
-        </Route>
-        <Route path="/other-spendings/" exact={true}>
-          <OtherSpendingsForm></OtherSpendingsForm>
-        </Route>
-        <Route path="/employees/" exact={true}>
-          <EmployeesForm></EmployeesForm>
-        </Route>
-        <Route path="/earnings/" exact={true}>
-          <EarningsForm></EarningsForm>
-        </Route>
-      </Modal>
       <IonSplitPane contentId="main">
         <SideMenu />
         <IonRouterOutlet id="main" animated={true}>
-          <Route path="/companies" exact={true}>
-            <Companies />
-          </Route>
-          <Route path="/" exact={true}>
-            <Redirect to="/purchase-records" />
-          </Route>
-          <Route path="/purchase-records" exact={true}>
-            <PurchaseRecords />
-          </Route>
-          <Route path="/rejected-items" exact={true}>
-            <RejectedItems />
-          </Route>
-          <Route path="/subscriptions" exact={true}>
-            <Subscriptions />
-          </Route>
-          <Route path="/other-spendings" exact={true}>
-            <OtherSpendings />
-          </Route>
-          <Route path="/employees" exact={true}>
-            <Employees />
-          </Route>
-          <Route path="/budget" exact={true}>
-            <Budget />
-          </Route>
-          <Route path="/earnings" exact={true}>
-            <Earnings />
-          </Route>
-          <Route path="/dashboard" exact={true}>
-            <Dashboard />
-          </Route>
-          <Route path="/settings" exact={true}>
-            <Settings />
-          </Route>
+          <Route path="/finances-accounts" component={financesAccounts} />
         </IonRouterOutlet>
       </IonSplitPane>
-      {/* <Login></Login> */}
     </IonApp>
   );
 }

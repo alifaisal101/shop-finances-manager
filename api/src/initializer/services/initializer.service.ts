@@ -163,7 +163,7 @@ export class InitializerService {
       // Creating admin user
       const adminUserRes = await this.createAdminUser(
         hashSync(adminUser.password, 12),
-        adminRole[0]._id,
+        adminRole._id,
         adminUser.fullName,
       );
       const initializeKeyRes = await this.setInitializedKey();
