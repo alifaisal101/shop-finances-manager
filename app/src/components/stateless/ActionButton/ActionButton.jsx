@@ -5,8 +5,9 @@ const ActionButton = (props) => {
   return (
     <IonButton
       onClick={props.onClick}
-      className={' ' + props.className}
+      className={'action-btn ' + props.className}
       color={props.color || 'tertiary'}
+      size={props.size || 'default'}
     >
       {props.children}
     </IonButton>

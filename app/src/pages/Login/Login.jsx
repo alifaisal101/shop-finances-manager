@@ -8,10 +8,14 @@ import {
   IonItem,
   IonLabel,
   IonPage,
+  IonGrid,
+  IonRow,
+  IonCol,
 } from '@ionic/react';
 import Header from '../../global/Header/Header';
 import Content from '../../components/stateless/Content/Content';
 import ZuseLogo from '../../components/stateless/ZuseLogo/ZuseLogo';
+import ActionButton from '../../components/stateless/ActionButton/ActionButton';
 
 const Login = () => {
   // const [email, setEmail] = useState('');
@@ -29,6 +33,28 @@ const Login = () => {
       <Header title="تسجيل الدخول" />
       <Content className="page_content">
         <ZuseLogo size="medium"></ZuseLogo>
+
+        <IonGrid>
+          <IonRow className="ion-align-items-center ion-margin-bottom">
+            <IonCol size="6">
+              <IonItem className="ion-margin-bottom">
+                <IonLabel position="floating">إسم المستخدم</IonLabel>
+                <IonInput></IonInput>
+              </IonItem>
+              <IonItem>
+                <IonLabel position="floating">كلمة السر</IonLabel>
+                <IonInput type="password"></IonInput>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonRow class="ion-align-items-center">
+            <IonCol class="ion-align-items-center ion-text-center" size="4">
+              <ActionButton size="large" color="primary">
+                تسجيل الدخول
+              </ActionButton>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
       </Content>
 
       {/* <IonContent>
