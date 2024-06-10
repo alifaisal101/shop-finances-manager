@@ -1,19 +1,13 @@
-import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonMenu,
-  IonMenuToggle,
-  IonNote,
-} from '@ionic/react';
-import { useLocation } from 'react-router-dom';
+import { IonContent, IonList, IonMenu } from '@ionic/react';
 import './__SideMenu.css';
-import { useState } from 'react';
 import appPages from './side-menu-items';
 import SubItem from '../../components/stateless/SubItem/SubItem';
 import SideMenuItemList from '../../components/containers/SideMenuItemList/SideMenuItemList';
+
+const adPage = {
+  title: 'لوحة الادمن',
+  url: '/admin-panel',
+};
 
 const SideMenu = () => {
   return (

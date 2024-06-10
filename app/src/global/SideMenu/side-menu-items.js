@@ -31,6 +31,7 @@ import {
   brushOutline,
   statsChartOutline,
   peopleCircleOutline,
+  informationCircleOutline,
 } from 'ionicons/icons';
 
 const appPages = [
@@ -331,15 +332,21 @@ const appPages = [
   },
   {
     title: 'المخططات البيانية',
-    url: '/charts-data',
+    url: '/dashboard',
     iosIcon: pieChartOutline,
     mdIcon: pieChartOutline,
   },
   {
     title: 'واجهة المستخدم',
-    url: '/interface-settings',
+    url: '/user-interface',
     iosIcon: brushOutline,
     mdIcon: brushOutline,
+  },
+  {
+    title: 'تفاصيل النظام',
+    url: '/program-info',
+    iosIcon: informationCircleOutline,
+    mdIcon: informationCircleOutline,
   },
 ];
 

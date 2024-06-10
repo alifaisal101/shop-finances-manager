@@ -5,7 +5,6 @@ const CompaniesAccounts = () => {
   return (
     <IonPage>
       <Header title={'حسابات الشركات'}></Header>
-      <h1>sadsa</h1>
     </IonPage>
   );
 };

@@ -66,71 +66,51 @@ import management from './modules/management';
 import reports from './modules/reports';
 import providers from './modules/providers';
 
+import mainRoutes from './pages';
+import React from 'react';
+
 setupIonicReact();
 
 function App() {
   const location = useLocation();
-  console.log(location);
   const [themetoggle, setThemeToggle] = useRecoilState(themeState);
   document.body.classList.toggle('dark', themetoggle);
-
-  // return (
-  //   <IonApp>
-  //     <IonSplitPane contentId="main">
-  //       <SideMenu />
-  //       <IonRouterOutlet id="main" animated={true}>
-  //         <Route path="/companies" exact={true}>
-  //           <Companies />
-  //         </Route>
-  //         <Route path="/" exact={true}>
-  //           <Redirect to="/purchase-records" />
-  //         </Route>
-  //         <Route path="/purchase-records" exact={true}>
-  //           <PurchaseRecords />
-  //         </Route>
-  //         <Route path="/rejected-items" exact={true}>
-  //           <RejectedItems />
-  //         </Route>
-  //         <Route path="/subscriptions" exact={true}>
-  //           <Subscriptions />
-  //         </Route>
-  //         <Route path="/other-spendings" exact={true}>
-  //           <OtherSpendings />
-  //         </Route>
-  //         <Route path="/employees" exact={true}>
-  //           <Employees />
-  //         </Route>
-  //         <Route path="/budget" exact={true}>
-  //           <Budget />
-  //         </Route>
-  //         <Route path="/earnings" exact={true}>
-  //           <Earnings />
-  //         </Route>
-  //         <Route path="/dashboard" exact={true}>
-  //           <Dashboard />
-  //         </Route>
-  //         <Route path="/settings" exact={true}>
-  //           <Settings />
-  //         </Route>
-  //       </IonRouterOutlet>
-  //     </IonSplitPane>
-  //   </IonApp>
-  // );
 
   return (
     <IonApp>
       <IonSplitPane contentId="main">
         <SideMenu />
         <IonRouterOutlet id="main" animated={true}>
-          {adminPanel}
-          {cashier}
-          {warehouses}
-          {sells}
-          {purchases}
-          {management}
-          {providers}
-          {financesAccounts}
-          {reports}
+          {adminPanel.map((route, index) =>
+            React.cloneElement(route, { key: `adminPanel_${index}` })
+          )}
+          {cashier.map((route, index) =>
+            React.cloneElement(route, { key: `cashier_${index}` })
+          )}
+          {warehouses.map((route, index) =>
+            React.cloneElement(route, { key: `warehouses_${index}` })
+          )}
+          {sells.map((route, index) =>
+            React.cloneElement(route, { key: `sells_${index}` })
+          )}
+          {purchases.map((route, index) =>
+            React.cloneElement(route, { key: `purchases_${index}` })
+          )}
+          {management.map((route, index) =>
+            React.cloneElement(route, { key: `management_${index}` })
+          )}
+          {providers.map((route, index) =>
+            React.cloneElement(route, { key: `providers_${index}` })
+          )}
+          {financesAccounts.map((route, index) =>
+            React.cloneElement(route, { key: `financesAccounts_${index}` })
+          )}
+          {reports.map((route, index) =>
+            React.cloneElement(route, { key: `reports_${index}` })
+          )}
+          {mainRoutes.map((route, index) =>
+            React.cloneElement(route, { key: `mainRoutes_${index}` })
+          )}
         </IonRouterOutlet>
       </IonSplitPane>
     </IonApp>
