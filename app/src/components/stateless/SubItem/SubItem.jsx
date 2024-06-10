@@ -13,6 +13,11 @@ const SubItem = (props) => {
   }
 
   let selectedClass = location.pathname === route ? 'selected' : '';
+  let iconClass = '';
+  if (route == '/login') {
+    selectedClass += ' login ';
+    iconClass += ' login ';
+  }
 
   return (
     <IonItem
@@ -25,6 +30,7 @@ const SubItem = (props) => {
       <IonIcon
         aria-hidden="true"
         slot="start"
+        className={iconClass}
         ios={props.subPage.iosIcon}
         md={props.subPage.mdIcon}
       />

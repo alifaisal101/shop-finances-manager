@@ -9,21 +9,29 @@ import {
   IonLabel,
   IonPage,
 } from '@ionic/react';
+import Header from '../../global/Header/Header';
+import Content from '../../components/stateless/Content/Content';
+import ZuseLogo from '../../components/stateless/ZuseLogo/ZuseLogo';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Implement your login logic here
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Example: You might want to send a request to your backend for authentication
-  };
+  // const handleLogin = () => {
+  //   // Implement your login logic here
+  //   console.log('Email:', email);
+  //   console.log('Password:', password);
+  //   // Example: You might want to send a request to your backend for authentication
+  // };
 
   return (
     <IonPage>
-      <IonContent>
+      <Header title="تسجيل الدخول" />
+      <Content className="page_content">
+        <ZuseLogo size="medium"></ZuseLogo>
+      </Content>
+
+      {/* <IonContent>
         <form onSubmit={handleLogin}>
           <IonItem>
             <IonLabel position="floating">Email</IonLabel>
@@ -47,7 +55,7 @@ const Login = () => {
             Login
           </IonButton>
         </form>
-      </IonContent>
+      </IonContent> */}
     </IonPage>
   );
 };

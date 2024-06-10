@@ -5,11 +5,15 @@ import './index.css';
 import { RecoilRoot } from 'recoil';
 import { IonReactRouter } from '@ionic/react-router';
 
-// Replacing the alert and confirm function with new ones, fixing the input focus issue
+try {
+  // Replacing the alert and confirm function with new ones, fixing the input focus issue
+  alert = e_util.alert;
+  confirm = e_util.confirm;
+  window.config = e_util?.getConfig();
+} catch (err) {
+  console.log(err);
+}
 
-alert = e_util.alert;
-confirm = e_util.confirm;
-window.config = e_util.getConfig();
 // console.log(window.config);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RecoilRoot>

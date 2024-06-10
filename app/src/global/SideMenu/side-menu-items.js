@@ -32,9 +32,16 @@ import {
   statsChartOutline,
   peopleCircleOutline,
   informationCircleOutline,
+  keyOutline,
 } from 'ionicons/icons';
 
 const appPages = [
+  {
+    title: 'تسجيل الدخول',
+    url: '/login',
+    iosIcon: keyOutline,
+    mdIcon: keyOutline,
+  },
   {
     isSpecialItem: true,
     title: 'لوحة الادمن',

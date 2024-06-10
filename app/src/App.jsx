@@ -27,35 +27,10 @@ import './theme/variables.css';
 
 import SideMenu from './global/SideMenu/SideMenu';
 
-/* Pages */
-import PurchaseRecords from './pages/PurchaseRecords/PurchaseRecords';
-import RejectedItems from './pages/RejectedItems/RejectedItems';
-import OtherSpendings from './pages/OtherSpendings/OtherSpendings';
-import Employees from './pages/Employees/Employees';
-import Budget from './pages/Budget/Budget';
-import Earnings from './pages/Earnings/Earnings';
-import Settings from './pages/Settings/Settings';
-
 import { useRecoilState } from 'recoil';
 import { themeState } from './store/theme.store';
-import Modal from './components/stateless/Modal/Modal';
-import PurchaseRecordsForm from './components/containers/Forms/PurchaseRecordsForm/PurchaseRecordsForm';
-import RejectedItemsForm from './components/containers/Forms/RejectedItemsForm/RejectedItemsForm';
-import OtherSpendingsForm from './components/containers/Forms/OtherSpendingsForm/OtherSpendingsForm';
-import EmployeesForm from './components/containers/Forms/EmployeesForm/EmployeesForm';
-import EarningsForm from './components/containers/Forms/EarningsForm/EarningsForm';
-import {
-  purchaseRecordStoreForm,
-  purchaseRecordStoreFormDefault,
-  purchaseRecordsStore,
-} from './store/purchaseRecords.store';
-import { budgetStore } from './store/budgets.store';
-import { budgets } from './preset-data';
-import { displayDate } from './util/display.functions';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Companies from './pages/Companies/Companies';
-import Subscriptions from './pages/Subscriptions/Subscriptions';
-import Login from './pages/Login/Login';
+
+/* Modules */
 import financesAccounts from './modules/finances-accounts';
 import cashier from './modules/cashier';
 import adminPanel from './modules/admin-panel';
@@ -73,8 +48,8 @@ setupIonicReact();
 
 function App() {
   const location = useLocation();
-  const [themetoggle, setThemeToggle] = useRecoilState(themeState);
-  document.body.classList.toggle('dark', themetoggle);
+  const [themeToggle, setThemeToggle] = useRecoilState(themeState);
+  document.body.classList.toggle('dark', themeToggle);
 
   return (
     <IonApp>
