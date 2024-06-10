@@ -34,6 +34,7 @@ import {
   informationCircleOutline,
   keyOutline,
 } from 'ionicons/icons';
+import { routesPermissions } from '../../routes-permissions';
 
 const appPages = [
   {
@@ -48,21 +49,23 @@ const appPages = [
     url: '/admin-panel',
     iosIcon: personCircleOutline,
     mdIcon: personCircleOutline,
-    permissions: ['adminPanel'],
+    permissions: routesPermissions['/admin-panel'].permissions,
     subPages: [
       {
         url: '/users',
         title: 'المستخدمين',
         iosIcon: peopleOutline,
         mdIcon: peopleOutline,
-        permissions: ['adminPanel.users'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/users'].permissions,
       },
       {
         url: '/roles',
         title: 'الأدوار',
         iosIcon: briefcaseOutline,
         mdIcon: briefcaseOutline,
-        permissions: ['adminPanel.roles'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/roles'].permissions,
       },
 
       {
@@ -70,28 +73,33 @@ const appPages = [
         title: 'السجل',
         iosIcon: documentOutline,
         mdIcon: documentOutline,
-        permissions: ['adminPanel.logs'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/logs'].permissions,
       },
       {
         url: '/database',
         title: 'إعدادات قاعدة البيانات',
         iosIcon: serverOutline,
         mdIcon: serverOutline,
-        permissions: ['adminPanel.database'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/database'].permissions,
       },
       {
         url: '/trademarks',
         title: 'العلامات التجارية',
         iosIcon: businessOutline,
         mdIcon: businessOutline,
-        permissions: ['adminPanel.trademarks'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/trademarks'].permissions,
       },
       {
         url: '/app-settings',
         title: 'إعدادات النظام',
         iosIcon: cogOutline,
         mdIcon: cogOutline,
-        permissions: ['adminPanel.appSettings'],
+        permissions:
+          routesPermissions['/admin-panel'].subPages['/app-settings']
+            .permissions,
       },
     ],
   },
@@ -100,7 +108,7 @@ const appPages = [
     url: '/cashier',
     iosIcon: cartOutline,
     mdIcon: cartOutline,
-    permissions: ['adminPanel.cashier'],
+    permissions: routesPermissions['/cashier'].permissions,
 
     subPages: [
       {
@@ -108,21 +116,23 @@ const appPages = [
         title: 'واجهة البيع POS',
         iosIcon: tvOutline,
         mdIcon: tvOutline,
-        permissions: ['cashier.pos', 'sells.records.create'],
+        permissions: routesPermissions['/cashier'].subPages['/pos'].permissions,
       },
       {
         url: '/refund',
         title: 'إرجاع مال',
         iosIcon: cashOutline,
         mdIcon: cashOutline,
-        permissions: ['cashier.refund', 'sells.refunds.create'],
+        permissions:
+          routesPermissions['/cashier'].subPages['/refund'].permissions,
       },
       {
         url: '/returns',
         title: 'إرجاع سلعة',
         iosIcon: receiptOutline,
         mdIcon: receiptOutline,
-        permissions: ['cashier.returns', 'sells.returnRecords.create'],
+        permissions:
+          routesPermissions['/cashier'].subPages['/returns'].permissions,
       },
     ],
   },
@@ -131,63 +141,65 @@ const appPages = [
     url: '/warehouses',
     iosIcon: homeOutline,
     mdIcon: homeOutline,
-    permissions: ['warehouses'],
+    permissions: routesPermissions['/warehouses'].permissions,
     subPages: [
       {
         url: '/warehouses',
         title: 'المخازن',
         iosIcon: homeOutline,
         mdIcon: homeOutline,
-        permissions: ['warehouses.warehouses'],
+        permissions: routesPermissions['/warehouses'].subPages['/warehouses'],
       },
       {
         url: '/items',
         title: 'المواد',
         iosIcon: fastFoodOutline,
         mdIcon: fastFoodOutline,
-        permissions: ['warehouses.items'],
+        permissions: routesPermissions['/warehouses'].subPages['/items'],
       },
       {
         url: '/move-items',
         title: 'نقل بين مخازن',
         iosIcon: moveOutline,
         mdIcon: moveOutline,
-        permissions: ['warehouses.moveItems'],
+        permissions: routesPermissions['/warehouses'].subPages['/move-items'],
       },
       {
         url: '/empty-items',
         title: 'المواد المستهلكة',
         iosIcon: alertCircleOutline,
         mdIcon: alertCircleOutline,
-        permissions: ['warehouses.emptyItems'],
+        permissions: routesPermissions['/warehouses'].subPages['/empty-items'],
       },
       {
         url: '/expired-items',
         title: 'المواد التالفة',
         iosIcon: trashBinOutline,
         mdIcon: trashBinOutline,
-        permissions: ['warehouses.expiredItems'],
+        permissions:
+          routesPermissions['/warehouses'].subPages['/expired-items'],
       },
       {
         url: '/print-barcode',
         title: 'طباعة باركود',
         iosIcon: barcodeOutline,
         mdIcon: barcodeOutline,
-        permissions: ['warehouses.printBarcode'],
+        permissions:
+          routesPermissions['/warehouses'].subPages['/print-barcode'],
       },
       {
         url: '/add-items',
         title: 'إدخال مواد',
         iosIcon: bagAddOutline,
         mdIcon: bagAddOutline,
-        permissions: ['warehouses.addItems'],
+        permissions: routesPermissions['/warehouses'].subPages['/add-items'],
       },
       {
         url: '/remove-items',
         title: 'إخراج مواد',
         iosIcon: bagRemoveOutline,
         mdIcon: bagRemoveOutline,
-        permissions: ['warehouses.removeItems'],
+        permissions: routesPermissions['/warehouses'].subPages['/remove-items'],
       },
     ],
   },
@@ -196,49 +208,56 @@ const appPages = [
     url: '/sells',
     iosIcon: cardOutline,
     mdIcon: cardOutline,
-    permissions: ['sells'],
+    permissions: routesPermissions['/sells'].permissions,
     subPages: [
       {
         url: '/records',
         title: 'قوائم البيع',
         iosIcon: receiptOutline,
         mdIcon: receiptOutline,
-        permissions: ['sells.records'],
+        permissions:
+          routesPermissions['/sells'].subPages['/records'].permissions,
       },
       {
         url: '/modify-record',
         title: 'تعديل بيع',
         iosIcon: createOutline,
         mdIcon: createOutline,
-        permissions: ['sells.modifyRecord'],
+        permissions:
+          routesPermissions['/sells'].subPages['/modify-record'].permissions,
       },
       {
         url: '/refunds',
         title: 'إرجاع مال',
         iosIcon: cashOutline,
         mdIcon: cashOutline,
-        permissions: ['sells.refunds'],
+        permissions:
+          routesPermissions['/sells'].subPages['/refunds'].permissions,
       },
       {
         url: '/modify-refunds',
         title: 'تعديل إرجاع مال',
         iosIcon: createOutline,
         mdIcon: createOutline,
-        permissions: ['sells.modifyRefundRecord'],
+        permissions:
+          routesPermissions['/sells'].subPages['/modify-refunds'].permissions,
       },
       {
         url: '/return-sell',
         title: 'إرجاع بيع',
         iosIcon: returnUpForward,
         mdIcon: returnUpForward,
-        permissions: ['sells.returnRecords'],
+        permissions:
+          routesPermissions['/sells'].subPages['/return-sell'].permissions,
       },
       {
         url: '/modify-return-sell',
         title: 'تعديل إرجاع بيع',
         iosIcon: createOutline,
         mdIcon: createOutline,
-        permissions: ['sells.modifyReturnRecord'],
+        permissions:
+          routesPermissions['/sells'].subPages['/modify-return-sell']
+            .permissions,
       },
     ],
   },
@@ -247,7 +266,7 @@ const appPages = [
     url: '/purchases',
     iosIcon: basketOutline,
     mdIcon: basketOutline,
-    permissions: ['purchases'],
+    permissions: routesPermissions['/purchases'].permissions,
 
     subPages: [
       {
@@ -255,28 +274,30 @@ const appPages = [
         title: 'قائمة شراء',
         iosIcon: receiptOutline,
         mdIcon: receiptOutline,
-        permissions: ['purchases.records'],
+        permissions: routesPermissions['/purchases'].subPages['/records'],
       },
       {
         url: '/modify-record',
         title: 'تعديل قائمة شراء',
         iosIcon: createOutline,
         mdIcon: createOutline,
-        permissions: ['purchases.modifyRecord'],
+        permissions: routesPermissions['/purchases'].subPages['/modify-record'],
       },
       {
         url: '/return-purchase',
         title: 'إرجاع شراء',
         iosIcon: returnUpForward,
         mdIcon: returnUpForward,
-        permissions: ['purchases.returnRecord'],
+        permissions:
+          routesPermissions['/purchases'].subPages['/return-purchase'],
       },
       {
         url: '/modify-return-purchase',
         title: 'تعديل إرجاع شراء',
         iosIcon: createOutline,
         mdIcon: createOutline,
-        permissions: ['purchases.modifyReturnRecord'],
+        permissions:
+          routesPermissions['/purchases'].subPages['/modify-return-purchase'],
       },
     ],
   },
@@ -285,7 +306,7 @@ const appPages = [
     url: '/providers',
     iosIcon: storefrontOutline,
     mdIcon: storefrontOutline,
-    permissions: ['purchases.providers'],
+    permissions: routesPermissions['/providers'].permissions,
 
     subPages: [
       {
@@ -293,14 +314,16 @@ const appPages = [
         title: 'الشركات',
         iosIcon: businessOutline,
         mdIcon: businessOutline,
-        permissions: ['purchases.companies'],
+        permissions:
+          routesPermissions['/providers'].subPages['/companies'].permissions,
       },
       {
         url: '/delegates',
         title: 'المندوبين',
         iosIcon: personOutline,
         mdIcon: personOutline,
-        permissions: ['purchases.delegates'],
+        permissions:
+          routesPermissions['/providers'].subPages['/delegates'].permissions,
       },
     ],
   },
@@ -309,7 +332,7 @@ const appPages = [
     url: '/management',
     iosIcon: copyOutline,
     mdIcon: copyOutline,
-    permissions: ['management'],
+    permissions: routesPermissions['/management'],
 
     subPages: [
       {
@@ -317,21 +340,26 @@ const appPages = [
         url: '/employees',
         iosIcon: peopleOutline,
         mdIcon: peopleOutline,
-        permissions: ['management.employees'],
+        permissions:
+          routesPermissions['/management'].subPages['/employees'].permissions,
       },
       {
         title: 'المصاريف الاَخرى',
         url: '/other-spendings',
         iosIcon: cartOutline,
         mdIcon: cartOutline,
-        permissions: ['management.otherSpendings'],
+        permissions:
+          routesPermissions['/management'].subPages['/other-spendings']
+            .permissions,
       },
       {
         title: 'الاشتراكات',
         url: '/subscriptions',
         iosIcon: cardOutline,
         mdIcon: cardOutline,
-        permissions: ['management.subscriptions'],
+        permissions:
+          routesPermissions['/management'].subPages['/subscriptions']
+            .permissions,
       },
     ],
   },
@@ -340,7 +368,7 @@ const appPages = [
     url: '/finances-accounts',
     iosIcon: fileTrayStackedOutline,
     mdIcon: fileTrayStackedOutline,
-    permissions: ['financesAccounts'],
+    permissions: routesPermissions['/finances-accounts'].permissions,
 
     subPages: [
       {
@@ -348,14 +376,18 @@ const appPages = [
         url: '/special-accounts',
         iosIcon: fileTrayFullOutline,
         mdIcon: fileTrayFullOutline,
-        permissions: ['financesAccounts.specialAccounts'],
+        permissions:
+          routesPermissions['/finances-accounts'].subPages['/special-accounts'],
       },
       {
         title: 'حسابات الشركات',
         url: '/companies-accounts',
         iosIcon: businessOutline,
         mdIcon: businessOutline,
-        permissions: ['financesAccounts.companiesAccounts'],
+        permissions:
+          routesPermissions['/finances-accounts'].subPages[
+            '/companies-accounts'
+          ],
       },
     ],
   },
@@ -364,7 +396,7 @@ const appPages = [
     url: '/reports',
     iosIcon: statsChartOutline,
     mdIcon: statsChartOutline,
-    permissions: ['reports'],
+    permissions: routesPermissions['/reports'],
 
     subPages: [
       {
@@ -372,35 +404,38 @@ const appPages = [
         url: '/sells-reports',
         iosIcon: receiptOutline,
         mdIcon: receiptOutline,
-        permissions: ['reports.sellsReports'],
+        permissions: routesPermissions['/reports'].subPages['/sells-reports'],
       },
       {
         title: 'تقارير المخازن',
         url: '/warehouse-reports',
         iosIcon: homeOutline,
         mdIcon: homeOutline,
-        permissions: ['reports.warehouses'],
+        permissions:
+          routesPermissions['/reports'].subPages['/warehouse-reports'],
       },
       {
         title: 'التقارير المالية',
         url: '/finances-reports',
         iosIcon: cashOutline,
         mdIcon: cashOutline,
-        permissions: ['reports.financesReports'],
+        permissions:
+          routesPermissions['/reports'].subPages['/finances-reports'],
       },
       {
         title: 'تقارير المستخدمين',
         url: '/users-reports',
         iosIcon: peopleCircleOutline,
         mdIcon: peopleCircleOutline,
-        permissions: ['reports.userReports'],
+        permissions: routesPermissions['/reports'].subPages['/users-reports'],
       },
       {
         title: 'تقارير المزودين',
         url: '/providers-reports',
         iosIcon: peopleOutline,
         mdIcon: peopleOutline,
-        permissions: ['reports.providersReports'],
+        permissions:
+          routesPermissions['/reports'].subPages['/providers-reports'],
       },
     ],
   },
@@ -409,7 +444,7 @@ const appPages = [
     url: '/dashboard',
     iosIcon: pieChartOutline,
     mdIcon: pieChartOutline,
-    permissions: ['dashboard'],
+    permissions: routesPermissions['/dashboard'],
   },
   {
     title: 'واجهة المستخدم',
