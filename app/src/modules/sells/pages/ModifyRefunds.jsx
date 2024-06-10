@@ -1,12 +1,12 @@
 import { IonPage } from '@ionic/react';
 import Header from '../../../global/Header/Header';
 
-const ModifyReturnPurchases = () => {
+const ModifyRefunds = () => {
   return (
     <IonPage>
-      <Header title={'تعديل إرجاع شراء'}></Header>
+      <Header title={' تعديل إرجاع مال'}></Header>
     </IonPage>
   );
 };
 
-export default ModifyReturnPurchases;
+export default ModifyRefunds;

@@ -26,6 +26,13 @@
           "modify": "adminPanel.database.modify",
           "backup": "adminPanel.database.backup"
         },
+        "trademarks": {
+          "access": "adminPanel.trademarks",
+          "delete": "adminPanel.trademarks.delete",
+          "modify": "adminPanel.trademarks.modify",
+          "create": "adminPanel.trademarks.create"
+        },
+
         "appSettings": {
           "access": "adminPanel.appSettings",
           "modify": "adminPanel.appSettings.modify"
@@ -114,12 +121,23 @@
           "modify": "sells.modifyRecord.modify",
           "create": "sells.modifyRecord.create"
         },
-
-        "returnRecord": {
-          "access": "sells.returnRecord",
-          "delete": "sells.returnRecord.delete",
-          "modify": "sells.returnRecord.modify",
-          "create": "sells.returnRecord.create"
+        "refundRecords": {
+          "access": "sells.refunds",
+          "delete": "sells.refunds.delete",
+          "modify": "sells.refunds.modify",
+          "create": "sells.refunds.create"
+        },
+        "modifyRefundRecords": {
+          "access": "sells.modifyRefundRecord",
+          "delete": "sells.modifyRefundRecord.delete",
+          "modify": "sells.modifyRefundRecord.modify",
+          "create": "sells.modifyRefundRecord.create"
+        },
+        "returnRecords": {
+          "access": "sells.returnRecords",
+          "delete": "sells.returnRecords.delete",
+          "modify": "sells.returnRecords.modify",
+          "create": "sells.returnRecords.create"
         },
         "modifyReturnRecord": {
           "access": "sells.modifyReturnRecord",
@@ -254,8 +272,8 @@
         }
       }
     },
-    "chartData": {
-      "access": "chartsData"
+    "dashboard": {
+      "access": "dashboard"
     }
   }
 }

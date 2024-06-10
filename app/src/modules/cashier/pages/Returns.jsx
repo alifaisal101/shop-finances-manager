@@ -4,7 +4,7 @@ import Header from '../../../global/Header/Header';
 const Returns = () => {
   return (
     <IonPage>
-      <Header title={'إعادة سلعة'}></Header>
+      <Header title={'إرجاع سلعة'}></Header>
     </IonPage>
   );
 };
