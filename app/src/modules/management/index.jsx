@@ -11,7 +11,7 @@ export default [
         routesPermissions['/management'].subPages['/employees'].permissions
       }
     >
-      {Employees}
+      <Employees />
     </Guard>
   </Route>,
   <Route path="/management/other-spendings">
@@ -21,7 +21,7 @@ export default [
           .permissions
       }
     >
-      {OtherSpendings}
+      <OtherSpendings />
     </Guard>
   </Route>,
   <Route path="/management/subscriptions">
@@ -30,7 +30,7 @@ export default [
         routesPermissions['/management'].subPages['/subscriptions'].permissions
       }
     >
-      {Subscriptions}
+      <Subscriptions />
     </Guard>
   </Route>,
 ];

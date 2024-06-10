@@ -6,12 +6,18 @@ import Login from './Login/Login';
 import { routesPermissions } from '../routes-permissions';
 import Guard from '../components/containers/Guard';
 export default [
-  <Route path="/program-info">{ProgramInfo}</Route>,
-  <Route path="/user-interface">{UserInterface}</Route>,
+  <Route path="/program-info">
+    <ProgramInfo />
+  </Route>,
+  <Route path="/user-interface">
+    <UserInterface />
+  </Route>,
   <Route path="/dashboard">
     <Guard requiredPermissions={routesPermissions['/dashboard'].permissions}>
-      {Dashboard}
+      <Dashboard />
     </Guard>
   </Route>,
-  <Route path="/login">{Login}</Route>,
+  <Route path="/login">
+    <Login />
+  </Route>,
 ];

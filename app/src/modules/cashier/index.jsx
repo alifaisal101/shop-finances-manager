@@ -11,7 +11,7 @@ export default [
         routesPermissions['/cashier'].subPages['/pos'].permissions
       }
     >
-      {Pos}
+      <Pos />
     </Guard>
   </Route>,
   <Route path="/cashier/refund">
@@ -20,7 +20,7 @@ export default [
         routesPermissions['/cashier'].subPages['/refund'].permissions
       }
     >
-      {Refunds}
+      <Refunds />
     </Guard>
   </Route>,
   <Route path="/cashier/returns">
@@ -29,7 +29,7 @@ export default [
         routesPermissions['/cashier'].subPages['/returns'].permissions
       }
     >
-      {Returns}
+      <Returns />
     </Guard>
   </Route>,
 ];

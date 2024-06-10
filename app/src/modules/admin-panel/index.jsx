@@ -16,7 +16,7 @@ export default [
           .permissions,
       ]}
     >
-      {AppSettings}
+      <AppSettings />
     </Guard>
   </Route>,
   <Route path="/admin-panel/database">
@@ -26,7 +26,7 @@ export default [
         ...routesPermissions['/admin-panel'].subPages['/database'].permissions,
       ]}
     >
-      {DatabaseSettings}
+      <DatabaseSettings />
     </Guard>
   </Route>,
   <Route path="/admin-panel/logs">
@@ -36,7 +36,7 @@ export default [
         ...routesPermissions['/admin-panel'].subPages['/logs'].permissions,
       ]}
     >
-      {Logs}
+      <Logs />
     </Guard>
   </Route>,
   <Route path="/admin-panel/roles">
@@ -46,7 +46,7 @@ export default [
         ...routesPermissions['/admin-panel'].subPages['/roles'].permissions,
       ]}
     >
-      {Roles}
+      <Roles />
     </Guard>
   </Route>,
   <Route path="/admin-panel/trademarks">
@@ -57,7 +57,7 @@ export default [
           .permissions,
       ]}
     >
-      {Trademarks}
+      <Trademarks />
     </Guard>
   </Route>,
   <Route path="/admin-panel/users">
@@ -67,7 +67,7 @@ export default [
         ...routesPermissions['/admin-panel'].subPages['/users'].permissions,
       ]}
     >
-      {Users}
+      <Users />
     </Guard>
   </Route>,
 ];

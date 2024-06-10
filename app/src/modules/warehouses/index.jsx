@@ -16,7 +16,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/warehouses'].permissions
       }
     >
-      {Warehouses}
+      <Warehouses />
     </Guard>
   </Route>,
   <Route path="/warehouses/items">
@@ -25,7 +25,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/items'].permissions
       }
     >
-      {Items}
+      <Items />
     </Guard>
   </Route>,
   <Route path="/warehouses/move-items">
@@ -34,7 +34,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/move-items'].permissions
       }
     >
-      {MoveItems}
+      <MoveItems />
     </Guard>
   </Route>,
   <Route path="/warehouses/empty-items">
@@ -43,7 +43,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/empty-items'].permissions
       }
     >
-      {EmptyItems}
+      <EmptyItems />
     </Guard>
   </Route>,
   <Route path="/warehouses/expired-items">
@@ -52,7 +52,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/expired-items'].permissions
       }
     >
-      {ExpiredItems}
+      <ExpiredItems />
     </Guard>
   </Route>,
   <Route path="/warehouses/print-barcode">
@@ -61,7 +61,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/print-barcode'].permissions
       }
     >
-      {PrintBarcode}
+      <PrintBarcode />
     </Guard>
   </Route>,
   <Route path="/warehouses/add-items">
@@ -70,7 +70,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/add-items'].permissions
       }
     >
-      {AddItems}
+      <AddItems />
     </Guard>
   </Route>,
   <Route path="/warehouses/remove-items">
@@ -79,7 +79,7 @@ export default [
         routesPermissions['/warehouses'].subPages['/remove-items'].permissions
       }
     >
-      {RemoveItems}
+      <RemoveItems />
     </Guard>
   </Route>,
 ];

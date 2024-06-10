@@ -11,7 +11,7 @@ export default [
           .permissions
       }
     >
-      {PersonalAccounts}
+      <PersonalAccounts />
     </Guard>
   </Route>,
   <Route path="/finances-accounts/companies-accounts">
@@ -21,7 +21,7 @@ export default [
           .permissions
       }
     >
-      {CompaniesAccounts}
+      <CompaniesAccounts />
     </Guard>
   </Route>,
 ];

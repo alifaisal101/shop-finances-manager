@@ -10,7 +10,7 @@ export default [
         routesPermissions['/providers'].subPages['/companies'].permissions
       }
     >
-      {Companies}
+      <Companies />
     </Guard>
   </Route>,
   <Route path="/providers/delegates">
@@ -19,7 +19,7 @@ export default [
         routesPermissions['/providers'].subPages['/delegates'].permissions
       }
     >
-      {Delegates}
+      <Delegates />
     </Guard>
   </Route>,
 ];

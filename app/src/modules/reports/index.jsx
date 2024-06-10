@@ -13,7 +13,7 @@ export default [
         routesPermissions['/reports'].subPages['/sells-reports'].permissions
       }
     >
-      {SellsReports}
+      <SellsReports />
     </Guard>
   </Route>,
   <Route path="/reports/warehouse-reports">
@@ -22,7 +22,7 @@ export default [
         routesPermissions['/reports'].subPages['/warehouse-reports'].permissions
       }
     >
-      {WarehouseReports}
+      <WarehouseReports />
     </Guard>
   </Route>,
   <Route path="/reports/finances-reports">
@@ -31,7 +31,7 @@ export default [
         routesPermissions['/reports'].subPages['/finances-reports'].permissions
       }
     >
-      {FinancesReports}
+      <FinancesReports />
     </Guard>
   </Route>,
   <Route path="/reports/users-reports">
@@ -40,7 +40,7 @@ export default [
         routesPermissions['/reports'].subPages['/users-reports'].permissions
       }
     >
-      {UsersReports}
+      <UsersReports />
     </Guard>
   </Route>,
   <Route path="/reports/providers-reports">
@@ -49,7 +49,7 @@ export default [
         routesPermissions['/reports'].subPages['/providers-reports'].permissions
       }
     >
-      {ProvidersReports}
+      <ProvidersReports />
     </Guard>
   </Route>,
 ];

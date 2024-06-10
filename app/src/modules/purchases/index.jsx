@@ -12,7 +12,7 @@ export default [
         routesPermissions['/purchases'].subPages['/records'].permissions
       }
     >
-      {PurchasesRecords}
+      <PurchasesRecords />
     </Guard>
   </Route>,
   <Route path="/purchases/modify-record">
@@ -21,7 +21,7 @@ export default [
         routesPermissions['/purchases'].subPages['/modify-record'].permissions
       }
     >
-      {ModifyPurchasesRecords}
+      <ModifyPurchasesRecords />
     </Guard>
   </Route>,
   <Route path="/purchases/return-purchase">
@@ -30,7 +30,7 @@ export default [
         routesPermissions['/purchases'].subPages['/return-purchase'].permissions
       }
     >
-      {ReturnPurchases}
+      <ReturnPurchases />
     </Guard>
   </Route>,
   <Route path="/purchases/modify-return-purchase">
@@ -40,7 +40,7 @@ export default [
           .permissions
       }
     >
-      {ModifyReturnPurchases}
+      <ModifyReturnPurchases />
     </Guard>
   </Route>,
 ];

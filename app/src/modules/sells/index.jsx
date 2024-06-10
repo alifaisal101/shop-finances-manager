@@ -14,7 +14,7 @@ export default [
         routesPermissions['/sells'].subPages['/records'].permissions
       }
     >
-      {SellsRecords}
+      <SellsRecords />
     </Guard>
   </Route>,
   <Route path="/sells/modify-record">
@@ -23,7 +23,7 @@ export default [
         routesPermissions['/sells'].subPages['/modify-record'].permissions
       }
     >
-      {ModifySellsRecords}
+      <ModifySellsRecords />
     </Guard>
   </Route>,
   <Route path="/sells/refunds">
@@ -32,7 +32,7 @@ export default [
         routesPermissions['/sells'].subPages['/refunds'].permissions
       }
     >
-      {Refunds}
+      <Refunds />
     </Guard>
   </Route>,
   <Route path="/sells/modify-refunds">
@@ -41,7 +41,7 @@ export default [
         routesPermissions['/sells'].subPages['/modify-refunds'].permissions
       }
     >
-      {ModifyRefunds}
+      <ModifyRefunds />
     </Guard>
   </Route>,
   <Route path="/sells/return-sell">
@@ -50,7 +50,7 @@ export default [
         routesPermissions['/sells'].subPages['/return-sell'].permissions
       }
     >
-      {ReturnSells}
+      <ReturnSells />
     </Guard>
   </Route>,
   <Route path="/sells/modify-return-sell">
@@ -59,7 +59,7 @@ export default [
         routesPermissions['/sells'].subPages['/modify-return-sell'].permissions
       }
     >
-      {ModifyReturnSells}
+      <ModifyReturnSells />
     </Guard>
   </Route>,
 ];
