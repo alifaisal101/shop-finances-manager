@@ -332,7 +332,7 @@ const appPages = [
     url: '/management',
     iosIcon: copyOutline,
     mdIcon: copyOutline,
-    permissions: routesPermissions['/management'],
+    permissions: routesPermissions['/management'].permissions,
 
     subPages: [
       {
@@ -396,7 +396,7 @@ const appPages = [
     url: '/reports',
     iosIcon: statsChartOutline,
     mdIcon: statsChartOutline,
-    permissions: routesPermissions['/reports'],
+    permissions: routesPermissions['/reports'].permissions,
 
     subPages: [
       {
@@ -444,7 +444,7 @@ const appPages = [
     url: '/dashboard',
     iosIcon: pieChartOutline,
     mdIcon: pieChartOutline,
-    permissions: routesPermissions['/dashboard'],
+    permissions: routesPermissions['/dashboard'].permissions,
   },
   {
     title: 'واجهة المستخدم',

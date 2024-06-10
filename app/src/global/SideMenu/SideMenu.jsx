@@ -31,11 +31,11 @@ const SideMenu = () => {
 
         <IonList className="side-menu_items-list" id="inbox-list">
           {appPages.map((appPage, index) => {
-            // if (
-            //   !permissionValidator(role.permissions, appPage?.permissions || [])
-            // ) {
-            //   return null;
-            // }
+            if (
+              !permissionValidator(role.permissions, appPage?.permissions || [])
+            ) {
+              return null;
+            }
             if (appPage.subPages?.length > 0) {
               return <SideMenuItemList appPage={appPage} key={index} />;
             }
