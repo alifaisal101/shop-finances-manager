@@ -5,8 +5,8 @@ import SubItem from '../../components/stateless/SubItem/SubItem';
 import SideMenuItemList from '../../components/containers/SideMenuItemList/SideMenuItemList';
 import ZuseLogo from '../../components/stateless/ZuseLogo/ZuseLogo';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../store/users.store';
-import { roleState } from '../../store/roles.store';
+import { userState } from '../../store/app/users.store';
+import { roleState } from '../../store/app/roles.store';
 import { permissionValidator } from '../../util/permissions.functions';
 
 console.log(appPages);

@@ -6,8 +6,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
-
+  app.enableCors({
+    origin: ['http://localhost:5173', 'http://s0.0.0.0'], // Allow requests from these origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+    credentials: true, // Allow cookies and credentials
+  });
   const config = new DocumentBuilder()
     .setTitle('Cats example')
     .setDescription('The cats API description')

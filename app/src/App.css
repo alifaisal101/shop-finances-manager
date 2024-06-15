@@ -58,3 +58,9 @@ ion-button[shape='circle'] {
 .form_month-picker {
   margin: auto;
 }
+
+.input_error-msg {
+  color: var(--ion-color-danger);
+  font-size: 12px;
+  margin-bottom: 6px;
+}

@@ -10,10 +10,14 @@ import { compareSync } from 'bcryptjs';
 import { UserDocument } from '../entities/users.entity';
 import { sign } from 'jsonwebtoken';
 import { jwtExpiration, jwtSecret } from 'src/config';
+import { RolesService } from 'src/roles/services/roles.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersSrv: UsersService) {}
+  constructor(
+    private usersSrv: UsersService,
+    private roleSrv: RolesService,
+  ) {}
 
   async findUserByUsername(username: string): Promise<UserDocument> {
     return (
@@ -33,7 +37,9 @@ export class AuthService {
         throw new Error('Wrong password.');
       }
 
-      return { ...user, token: await this.signJwt(user) };
+      const role = await this.roleSrv.findById(user.roleId);
+
+      return { ...user, role, token: await this.signJwt(user) };
     } catch (err) {
       throw badRequestExceptionCatch(err);
     }
