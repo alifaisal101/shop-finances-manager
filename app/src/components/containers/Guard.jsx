@@ -9,18 +9,16 @@ const Guard = (props) => {
   const [role, setRole] = useRecoilState(roleState);
   const location = useLocation();
 
-  const isValid = permissionValidator(
-    role.permissions,
-    props.requiredPermissions || []
-  );
+  const isValid =
+    role.role == 'admin'
+      ? true
+      : permissionValidator(role.permissions, props.requiredPermissions || []);
 
   if (!isValid) {
     return <Redirect to="/login" />;
   }
 
-  return (
-    <Fragment>{isValid ? <props.children></props.children> : null}</Fragment>
-  );
+  return isValid ? <>{props.children}</> : null;
 };
 
 export default Guard;

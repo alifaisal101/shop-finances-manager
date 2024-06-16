@@ -25,6 +25,8 @@ import ErrMsg from '../../components/stateless/ErrMsg/ErrMsg';
 import { userState } from '../../store/app/users.store';
 import { roleState } from '../../store/app/roles.store';
 import { tokenState } from '../../store/app/token.store';
+import { Redirect } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const [loginData, setLoginData] = useRecoilState(loginState);
@@ -33,9 +35,7 @@ const Login = () => {
   const [user, setUser] = useRecoilState(userState);
   const [role, setRole] = useRecoilState(roleState);
   const [token, setToken] = useRecoilState(tokenState);
-  console.log('USER:::', user);
-  console.log('token:::', token);
-  console.log('role:::', role);
+  const [tokenCookie, setTokenCookie] = useCookies(['token']);
 
   const handleLogin = async () => {
     // Calls the validation functions on the username and password.
@@ -63,6 +63,12 @@ const Login = () => {
         loginData.password.value
       );
 
+      // login failed
+      if (!result.loggedIn) {
+        setTimeout(() => setLoading(false), 250);
+        return setErrorMsg(result.message);
+      }
+
       // login successful:
       // -> store the new permissions, role, token and user data
       // await loginAction({user, setUser}, {role, setRole}, token, {persistance: false});
@@ -84,6 +90,7 @@ const Login = () => {
         notes: result.response.notes
           ? result.response.notes
           : result.response.notes,
+        isLoggedIn: true,
       });
 
       setToken(result.response.token);
@@ -94,13 +101,11 @@ const Login = () => {
           : null,
         permissions: result.response.role.permissions,
       });
-      console.log('RESPONSE:::', result.response);
 
-      // login failed
-      if (!result.loggedIn) {
-        setTimeout(() => setLoading(false), 250);
-        setErrorMsg(result.message);
-      }
+      setTokenCookie('token', {
+        ...result.response.token,
+        createdAt: new Date(),
+      });
     }
   };
 
@@ -117,6 +122,10 @@ const Login = () => {
       document.removeEventListener('keypress', handleKeyPress);
     };
   }, []); // Empty dependency array ensures that this effect runs only once after the component mounts
+
+  if (user.isLoggedIn) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <IonPage>

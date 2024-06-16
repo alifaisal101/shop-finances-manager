@@ -10,5 +10,6 @@ export const userState = atom({
     workShift: null,
     photoUrl: null,
     notes: null,
+    isLoggedIn: false,
   },
 });

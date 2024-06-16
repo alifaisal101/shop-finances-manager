@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { LoginDto } from '../dtos/req/login.dto';
 import {
@@ -11,12 +11,14 @@ import { UserDocument } from '../entities/users.entity';
 import { sign } from 'jsonwebtoken';
 import { jwtExpiration, jwtSecret } from 'src/config';
 import { RolesService } from 'src/roles/services/roles.service';
+import { ValidateTokenDto } from '../dtos/req/Validate-Token.dto';
+import { verify } from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersSrv: UsersService,
-    private roleSrv: RolesService,
+    private rolesSrv: RolesService,
   ) {}
 
   async findUserByUsername(username: string): Promise<UserDocument> {
@@ -37,7 +39,7 @@ export class AuthService {
         throw new Error('Wrong password.');
       }
 
-      const role = await this.roleSrv.findById(user.roleId);
+      const role = await this.rolesSrv.findById(user.roleId);
 
       return { ...user, role, token: await this.signJwt(user) };
     } catch (err) {
@@ -53,6 +55,29 @@ export class AuthService {
       return { value: token, expiresIn: jwtExpiration };
     } catch (err) {
       throw internalErrorExceptionCatch(err);
+    }
+  }
+
+  async validateToken(body: ValidateTokenDto) {
+    const { token } = body;
+
+    if (!token) {
+      return false;
+    }
+    try {
+      const result = verify(token, jwtSecret) as any;
+      const user = (await this.usersSrv.findById(result.id)) || false;
+      if (!user) {
+        throw new Error();
+      }
+
+      // Fetching role
+      const role = await this.rolesSrv.findById(user.roleId);
+
+      // @ts-ignore
+      return { isTokenValid: true, ...user._doc, role };
+    } catch (err) {
+      throw new UnauthorizedException('Unauthorized. Token is invalid.');
     }
   }
 }

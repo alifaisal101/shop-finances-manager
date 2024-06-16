@@ -25,8 +25,6 @@ if (!window.config?.API_URL) {
   };
 }
 
-console.log(window.config);
-// console.log(window.config);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RecoilRoot>
     <IonReactRouter>

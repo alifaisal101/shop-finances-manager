@@ -9,7 +9,6 @@ import { userState } from '../../store/app/users.store';
 import { roleState } from '../../store/app/roles.store';
 import { permissionValidator } from '../../util/permissions.functions';
 
-console.log(appPages);
 const adPage = {
   title: 'لوحة الادمن',
   url: '/admin-panel',
@@ -32,8 +31,16 @@ const SideMenu = () => {
         <IonList className="side-menu_items-list" id="inbox-list">
           {appPages.map((appPage, index) => {
             if (
-              !permissionValidator(role.permissions, appPage?.permissions || [])
+              !permissionValidator(
+                role.permissions,
+                appPage?.permissions || []
+              ) &&
+              role.role != 'admin'
             ) {
+              return null;
+            }
+
+            if (appPage.url == '/login' && user.isLoggedIn) {
               return null;
             }
             if (appPage.subPages?.length > 0) {

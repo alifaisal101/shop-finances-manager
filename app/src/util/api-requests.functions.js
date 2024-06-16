@@ -1,5 +1,6 @@
 export const postRequest = async (body, url) => {
-  const res = await fetch(`http://localhost:3000/auth/login`, {
+  console.log(body);
+  const res = await fetch(`${window.config.API_URL}${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

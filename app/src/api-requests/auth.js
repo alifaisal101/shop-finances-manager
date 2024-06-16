@@ -16,3 +16,12 @@ export const loginApiRequest = async (username, password) => {
     }
   }
 };
+
+export const validateTokenApiRequest = async (token) => {
+  try {
+    const response = await postRequest({ token }, '/auth/validate-token');
+    return { isValid: true, response };
+  } catch (err) {
+    return { isValid: false };
+  }
+};

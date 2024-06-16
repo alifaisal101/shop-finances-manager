@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, safeStorage } from 'electron';
 import path from 'node:path';
 import { checkActiveStatus } from './activation';
 import { checkApiConnection } from './api-status';
@@ -87,8 +87,7 @@ const bootstrap = async () => {
   app.on('window-all-closed', () => {
     win = null;
   });
-
-  app.whenReady().then(createWindow);
+  app.whenReady().then();
 
   ipcMain.on('ready', (event) => {
     if (failedToActivate) {
