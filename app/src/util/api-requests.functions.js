@@ -1,10 +1,16 @@
-export const postRequest = async (body, url) => {
-  console.log(body);
+export const postRequest = async (body, url, token) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  // Add Authorization header if token is provided
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${window.config.API_URL}${url}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(body),
   });
 

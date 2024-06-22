@@ -87,7 +87,7 @@ const bootstrap = async () => {
   app.on('window-all-closed', () => {
     win = null;
   });
-  app.whenReady().then();
+  app.whenReady().then(createWindow);
 
   ipcMain.on('ready', (event) => {
     if (failedToActivate) {

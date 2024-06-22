@@ -37,12 +37,12 @@ ion-select {
   --color: var(--ion-color-step-950) !important;
 }
 
-.form .form_row {
-  margin-bottom: 10px;
-}
-
 .form_title {
   text-align: center;
+}
+
+.shift-select-option {
+  font-size: smaller;
 }
 
 ion-button[shape='circle'] {

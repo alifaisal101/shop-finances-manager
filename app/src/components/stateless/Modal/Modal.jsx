@@ -12,29 +12,38 @@ import {
   IonItem,
   IonInput,
 } from '@ionic/react';
-import { useRecoilState } from 'recoil';
-import { modalState } from '../../../store/modal.store';
 import Content from '../Content/Content';
 
 const Modal = (props) => {
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const { isOpen } = props;
 
   const cancelHandler = () => {
     if (props.cancelHandler) {
       props.cancelHandler();
     }
-    setIsOpen(false);
   };
 
   const confirmHandler = () => {
     if (props.confirmHandler) {
       props.confirmHandler();
     }
-    setIsOpen(false);
   };
 
+  let modalClasses = 'modal';
+  if (props?.size) {
+    modalClasses += ` ${props.size}`;
+  }
+
+  if (props?.isOverlay) {
+    modalClasses += ` overlay-modal`;
+  }
+
   return (
-    <IonModal className="modal" isOpen={isOpen} onWillDismiss={cancelHandler}>
+    <IonModal
+      className={modalClasses}
+      isOpen={isOpen}
+      onWillDismiss={cancelHandler}
+    >
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
@@ -55,7 +64,9 @@ const Modal = (props) => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <Content className="ion-padding">{props.children}</Content>
+      <Content color={props.color} className="ion-padding">
+        {props.children}
+      </Content>
     </IonModal>
   );
 };

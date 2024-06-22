@@ -64,6 +64,7 @@ function App() {
 
   document.body.classList.toggle('dark', themeToggle);
 
+  // TEMP DISABLE FOR DEV
   const redirectToLogin = location.pathname == '/' && !user.isLoggedIn;
 
   useEffect(() => {
@@ -112,7 +113,10 @@ function App() {
               isLoggedIn: true,
             });
 
-            setToken(result.response.token);
+            setToken({
+              value: tokenCookie.token.value,
+              expiresIn: tokenCookie.token.expiresIn,
+            });
             setRole({
               role: result.response.role.role,
               description: result.response.role.description
