@@ -5,12 +5,12 @@ import EditBtnTable from '../../../../../../components/stateless/EditBtnTable/Ed
 import { displayDate } from '../../../../../../util/display.functions';
 import Table from '../../../../../../components/stateless/Table/Table';
 import { useRecoilState } from 'recoil';
-import { usersState } from '../../../../store/users.store';
+import { usersState } from '../../../../store/data/users.store';
 import { useEffect } from 'react';
 import { postFetchUsers } from '../../../../api-requests/users';
 import { tokenState } from '../../../../../../store/app/token.store';
 
-const companiesColumns = [
+const columns = [
   {
     name: 'ID',
     selector: (user) => user._id,
@@ -73,7 +73,7 @@ const UsersTable = () => {
 
   return (
     <div className="users-table-container">
-      <Table columns={companiesColumns} data={users}></Table>
+      <Table columns={columns} data={users}></Table>
     </div>
   );
 };

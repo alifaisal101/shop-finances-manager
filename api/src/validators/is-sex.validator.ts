@@ -1,4 +1,4 @@
-import { ValidationOptions, Validate } from 'class-validator';
+import { ValidationOptions, Validate, isAlpha } from 'class-validator';
 import { ValidationArguments } from 'class-validator/types/validation/ValidationArguments';
 
 export function IsSex(validationOptions?: ValidationOptions) {

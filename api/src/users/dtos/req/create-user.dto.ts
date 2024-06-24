@@ -9,11 +9,18 @@ import {
   IsNotEmptyObject,
   IsOptional,
   IsString,
+  Max,
+  MaxLength,
+  Min,
+  MinLength,
   ValidateNested,
 } from 'class-validator';
 import { Types } from 'mongoose';
+import { IsFullName } from 'src/validators/is-fullname-validator';
 
 export class CreateUserDto {
+  @MaxLength(26)
+  @MinLength(3)
   @IsAlphanumeric()
   @IsNotEmpty()
   @IsString()
@@ -34,6 +41,7 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  @IsFullName()
   fullName: string;
 
   @IsOptional()

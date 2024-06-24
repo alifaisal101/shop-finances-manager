@@ -23,6 +23,8 @@ import Content from '../../../../../../components/stateless/Content/Content';
 import Modal from '../../../../../../components/stateless/Modal/Modal';
 import { convertMilitaryToArabicTime } from '../../../../../../util/display.functions';
 import CustomTimeRangeSelector from '../../../../../../components/stateless/CustomTimeRangeSelector/CustomTimeRangeSelector';
+import UsersFormTable from '../../tables/FormTables/UsersFormTable/UsersFormTable';
+import ActionButton from '../../../../../../components/stateless/ActionButton/ActionButton';
 
 const UsersFormModal = (props) => {
   const {
@@ -36,8 +38,25 @@ const UsersFormModal = (props) => {
   } = props;
   const [showTimeSelectorModal, setShowTimeSelectorModal] = useState(false);
 
+  const [users, setUsers] = useState([]);
+  const initialUserState = {
+    username: '',
+    fullName: '',
+    phoneNumber: '',
+    password: '',
+    cPassword: '',
+    sex: '',
+    shift: '',
+  };
+  const [user, setUser] = useState(initialUserState);
+
+  const shiftTimeHandler = (shiftTime) => {
+    setUser((_user) => {
+      return { ..._user, shift: shiftTime };
+    });
+  };
+
   const shiftTimeRangeHandler = (e) => {
-    console.log(e);
     if (!e?.target?.value) return;
 
     if (e.target.value === 'custom') {
@@ -45,10 +64,13 @@ const UsersFormModal = (props) => {
       setShowTimeSelectorModal(true);
       e.target.value += '1';
     }
+
+    shiftTimeHandler(e.target.value);
   };
 
-  const shiftTimeHandler = (shiftTime) => {
-    console.log('SHIFT TIME WILL BE ', shiftTime);
+  const addUserHandler = () => {
+    setUsers((users) => [...users, user]);
+    setUser(initialUserState);
   };
 
   return (
@@ -74,7 +96,7 @@ const UsersFormModal = (props) => {
               <IonLabel dir="ltr" position="floating">
                 الأسم الكامل
               </IonLabel>
-              <IonInput></IonInput>
+              <IonInput value={user.fullName}></IonInput>
             </IonItem>
           </IonCol>
           <IonCol>
@@ -107,9 +129,9 @@ const UsersFormModal = (props) => {
         <IonRow className="">
           <IonCol>
             <IonSelect
-              aria-label="نوع الدفع"
+              aria-label="جنس المتسخدم"
               interface="popover"
-              placeholder="جنس الموظف"
+              placeholder="جنس المتسخدم"
               className="form_input"
             >
               <IonSelectOption value="male">ذكر</IonSelectOption>
@@ -145,29 +167,21 @@ const UsersFormModal = (props) => {
             ></CustomTimeRangeSelector>
           </IonCol>
         </IonRow>
+        <IonRow>
+          <IonCol className="ion-align-items-center ion-text-center">
+            <ActionButton onClick={addUserHandler} size="large">
+              اضافة
+            </ActionButton>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <UsersFormTable data={users}></UsersFormTable>
+          </IonCol>
+        </IonRow>
       </IonGrid>
     </Modal>
   );
 };
 
 export default UsersFormModal;
-
-// <IonModal isOpen={showCustomModal}>
-// <IonLabel>اختيار مدة العمل</IonLabel>
-// <IonButton onClick={() => setShowCustomModal(false)}>
-//   إغلاق
-// </IonButton>
-// {/* Add your custom component for selecting hour and minute range here */}
-// {/* For example, you can create a TimeRangePicker component */}
-// {/* <TimeRangePicker /> */}
-// <IonList>
-//   <IonItem>
-//     <IonLabel>Start Time</IonLabel>
-//     <IonRange min={0} max={24} step={1} snaps={true} />
-//   </IonItem>
-//   <IonItem>
-//     <IonLabel>End Time</IonLabel>
-//     <IonRange min={0} max={24} step={1} snaps={true} />
-//   </IonItem>
-// </IonList>
-// </IonModal>
