@@ -1,0 +1,56 @@
+{
+  "noUsername": { "ar": "أسم المستخدم مطلوب.", "en": "Username is required." },
+  "invalidUsername": {
+    "ar": "يجب أن يتكون أسم المستخدم من أحرف وأرقام فقط وطوله بين 3 و26.",
+    "en": "Username must only contain numbers and letters, and be between 3 to 26 characters long."
+  },
+  "noPassword": { "ar": "كلمة السر مطلوبة.", "en": "Password is required." },
+  "invalidPassword": {
+    "ar": "كلمة السر غير صحيحة.",
+    "en": "Password is invalid."
+  },
+  "weakPassword": {
+    "ar": "يجب أن تكون كلمة السر أكثر تعقيدا.",
+    "en": "Password must be stronger."
+  },
+  "passwordsDiffer": {
+    "ar": "كلمات السر غير مطابقة",
+    "en": "Passwords don't match."
+  },
+
+  "noFullName": { "ar": "الأسم الكامل مطلوب", "en": "Full name is required." },
+  "invalidFullName": {
+    "ar": "الأسم الكامل غير صحيح",
+    "en": "Full name is invalid"
+  },
+
+  "noRole": { "ar": "دور المستخدم مطلوب", "en": "User role is required." },
+  "invalidRole": {
+    "ar": "دور المتسخدم غير صحيح",
+    "en": "User role is invalid."
+  },
+
+  "noPhoneNumber": {
+    "ar": "رقم الهاتف مطلوب",
+    "en": "Phone number is required."
+  },
+  "invalidPhoneNumber": {
+    "ar": "رقم الهاتف غير صحيح",
+    "en": "Phone number is invalid."
+  },
+
+  "noSex": { "ar": "جنس المتسخدم مطلوب", "en": "User's sex is required." },
+  "invalidSex": { "ar": "جنس المتسخدم غير صحيح", "en": "Sex is invalid." },
+
+  "noShift": { "ar": "وقت العمل مطلوب", "en": "Shift is required." },
+  "invalidShift": { "ar": "وقت العمل غير صحيح", "en": "Shift is invalid." },
+
+  "failedToLoginBadRequest": {
+    "ar": "فشل تسجيل الدخول. تأكد من أسم المستخدم أو كلمة السر",
+    "ar": "Failed to login. Make sure the username and password are both valid."
+  },
+  "failedToLoginSystemError": {
+    "ar": "فشل تسجيل الدخول. حدث خطا ما في النظام. حاول لاحقا أو تواصل مع الدعم.",
+    "en": "Failed to login. Application error. Try again or contact support if the error persists."
+  }
+}

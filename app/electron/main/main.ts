@@ -1,12 +1,10 @@
-import { app, BrowserWindow, ipcMain, safeStorage } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
-import { checkActiveStatus } from './activation';
-import { checkApiConnection } from './api-status';
-
-// import { dirname } from 'path';
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-// const rootFs = dirname(__dirname);
+import { checkActiveStatus } from './handlers/activation.handler';
+import { checkApiConnection } from './handlers/api-status.handler.ts';
+import { ipcInterface } from './ipc/ipc-interface.ts';
+import { ipcPrint } from './ipc/ipc-print';
+import { ipcApp } from './ipc/ipc-app';
 
 const messages = {
   noMongodbURIFound: `
@@ -89,30 +87,13 @@ const bootstrap = async () => {
   });
   app.whenReady().then(createWindow);
 
-  ipcMain.on('ready', (event) => {
-    if (failedToActivate) {
-      return event.reply('alert_exit_error', messages.failedToActivate);
-    }
+  ipcApp(failedToActivate, failedToConnectToTheAPI);
+  ipcInterface(win);
+  ipcPrint(printBudgetWin);
 
-    if (failedToConnectToTheAPI) {
-      return event.reply('alert_exit_error', messages.failedToConnectToApi);
-    }
-  });
-
-  ipcMain.on('exit_error', () => {
-    return process.exit(1);
-  });
-
-  // Input can't be focused after alert/confirm, fix
-  ipcMain.on('focus-fix', () => {
-    win.blur();
-    win.focus();
-  });
-
-  // Handle printing
-  ipcMain.on('print_budget', (event, budget) => {
-    printBudgetWin.webContents.send('print_window_execute', budget);
-  });
+  // Get system locale
+  const systemLocale = app.getLocale();
+  console.log('System Locale:', systemLocale);
 };
 
 bootstrap();

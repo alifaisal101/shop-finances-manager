@@ -4,12 +4,14 @@ import App from './App.jsx';
 import './index.css';
 import { RecoilRoot } from 'recoil';
 import { IonReactRouter } from '@ionic/react-router';
-import errorsLocaleAr from './locales/ar/errors.json';
-export const locale = {
-  errors: {
-    ar: errorsLocaleAr,
-  },
-};
+// import errorsLocaleAr from './locales/ar/errors.json';
+// export const locale = {
+//   errors: {
+//     ar: errorsLocaleAr,
+//   },
+// };
+
+export const locale = {};
 try {
   // Replacing the alert and confirm function with new ones, fixing the input focus issue
   alert = e_util.alert;

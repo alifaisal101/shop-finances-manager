@@ -1,4 +1,3 @@
-import { API_URL } from './config';
 import { contextBridge, ipcRenderer } from 'electron';
 
 function domReady(

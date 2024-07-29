@@ -1,4 +1,5 @@
-import { API_URL } from './config';
+import { errorLog } from '../utils/functions/log';
+import { API_URL } from './../config';
 
 export const checkApiConnection = async (): Promise<Boolean | void> => {
   try {
@@ -10,9 +11,9 @@ export const checkApiConnection = async (): Promise<Boolean | void> => {
     }
     return false;
   } catch (err) {
-    throw new Error(
-      err +
-        ' Failed to send a connection request to the API. The configuration might be invalid or the API is down.'
+    errorLog(
+      ' Failed to send a connection request to the API. The configuration might be invalid or the API is down.'
     );
+    throw err;
   }
 };
