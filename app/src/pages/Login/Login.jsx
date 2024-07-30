@@ -27,6 +27,7 @@ import { roleState } from '../../store/app/roles.store';
 import { tokenState } from '../../store/app/token.store';
 import { Redirect } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { storeToken } from '../../ipc-requests/auth';
 
 const Login = () => {
   const [loginData, setLoginData] = useRecoilState(loginState);
@@ -102,10 +103,7 @@ const Login = () => {
         permissions: result.response.role.permissions,
       });
 
-      setTokenCookie('token', {
-        ...result.response.token,
-        createdAt: new Date(),
-      });
+      storeToken(token);
     }
   };
 

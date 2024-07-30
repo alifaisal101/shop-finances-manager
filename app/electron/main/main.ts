@@ -92,7 +92,7 @@ const bootstrap = async () => {
   ipcPrint(printBudgetWin);
 
   // Get system locale
-  const systemLocale = app.getLocale();
+  const systemLocale = app.getLocale()[0] + app.getLocale()[1];
   console.log('System Locale:', systemLocale);
 };
 

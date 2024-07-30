@@ -1,0 +1,21 @@
+// Fetches the token from the IPC (Electron process)
+export const fetchToken = () => {
+  e_auth.fetchToken((err, result) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    // handle result
+  });
+};
+
+// Sends the token over the IPC to be stored
+export const setToken = () => {
+  e_auth.setToken(token, (err, result) => {
+    if (err) {
+      console.log(err);
+    }
+
+    console.log('SUCCESS', token);
+  });
+};

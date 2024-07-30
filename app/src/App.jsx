@@ -67,72 +67,72 @@ function App() {
   // TEMP DISABLE FOR DEV
   const redirectToLogin = location.pathname == '/' && !user.isLoggedIn;
 
-  useEffect(() => {
-    setLoading(true);
-    const validateTokenCookie = async () => {
-      if (
-        tokenCookie?.token?.value &&
-        tokenCookie?.token?.expiresIn &&
-        tokenCookie?.token?.createdAt
-      ) {
-        if (
-          isCookieExpired(
-            tokenCookie.token.createdAt,
-            tokenCookie.token.expiresIn
-          )
-        ) {
-          setLoading(true);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   const validateTokenCookie = async () => {
+  //     if (
+  //       tokenCookie?.token?.value &&
+  //       tokenCookie?.token?.expiresIn &&
+  //       tokenCookie?.token?.createdAt
+  //     ) {
+  //       if (
+  //         isCookieExpired(
+  //           tokenCookie.token.createdAt,
+  //           tokenCookie.token.expiresIn
+  //         )
+  //       ) {
+  //         setLoading(true);
 
-          setTokenCookie('token', null);
-        } else {
-          const result = await validateTokenApiRequest(tokenCookie.token.value);
+  //         setTokenCookie('token', null);
+  //       } else {
+  //         const result = await validateTokenApiRequest(tokenCookie.token.value);
 
-          if (
-            result?.isValid &&
-            result?.response?.role._id &&
-            result?.response?._id
-          ) {
-            setUser({
-              username: result.response.username,
-              roleId: result.response.roleId,
-              phoneNumber: result.response.phoneNumber
-                ? result.response.phoneNumber
-                : null,
-              fullName: result.response.fullName
-                ? result.response.fullName
-                : result.response.fullName,
-              workShift: result.response.workShift
-                ? result.response.workShift
-                : result.response.workShift,
-              photoUrl: result.response.photoUrl
-                ? result.response.photoUrl
-                : result.response.photoUrl,
-              notes: result.response.notes
-                ? result.response.notes
-                : result.response.notes,
-              isLoggedIn: true,
-            });
+  //         if (
+  //           result?.isValid &&
+  //           result?.response?.role._id &&
+  //           result?.response?._id
+  //         ) {
+  //           setUser({
+  //             username: result.response.username,
+  //             roleId: result.response.roleId,
+  //             phoneNumber: result.response.phoneNumber
+  //               ? result.response.phoneNumber
+  //               : null,
+  //             fullName: result.response.fullName
+  //               ? result.response.fullName
+  //               : result.response.fullName,
+  //             workShift: result.response.workShift
+  //               ? result.response.workShift
+  //               : result.response.workShift,
+  //             photoUrl: result.response.photoUrl
+  //               ? result.response.photoUrl
+  //               : result.response.photoUrl,
+  //             notes: result.response.notes
+  //               ? result.response.notes
+  //               : result.response.notes,
+  //             isLoggedIn: true,
+  //           });
 
-            setToken({
-              value: tokenCookie.token.value,
-              expiresIn: tokenCookie.token.expiresIn,
-            });
-            setRole({
-              role: result.response.role.role,
-              description: result.response.role.description
-                ? result.response.role.description
-                : null,
-              permissions: result.response.role.permissions,
-            });
-          } else {
-            setTokenCookie('token', null);
-          }
-        }
-      }
-      setTimeout(() => setLoading(false), 500);
-    };
-    validateTokenCookie();
-  }, []);
+  //           setToken({
+  //             value: tokenCookie.token.value,
+  //             expiresIn: tokenCookie.token.expiresIn,
+  //           });
+  //           setRole({
+  //             role: result.response.role.role,
+  //             description: result.response.role.description
+  //               ? result.response.role.description
+  //               : null,
+  //             permissions: result.response.role.permissions,
+  //           });
+  //         } else {
+  //           setTokenCookie('token', null);
+  //         }
+  //       }
+  //     }
+  //     setTimeout(() => setLoading(false), 500);
+  //   };
+  //   validateTokenCookie();
+  // }, []);
 
   return (
     <IonApp>

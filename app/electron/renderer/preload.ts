@@ -1,4 +1,7 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import utilFunctions from './functions/util.functions';
+import printFunctions from './functions/print.functions';
+import authFunctions from './functions/auth.functions';
 
 function domReady(
   condition: DocumentReadyState[] = ['complete', 'interactive']
@@ -103,40 +106,8 @@ window.onmessage = (ev) => {
 
 setTimeout(removeLoading, 500);
 
-contextBridge.exposeInMainWorld('e_print', {
-  printBudget: (budget: Object, cb: Function) => {
-    ipcRenderer.send('print_budget', budget);
-    ipcRenderer.on('print_budget_result', (_event, result: Object) => {
-      cb(null, result);
-    });
-    ipcRenderer.on('print_budget_error', (_event, error: Error) => {
-      cb(error, null);
-    });
-  },
+contextBridge.exposeInMainWorld('e_print', printFunctions);
 
-  handlePrintWindow: (cb: Function) => {
-    ipcRenderer.on('print_window_execute', (_event, budget: Object) => {
-      cb(budget);
-    });
-  },
-});
+contextBridge.exposeInMainWorld('e_util', utilFunctions);
 
-contextBridge.exposeInMainWorld('e_util', {
-  // Replacing the alert and confirm function with new ones, fixing the input focus issue
-
-  alert: (msg?: string) => {
-    const res = window.alert(msg);
-    ipcRenderer.send('focus-fix');
-    return res;
-  },
-
-  confirm: (msg?: string) => {
-    const res = window.confirm(msg);
-    ipcRenderer.send('focus-fix');
-    return res;
-  },
-
-  getConfig: () => {
-    return { API_URL: process.env.API_URL };
-  },
-});
+contextBridge.exposeInMainWorld('e_auth', authFunctions);

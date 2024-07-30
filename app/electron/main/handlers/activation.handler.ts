@@ -1,6 +1,6 @@
 import messenger from 'messenger';
 
-import { publicEncrypt, constants, privateDecrypt } from 'crypto';
+import { publicEncrypt, constants } from 'crypto';
 
 export const checkActiveStatus = async (): Promise<void | true> => {
   const client = messenger.createSpeaker(8000);

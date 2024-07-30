@@ -52,7 +52,7 @@ export class AuthService {
       const token = sign({ id: user._id }, jwtSecret, {
         expiresIn: jwtExpiration,
       });
-      return { value: token, expiresIn: jwtExpiration };
+      return { value: token, expiresIn: jwtExpiration, createdAt: new Date() };
     } catch (err) {
       throw internalErrorExceptionCatch(err);
     }
