@@ -94,6 +94,16 @@ const bootstrap = async () => {
   // Get system locale
   const systemLocale = app.getLocale()[0] + app.getLocale()[1];
   console.log('System Locale:', systemLocale);
+
+  console.log(app.getPath('userData'));
+  console.log(app.getPath('crashDumps'));
+  console.log(app.getPath('desktop'));
+  console.log(app.getPath('exe'));
+  console.log(app.getPath('home'));
+  console.log(app.getPath('logs'));
+  console.log(app.getPath('temp'));
+  console.log(app.getPath('sessionData'));
+  console.log(app.getPath('recent'));
 };
 
 bootstrap();
