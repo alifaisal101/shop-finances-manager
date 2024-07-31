@@ -14,19 +14,20 @@ export const loginState = atom({
       validate(username) {
         if (!username) {
           return {
-            error: locale.errors.ar.noUsername,
+            error: 'locale.errors.ar.noUsername',
             valid: false,
           };
         }
 
         if (!isString(username)) {
           return {
-            error: locale.errors.ar.invalidUsername,
+            error: 'locale.errors.ar.invalidUsername',
             valid: false,
           };
         }
         if (!isUsernameValid(username)) {
-          return { error: locale.errors.ar.invalidUsername, valid: false };
+          console.log('wtf');
+          return { error: 'locale.errors.ar.invalidUsername', valid: false };
         }
         return { error: '', valid: true };
       },
@@ -37,11 +38,11 @@ export const loginState = atom({
       error: '',
       validate(password) {
         if (!password) {
-          return { error: locale.errors.ar.noPassword, valid: false };
+          return { error: 'locale.errors.ar.noPassword', valid: false };
         }
 
         if (typeof password != 'string') {
-          return { error: locale.errors.ar.invalidPassword, valid: false };
+          return { error: 'locale.errors.ar.invalidPassword', valid: false };
         }
 
         return { error: '', valid: true };

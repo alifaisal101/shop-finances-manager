@@ -5,6 +5,8 @@ import { checkApiConnection } from './handlers/api-status.handler.ts';
 import { ipcInterface } from './ipc/ipc-interface.ts';
 import { ipcPrint } from './ipc/ipc-print';
 import { ipcApp } from './ipc/ipc-app';
+import { checkDirectoryAccess } from './utils/functions/dir.ts';
+import { ipcAuth } from './ipc/ipc-auth.ts';
 
 const messages = {
   noMongodbURIFound: `
@@ -90,20 +92,12 @@ const bootstrap = async () => {
   ipcApp(failedToActivate, failedToConnectToTheAPI);
   ipcInterface(win);
   ipcPrint(printBudgetWin);
+  ipcAuth(win);
 
-  // Get system locale
-  const systemLocale = app.getLocale()[0] + app.getLocale()[1];
-  console.log('System Locale:', systemLocale);
-
-  console.log(app.getPath('userData'));
-  console.log(app.getPath('crashDumps'));
-  console.log(app.getPath('desktop'));
-  console.log(app.getPath('exe'));
-  console.log(app.getPath('home'));
-  console.log(app.getPath('logs'));
-  console.log(app.getPath('temp'));
-  console.log(app.getPath('sessionData'));
-  console.log(app.getPath('recent'));
+  // // Get system locale
+  // const systemLocale = app.getLocale()[0] + app.getLocale()[1];
+  // console.log('System Locale:', systemLocale);
+  // console.log(app.getPath('userData'));
 };
 
 bootstrap();

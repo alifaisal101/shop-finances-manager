@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-function encrypt(text: string) {
+export function encrypt(text: string, SECRET_KEY: string) {
   const IV = crypto.randomBytes(16); // Initialization vector
 
   const cipher = crypto.createCipheriv('aes-256-cbc', SECRET_KEY, IV);
@@ -9,7 +9,7 @@ function encrypt(text: string) {
   return { iv: IV.toString('hex'), encryptedData: encrypted.toString('hex') };
 }
 
-function decrypt(text: string, iv: string) {
+export function decrypt(text: string, iv: string, SECRET_KEY: string) {
   const ivBuffer = Buffer.from(iv, 'hex');
   const encryptedText = Buffer.from(text, 'hex');
   const decipher = crypto.createDecipheriv('aes-256-cbc', SECRET_KEY, ivBuffer);
@@ -17,5 +17,3 @@ function decrypt(text: string, iv: string) {
   decrypted = Buffer.concat([decrypted, decipher.final()]);
   return decrypted.toString();
 }
-
-module.exports = { encrypt, decrypt };

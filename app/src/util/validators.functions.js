@@ -10,10 +10,6 @@ export const isUsernameValid = (username) => {
     return false;
   }
 
-  if (isAlphanumeric(username)) {
-    return false;
-  }
-
   return true;
 };
 

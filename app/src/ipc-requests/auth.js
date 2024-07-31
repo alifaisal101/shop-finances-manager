@@ -10,8 +10,8 @@ export const fetchToken = () => {
 };
 
 // Sends the token over the IPC to be stored
-export const setToken = () => {
-  e_auth.setToken(token, (err, result) => {
+export const storeToken = () => {
+  e_auth.storeToken(token, (err, result) => {
     if (err) {
       console.log(err);
     }
