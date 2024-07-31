@@ -5,8 +5,10 @@ import { TokenIn } from '../../types/auth.types';
 export function ipcAuth(win: BrowserWindow | null) {
   // Input can't be focused after alert/confirm, fix
   ipcMain.on('store_token', async (event, token: TokenIn) => {
+    console.log("I'm owrking");
     try {
       const storeSessionResult = await storeToken(token);
+      console.log(storeSessionResult);
       event.reply('store_token_result');
     } catch (err) {
       event.reply('store_token_error');

@@ -103,7 +103,7 @@ const Login = () => {
         permissions: result.response.role.permissions,
       });
 
-      storeToken(token);
+      storeToken(result.response.token);
     }
   };
 

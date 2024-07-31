@@ -106,8 +106,8 @@ window.onmessage = (ev) => {
 
 setTimeout(removeLoading, 500);
 
-contextBridge.exposeInMainWorld('e_print', printFunctions);
+contextBridge.exposeInMainWorld('e_print', printFunctions(ipcRenderer));
 
-contextBridge.exposeInMainWorld('e_util', utilFunctions);
+contextBridge.exposeInMainWorld('e_util', utilFunctions(ipcRenderer));
 
-contextBridge.exposeInMainWorld('e_auth', authFunctions);
+contextBridge.exposeInMainWorld('e_auth', authFunctions(ipcRenderer));

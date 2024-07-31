@@ -5,8 +5,10 @@ export const loginApiRequest = async (username, password) => {
   let loggedIn = false;
   try {
     const response = await postRequest({ username, password }, '/auth/login');
+    console.log('RESPONCE', response);
     return { loggedIn: true, response };
   } catch (err) {
+    console.log('ERRORR', err);
     console.log(err);
 
     if (err.message == 'Bad Request') {
