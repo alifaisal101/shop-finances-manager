@@ -1,11 +1,18 @@
 // Fetches the token from the IPC (Electron process)
-export const fetchToken = () => {
-  e_auth.fetchToken((err, result) => {
+export const retrieveToken = () => {
+  console.log('I Run TWICE');
+  e_auth.retrieveToken((err, result) => {
     if (err) {
       console.log(err);
-      return;
+      return false;
     }
-    // handle result
+
+    if (!result) {
+      // No token was found, token was invalid or expired.
+      return false;
+    }
+
+    return token;
   });
 };
 

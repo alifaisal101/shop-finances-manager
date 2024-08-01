@@ -50,6 +50,7 @@ import { isCookieExpired } from './util/cookie.functions';
 import { validateTokenApiRequest } from './api-requests/auth';
 import { roleState } from './store/app/roles.store';
 import LoadingDots from './components/stateless/LoadingDots/LoadingDots';
+import { retrieveToken } from './ipc-requests/auth';
 
 setupIonicReact();
 
@@ -67,6 +68,7 @@ function App() {
   // TEMP DISABLE FOR DEV
   const redirectToLogin = location.pathname == '/' && !user.isLoggedIn;
 
+  retrieveToken();
   // useEffect(() => {
   //   setLoading(true);
   //   const validateTokenCookie = async () => {

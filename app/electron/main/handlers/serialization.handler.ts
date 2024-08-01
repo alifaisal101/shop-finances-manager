@@ -1,4 +1,4 @@
-import { decrypt, encrypt } from './crypto.handler';
+import crypto from 'crypto';
 
 // Converts text into an encrypted and serialized blob.
 export const serialize = (text: string) => {
@@ -31,6 +31,23 @@ export const deserialize = (serializedBlob: Buffer) => {
   // Extract the text buffer based on the length
   const textBuffer = decryptedData.subarray(4, 4 + length);
 
-  // Convert the text buffer back to a string
   return textBuffer.toString('utf8');
 };
+
+// Function to decrypt data
+function decrypt(encryptedData, iv, secretKey) {
+  const decipher = crypto.createDecipheriv('aes-256-cbc', secretKey, iv);
+  const decrypted = Buffer.concat([
+    decipher.update(encryptedData),
+    decipher.final(),
+  ]);
+  return decrypted;
+}
+
+// Function to encrypt data
+function encrypt(data, secretKey) {
+  const iv = crypto.randomBytes(16); // Initialization vector
+  const cipher = crypto.createCipheriv('aes-256-cbc', secretKey, iv);
+  const encrypted = Buffer.concat([cipher.update(data), cipher.final()]);
+  return { iv, encryptedData: encrypted };
+}

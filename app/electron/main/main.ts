@@ -84,9 +84,6 @@ const bootstrap = async () => {
     }
   }
 
-  app.on('window-all-closed', () => {
-    win = null;
-  });
   app.whenReady().then(createWindow);
 
   ipcApp(failedToActivate, failedToConnectToTheAPI);

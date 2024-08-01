@@ -1,17 +1,26 @@
 import { BrowserWindow, ipcMain } from 'electron';
-import { storeToken } from '../handlers/auth.handler';
+import { retrieveToken, storeToken } from '../handlers/auth.handler';
 import { TokenIn } from '../../types/auth.types';
 
 export function ipcAuth(win: BrowserWindow | null) {
-  // Input can't be focused after alert/confirm, fix
-  ipcMain.on('store_token', async (event, token: TokenIn) => {
-    console.log("I'm owrking");
+  ipcMain.on('store_token', (event, token: TokenIn) => {
+    storeToken(token)
+      .then((result) => {
+        console.log(result);
+        event.reply('store_token_result', result);
+      })
+      .catch((err) => {
+        console.log(err);
+        event.reply('store_token_error');
+      });
+  });
+  ipcMain.on('retrieve_token', async (event) => {
     try {
-      const storeSessionResult = await storeToken(token);
-      console.log(storeSessionResult);
-      event.reply('store_token_result');
+      const result = await retrieveToken();
+      event.reply('retrieve_token_result', result);
     } catch (err) {
-      event.reply('store_token_error');
+      console.log(err);
+      event.reply('retrieve_token_error');
     }
   });
 }

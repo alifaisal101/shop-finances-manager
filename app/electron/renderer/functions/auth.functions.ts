@@ -3,12 +3,12 @@ import { TokenIn } from '../../types/auth.types';
 
 export default (ipcRenderer: IpcRenderer) => {
   return {
-    fetchToken: (cb: Function) => {
-      ipcRenderer.send('fetch_token');
-      ipcRenderer.on('fetch_token_result', (_event, result: Object) => {
+    retrieveToken: (cb: Function) => {
+      ipcRenderer.send('retrieve_token');
+      ipcRenderer.on('retrieve_token_result', (_event, result: Object) => {
         cb(null, result);
       });
-      ipcRenderer.on('fetch_token_error', (_event, error: Error) => {
+      ipcRenderer.on('retrieve_token_error', (_event, error: Error) => {
         cb(error, null);
       });
     },
